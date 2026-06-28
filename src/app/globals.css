@@ -76,11 +76,19 @@ input {
   background: var(--ink);
   color: var(--paper-soft);
   padding: 0.75rem 1rem;
-  transition: transform 160ms ease;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
 }
 
 .skip-link:focus {
   transform: translateY(0);
+}
+
+.skip-link:hover,
+.skip-link:focus-visible {
+  background: var(--bronze-deep);
+  outline: none;
 }
 
 .site-header {
@@ -101,7 +109,12 @@ input {
   flex: 0 0 auto;
   display: grid;
   gap: 0.15rem;
+  border-radius: var(--radius);
+  padding: 0.25rem 0.35rem;
   text-decoration: none;
+  transition:
+    background 160ms ease,
+    color 160ms ease;
 }
 
 .brand-kicker,
@@ -164,6 +177,8 @@ input {
   white-space: nowrap;
 }
 
+.brand-mark:hover,
+.brand-mark:focus-visible,
 .breadcrumb-trail a:hover,
 .breadcrumb-trail a:focus-visible {
   background: rgba(164, 123, 63, 0.11);
@@ -196,6 +211,11 @@ input {
   border-radius: var(--radius);
   text-decoration: none;
   white-space: nowrap;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
 }
 
 .site-nav a {
@@ -308,12 +328,38 @@ input {
   padding: 0.82rem 1rem;
 }
 
+.primary-link:hover,
+.primary-link:focus-visible,
+.final-cta a:hover,
+.final-cta a:focus-visible,
+.round-button:hover,
+.round-button:focus-visible {
+  background: var(--bronze-deep);
+  color: var(--paper-soft);
+  outline: none;
+}
+
 .secondary-link,
 .icon-button {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.34);
   color: var(--ink);
   padding: 0.78rem 0.95rem;
+}
+
+.icon-button {
+  cursor: pointer;
+}
+
+.secondary-link:hover,
+.secondary-link:focus-visible,
+.icon-button:hover,
+.icon-button:focus-visible {
+  border-color: rgba(119, 84, 42, 0.42);
+  background: rgba(164, 123, 63, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(119, 84, 42, 0.16);
+  color: var(--ink);
+  outline: none;
 }
 
 .hero-art {
@@ -465,6 +511,22 @@ input {
   color: var(--blue);
   padding: 0.55rem 0.7rem;
   text-decoration: none;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
+}
+
+.reference-grid a:hover,
+.reference-grid a:focus-visible,
+.section-index a:hover,
+.section-index a:focus-visible {
+  border-color: rgba(119, 84, 42, 0.42);
+  background: rgba(164, 123, 63, 0.13);
+  box-shadow: inset 0 0 0 1px rgba(119, 84, 42, 0.14);
+  color: var(--ink);
+  outline: none;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -508,6 +570,24 @@ input {
   background: rgba(251, 246, 235, 0.66);
   padding: 1rem;
   text-decoration: none;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
+}
+
+.part-card:hover,
+.part-card:focus-visible,
+.chapter-card:hover,
+.chapter-card:focus-visible {
+  border-color: rgba(119, 84, 42, 0.42);
+  background: rgba(251, 246, 235, 0.86);
+  box-shadow:
+    inset 0 0 0 1px rgba(119, 84, 42, 0.14),
+    0 14px 42px rgba(44, 31, 18, 0.08);
+  color: var(--ink);
+  outline: none;
 }
 
 .part-card strong,
@@ -585,6 +665,16 @@ input {
   color: var(--blue);
   text-decoration-color: rgba(36, 73, 96, 0.25);
   text-underline-offset: 0.2em;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
+}
+
+.recommendations a:hover,
+.recommendations a:focus-visible {
+  color: var(--ink);
+  outline: none;
+  text-decoration-color: rgba(119, 84, 42, 0.72);
 }
 
 .manuscript-prose {
@@ -637,6 +727,18 @@ input {
   padding-top: 1rem;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.22em;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    text-decoration-color 160ms ease;
+}
+
+.section-nav a:hover,
+.section-nav a:focus-visible {
+  border-color: rgba(119, 84, 42, 0.62);
+  color: var(--ink);
+  outline: none;
+  text-decoration-color: rgba(119, 84, 42, 0.72);
 }
 
 .section-nav a:last-child {
@@ -671,11 +773,25 @@ input {
   border-radius: 999px;
   background: var(--ink);
   color: var(--paper-soft);
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
 }
 
 .round-button.subtle {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.44);
+  color: var(--ink);
+}
+
+.round-button.subtle:hover,
+.round-button.subtle:focus-visible {
+  border-color: rgba(119, 84, 42, 0.42);
+  background: rgba(164, 123, 63, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(119, 84, 42, 0.16);
   color: var(--ink);
 }
 
@@ -690,7 +806,20 @@ input {
   border-radius: var(--radius);
   background: var(--paper-soft);
   color: var(--ink);
+  cursor: pointer;
   padding: 0 0.6rem;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.audio-controls select:hover,
+.audio-controls select:focus-visible {
+  border-color: rgba(119, 84, 42, 0.52);
+  background: #fffaf0;
+  box-shadow: inset 0 0 0 1px rgba(119, 84, 42, 0.14);
+  outline: none;
 }
 
 .range-field {
@@ -701,6 +830,25 @@ input {
   margin-top: 0.8rem;
   color: var(--ink-soft);
   font-size: 0.9rem;
+}
+
+.range-field input {
+  accent-color: var(--bronze);
+  cursor: pointer;
+}
+
+.range-field input:hover,
+.range-field input:focus-visible {
+  accent-color: var(--bronze-deep);
+}
+
+.range-field input:hover {
+  outline: none;
+}
+
+.range-field input:focus-visible {
+  outline: 2px solid rgba(119, 84, 42, 0.42);
+  outline-offset: 0.3rem;
 }
 
 .final-cta {

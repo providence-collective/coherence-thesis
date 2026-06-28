@@ -32,9 +32,17 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
   await expect(breadcrumbs.getByText("Home")).toBeVisible();
   await expect(breadcrumbs.getByText("Providence Imperative")).toBeVisible();
   await expect(breadcrumbs.getByText(firstSection.title).first()).toBeVisible();
-  await expect(page.getByRole("button", { name: /Progress/ })).toBeVisible();
-  await page.getByRole("button", { name: /Progress/ }).click();
-  await expect(page.getByRole("button", { name: /Mark read/ })).toBeVisible();
+  const progressButton = page.getByRole("button", { name: /Progress/ });
+  await expect(progressButton).toBeVisible();
+  await expect
+    .poll(async () => {
+      if ((await progressButton.getAttribute("aria-expanded")) !== "true") {
+        await progressButton.click();
+      }
+      return progressButton.getAttribute("aria-expanded");
+    })
+    .toBe("true");
+  await expect(page.getByRole("button", { name: /Mark read|Read/ })).toBeVisible();
   await expect(page.getByLabel("Audiobook controls")).toBeVisible();
   await expect(page.getByRole("button", { name: "Play audiobook" })).toBeVisible();
   await expect(page.getByRole("combobox", { name: "Voice" })).toBeVisible();

@@ -21,7 +21,8 @@ Implement a complete feature or fix in the Coherence Thesis repository, validate
    - `npm run manuscripts:compile` after manuscript or overview edits
    - `npm run manuscripts:validate` after manuscript or overview reference changes
    - `npm run test` after pure TypeScript or state helper changes
-   - `npm run test:e2e` after reader navigation, toolbar, progress, audio, or responsive UI changes
+   - `npm run test:e2e:fast:desktop` for narrow desktop UI checks while iterating
+   - `npm run test:e2e:fast` after reader navigation, toolbar, progress, audio, or responsive UI changes while iterating
 6. Run `npm run readme:update` when stats, package metadata, recent commits, or development status changed.
 7. Run `npm run validate` before committing.
 8. If the change affects browser behavior, run `npm run test:e2e` before committing.

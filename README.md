@@ -75,8 +75,20 @@ Useful validation commands:
 ```bash
 npm run manuscripts:validate
 npm run test
+npm run test:e2e:fast:desktop
+npm run test:e2e:fast
+npm run test:e2e
 npm run lint
 npm run build
+```
+
+Use `npm run test:e2e:fast` while iterating on UI. It reuses or starts an isolated Next dev server at `http://127.0.0.1:3200` and skips the static export build. Use `npm run test:e2e` for the final static-export browser gate before shipping.
+
+For the fastest repeated UI loop, keep the isolated e2e server running in one terminal:
+
+```bash
+npm run dev:e2e
+npm run test:e2e:fast:desktop
 ```
 
 ## Manuscript Import Workflow

@@ -11,7 +11,7 @@ This version has breaking changes. APIs, conventions, and file structure may all
 - This repository is the canonical source of truth for The Coherence Thesis. Word documents are import inputs and provenance. Canonical manuscript text lives in `content/manuscripts/`.
 - Do not edit generated manuscript data by hand. Edit Markdown, then run `npm run manuscripts:compile`.
 - After implementing any feature, run the narrowest useful checks during iteration, then run `npm run validate` before commit.
-- For UI changes, also run `npm run test:e2e` unless the change cannot affect browser behavior.
+- For UI changes, use `npm run test:e2e:fast:desktop` for narrow desktop checks and `npm run test:e2e:fast` for broader local checks during iteration. Run `npm run test:e2e` before commit unless the change cannot affect browser behavior.
 - After every completed feature, commit and push to `origin/main` without waiting to be asked again.
 - Update `README.md` with `npm run readme:update` when package metadata, manuscript stats, generated catalog state, or development status changes.
 - Before creating a new component, hook, script, or helper, search the repository for an existing primitive that does the same job. Duplication is a bug unless there is a clear reason.
@@ -66,6 +66,19 @@ npm run validate
 
 ```bash
 npm run test:e2e
+```
+
+- Fast local UI gate, reuses or starts Next dev instead of rebuilding the static export:
+
+```bash
+npm run test:e2e:fast
+```
+
+For repeated UI loops, keep the isolated e2e dev server running in a separate terminal:
+
+```bash
+npm run dev:e2e
+npm run test:e2e:fast:desktop
 ```
 
 - Static preview:
