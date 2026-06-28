@@ -1,7 +1,14 @@
 import { expect, test } from "@playwright/test";
 import { catalog } from "../../src/lib/manuscript-data";
+import { readerProgressStorageKey } from "../../src/lib/reader-state";
 
 const firstSection = catalog.sections[0];
+const firstOverviewReference = catalog.overview.nodes.flatMap(
+  (node) => node.references,
+)[0]!;
+const firstOverviewSection = catalog.sections.find(
+  (section) => section.sectionId === firstOverviewReference.sectionId,
+)!;
 
 test("home page presents the overview and manuscript entry points", async ({ page }) => {
   await page.goto("/");
@@ -38,6 +45,37 @@ test("overview links into canonical manuscript sections", async ({ page }) => {
   await expect(page.getByRole("link", { name: /The central wound/ }).first()).toBeVisible();
   await page.getByRole("link", { name: /The central wound/ }).first().click();
   await expect(page).toHaveURL(/\/manuscripts\/providence-imperative\//);
+});
+
+test("overview references show local read checkmarks", async ({ page }) => {
+  await page.addInitScript(
+    ({ contentHash, key, sectionId }) => {
+      window.localStorage.setItem(
+        key,
+        JSON.stringify({
+          sections: {
+            [sectionId]: {
+              sectionId,
+              contentHash,
+              readAt: Date.now(),
+              percent: 100,
+            },
+          },
+        }),
+      );
+    },
+    {
+      contentHash: firstOverviewSection.contentHash,
+      key: readerProgressStorageKey,
+      sectionId: firstOverviewSection.sectionId,
+    },
+  );
+
+  await page.goto("/overview/");
+
+  const label = firstOverviewReference.label ?? firstOverviewSection.title;
+  const readReference = page.locator(".reference-grid a", { hasText: label }).first();
+  await expect(readReference.locator('[data-read-checkmark="true"]')).toBeVisible();
 });
 
 test("reader route exposes progress and audio controls", async ({ page }) => {

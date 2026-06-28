@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ReadCheckmarkIsland } from "@/components/ReadCheckmarkIsland";
 import {
   chapterById,
   catalog,
   sectionsForChapter,
+  toProgressSection,
 } from "@/lib/manuscript-data";
 
 export const dynamicParams = false;
@@ -55,7 +57,8 @@ export default async function ChapterPage({
         <div className="section-index">
           {sections.map((section) => (
             <Link key={section.sectionId} href={section.href}>
-              {section.title}
+              <span>{section.title}</span>
+              <ReadCheckmarkIsland sections={[toProgressSection(section)]} />
             </Link>
           ))}
         </div>

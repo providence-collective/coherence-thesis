@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { catalog, partById, sectionsForPart } from "@/lib/manuscript-data";
+import { ReadCheckmarkIsland } from "@/components/ReadCheckmarkIsland";
+import {
+  catalog,
+  partById,
+  sectionsForPart,
+  toProgressSection,
+} from "@/lib/manuscript-data";
 
 export const dynamicParams = false;
 
@@ -45,19 +51,29 @@ export default async function PartPage({
         <p>{part.wordCount.toLocaleString()} words across {part.chapters.length} chapters.</p>
       </header>
       <section className="chapter-list">
-        {part.chapters.map((chapter) => (
-          <Link key={chapter.chapterId} href={chapter.href} className="chapter-card">
-            <span>{String(chapter.order).padStart(2, "0")}</span>
-            <strong>{chapter.title}</strong>
-            <small>{chapter.wordCount.toLocaleString()} words</small>
-          </Link>
-        ))}
+        {part.chapters.map((chapter) => {
+          const chapterSections = sections
+            .filter((section) => section.chapterId === chapter.chapterId)
+            .map(toProgressSection);
+
+          return (
+            <Link key={chapter.chapterId} href={chapter.href} className="chapter-card">
+              <span className="card-kicker">
+                {String(chapter.order).padStart(2, "0")}
+                <ReadCheckmarkIsland sections={chapterSections} />
+              </span>
+              <strong>{chapter.title}</strong>
+              <small>{chapter.wordCount.toLocaleString()} words</small>
+            </Link>
+          );
+        })}
       </section>
       <section className="section-index">
         <h2>Sections</h2>
         {sections.map((section) => (
           <Link key={section.sectionId} href={section.href}>
-            {section.title}
+            <span>{section.title}</span>
+            <ReadCheckmarkIsland sections={[toProgressSection(section)]} />
           </Link>
         ))}
       </section>

@@ -421,8 +421,8 @@ input {
 }
 
 .stats-band span,
-.part-card span,
-.chapter-card span,
+.part-card .card-kicker,
+.chapter-card .card-kicker,
 .part-card small,
 .chapter-card small {
   color: var(--ink-muted);
@@ -472,10 +472,17 @@ input {
   display: none;
 }
 
-.overview-node summary span {
+.overview-node-number {
   color: var(--bronze-deep);
   font-family: var(--font-display);
   font-size: 1.35rem;
+}
+
+.overview-node-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: end;
+  gap: 0.55rem;
 }
 
 .overview-node summary strong {
@@ -484,7 +491,7 @@ input {
   font-weight: 500;
 }
 
-.overview-node summary svg {
+.overview-chevron {
   color: var(--ink-soft);
   transition:
     color 160ms ease,
@@ -497,12 +504,12 @@ input {
   box-shadow: inset 0 0 0 2px rgba(119, 84, 42, 0.36);
 }
 
-.overview-node summary:focus-visible span,
-.overview-node summary:focus-visible svg {
+.overview-node summary:focus-visible .overview-node-number,
+.overview-node summary:focus-visible .overview-chevron {
   color: var(--bronze-deep);
 }
 
-.overview-node[open] summary svg {
+.overview-node[open] summary .overview-chevron {
   transform: rotate(90deg);
 }
 
@@ -524,6 +531,9 @@ input {
 
 .reference-grid a,
 .section-index a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   border: 1px solid rgba(96, 121, 109, 0.28);
   border-radius: var(--radius);
   background: rgba(96, 121, 109, 0.08);
@@ -548,14 +558,46 @@ input {
   outline: none;
 }
 
+.reference-grid a {
+  justify-content: center;
+}
+
+.reference-grid a span,
+.section-index a span {
+  min-width: 0;
+}
+
+.section-index a {
+  justify-content: space-between;
+}
+
+.read-checkmark {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 1px solid rgba(96, 121, 109, 0.38);
+  border-radius: 999px;
+  background: rgba(96, 121, 109, 0.14);
+  color: var(--sage);
+}
+
+.card-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .overview-node summary:hover {
     background: rgba(164, 123, 63, 0.1);
     box-shadow: inset 0 0 0 1px rgba(119, 84, 42, 0.28);
   }
 
-  .overview-node summary:hover span,
-  .overview-node summary:hover svg {
+  .overview-node summary:hover .overview-node-number,
+  .overview-node summary:hover .overview-chevron {
     color: var(--bronze-deep);
   }
 }

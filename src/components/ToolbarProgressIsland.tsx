@@ -10,6 +10,7 @@ import {
   parseProgress,
   readPercent,
   readerProgressStorageKey,
+  readerProgressUpdatedEvent,
   recommendNextSections,
   serializeProgress,
   updatedSinceRead,
@@ -23,6 +24,7 @@ function readStoredProgress(): ReaderProgressState {
 
 function writeStoredProgress(progress: ReaderProgressState): void {
   window.localStorage.setItem(readerProgressStorageKey, serializeProgress(progress));
+  window.dispatchEvent(new Event(readerProgressUpdatedEvent));
 }
 
 function normalizePath(path: string): string {

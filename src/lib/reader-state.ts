@@ -12,6 +12,7 @@ export type ReaderProgressState = {
 };
 
 export const readerProgressStorageKey = "coherence-reader-progress-v1";
+export const readerProgressUpdatedEvent = "coherence-reader-progress-updated";
 
 export function emptyProgress(): ReaderProgressState {
   return { sections: {} };
