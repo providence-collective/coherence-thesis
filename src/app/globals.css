@@ -395,7 +395,12 @@ input {
   gap: 1rem;
   cursor: pointer;
   list-style: none;
+  border-radius: calc(var(--radius) - 1px);
   padding: 1.1rem;
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
 }
 
 .overview-node summary::-webkit-details-marker {
@@ -412,6 +417,24 @@ input {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 3vw, 1.85rem);
   font-weight: 500;
+}
+
+.overview-node summary svg {
+  color: var(--ink-soft);
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.overview-node summary:focus-visible {
+  outline: none;
+  background: rgba(164, 123, 63, 0.12);
+  box-shadow: inset 0 0 0 2px rgba(119, 84, 42, 0.36);
+}
+
+.overview-node summary:focus-visible span,
+.overview-node summary:focus-visible svg {
+  color: var(--bronze-deep);
 }
 
 .overview-node[open] summary svg {
@@ -442,6 +465,18 @@ input {
   color: var(--blue);
   padding: 0.55rem 0.7rem;
   text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .overview-node summary:hover {
+    background: rgba(164, 123, 63, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(119, 84, 42, 0.28);
+  }
+
+  .overview-node summary:hover span,
+  .overview-node summary:hover svg {
+    color: var(--bronze-deep);
+  }
 }
 
 .page-heading,
