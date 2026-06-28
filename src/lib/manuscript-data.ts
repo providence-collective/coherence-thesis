@@ -113,10 +113,16 @@ export type Catalog = {
     }>;
   };
 };
+export type ProgressParagraph = Pick<
+  ParagraphFingerprint,
+  "paragraphId" | "anchor" | "contentHash"
+>;
 export type ProgressSection = Pick<
   Section,
-  "sectionId" | "contentHash" | "title" | "href" | "paragraphs"
->;
+  "sectionId" | "contentHash" | "title" | "href"
+> & {
+  paragraphs: ProgressParagraph[];
+};
 export type BreadcrumbCrumb = {
   label: string;
   href: string;
@@ -138,7 +144,11 @@ export function toProgressSection(section: Section): ProgressSection {
     contentHash: section.contentHash,
     title: section.title,
     href: section.href,
-    paragraphs: section.paragraphs,
+    paragraphs: section.paragraphs.map((paragraph) => ({
+      paragraphId: paragraph.paragraphId,
+      anchor: paragraph.anchor,
+      contentHash: paragraph.contentHash,
+    })),
   };
 }
 

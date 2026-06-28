@@ -12,6 +12,9 @@ export const volumeConfigPath = path.join(seriesRoot, "volumes.json");
 export const aliasConfigPath = path.join(seriesRoot, "aliases.json");
 export const generatedRoot = path.join(repoRoot, "src/generated/manuscripts");
 export const catalogPath = path.join(generatedRoot, "catalog.json");
+export const publicDataRoot = path.join(repoRoot, "public/data");
+export const readerSectionsPath = path.join(publicDataRoot, "reader-sections.json");
+export const breadcrumbRoutesPath = path.join(publicDataRoot, "breadcrumb-routes.json");
 export const artifactsRoot = path.join(repoRoot, "artifacts/imports");
 
 export type ManuscriptFrontmatter = {

@@ -48,8 +48,8 @@ export function serializeProgress(progress: ReaderProgressState): string {
 
 export function markRead(
   progress: ReaderProgressState,
-  section: Pick<Section, "sectionId" | "contentHash"> &
-    Partial<Pick<Section, "paragraphs">>,
+  section: Pick<ProgressSection, "sectionId" | "contentHash"> &
+    Partial<Pick<ProgressSection, "paragraphs">>,
   percent = 100,
   now = Date.now(),
 ): ReaderProgressState {

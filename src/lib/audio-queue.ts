@@ -1,6 +1,10 @@
-import type { Section } from "./manuscript-data";
-
 export type AudioQueueItem = {
+  sectionId: string;
+  title: string;
+  text: string;
+};
+
+type AudioSection = {
   sectionId: string;
   title: string;
   text: string;
@@ -18,7 +22,7 @@ export const defaultVoicePreference: AudioVoicePreference = {
   pitch: 1,
 };
 
-export function queueFromSection(section: Section): AudioQueueItem[] {
+export function queueFromSection(section: AudioSection): AudioQueueItem[] {
   return [
     {
       sectionId: section.sectionId,
@@ -28,7 +32,7 @@ export function queueFromSection(section: Section): AudioQueueItem[] {
   ];
 }
 
-export function queueFromSections(sections: Section[]): AudioQueueItem[] {
+export function queueFromSections(sections: AudioSection[]): AudioQueueItem[] {
   return sections.map((section) => ({
     sectionId: section.sectionId,
     title: section.title,

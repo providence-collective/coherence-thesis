@@ -4,7 +4,6 @@ import { BookOpen, ListTree } from "lucide-react";
 import { AudioPlayerIsland } from "@/components/AudioPlayerIsland";
 import { ToolbarBreadcrumbs } from "@/components/ToolbarBreadcrumbs";
 import { ToolbarProgressIsland } from "@/components/ToolbarProgressIsland";
-import { allSections, breadcrumbRoutes, progressSections } from "@/lib/manuscript-data";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
@@ -17,7 +16,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <span className="brand-kicker">The Coherence Thesis</span>
           <span className="brand-title">The Coherence Thesis</span>
         </Link>
-        <ToolbarBreadcrumbs routes={breadcrumbRoutes()} />
+        <ToolbarBreadcrumbs />
         <nav className="site-nav" aria-label="Primary">
           <Link href="/overview/">
             <ListTree aria-hidden="true" size={17} />
@@ -27,8 +26,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <BookOpen aria-hidden="true" size={17} />
             Manuscripts
           </Link>
-          <AudioPlayerIsland sections={allSections()} />
-          <ToolbarProgressIsland allSections={progressSections()} />
+          <AudioPlayerIsland />
+          <ToolbarProgressIsland />
         </nav>
       </header>
       <main id="main-content">{children}</main>

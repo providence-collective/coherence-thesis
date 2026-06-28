@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Check, ChevronDown, RotateCcw } from "lucide-react";
+import { loadReaderSections } from "@/lib/reader-data";
 import type { ProgressSection } from "@/lib/manuscript-data";
 import {
   emptyProgress,
@@ -31,15 +32,12 @@ function normalizePath(path: string): string {
   return path.endsWith("/") ? path : `${path}/`;
 }
 
-export function ToolbarProgressIsland({
-  allSections,
-}: {
-  allSections: ProgressSection[];
-}) {
+export function ToolbarProgressIsland() {
   const pathname = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState<ReaderProgressState>(() => emptyProgress());
+  const [allSections, setAllSections] = useState<ProgressSection[]>([]);
 
   const section = useMemo(() => {
     const currentPath = normalizePath(pathname);
@@ -51,6 +49,20 @@ export function ToolbarProgressIsland({
       setProgress(readStoredProgress());
     }, 0);
     return () => window.clearTimeout(hydrationTimer);
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    loadReaderSections()
+      .then((sections) => {
+        if (mounted) setAllSections(sections);
+      })
+      .catch(() => {
+        if (mounted) setAllSections([]);
+      });
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   useEffect(() => {
