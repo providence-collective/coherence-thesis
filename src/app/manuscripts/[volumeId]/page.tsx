@@ -3,7 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookOpen } from "lucide-react";
-import { catalog, volumeById } from "@/lib/manuscript-data";
+import { ReadCheckmarkIsland } from "@/components/ReadCheckmarkIsland";
+import {
+  catalog,
+  sectionsForPart,
+  toProgressSection,
+  volumeById,
+} from "@/lib/manuscript-data";
 
 export const dynamicParams = false;
 
@@ -63,14 +69,23 @@ export default async function VolumePage({
         </div>
       </section>
       <section className="part-list">
-        {volume.parts.map((part) => (
-          <Link key={part.partId} href={part.href} className="part-card">
-            <BookOpen aria-hidden="true" size={21} />
-            <span>Part {part.order || "0"}</span>
-            <strong>{part.title}</strong>
-            <small>{part.wordCount.toLocaleString()} words</small>
-          </Link>
-        ))}
+        {volume.parts.map((part) => {
+          const partSections = sectionsForPart(volume.volumeId, part.partId).map(
+            toProgressSection,
+          );
+
+          return (
+            <Link key={part.partId} href={part.href} className="part-card">
+              <span className="card-kicker">
+                <BookOpen aria-hidden="true" size={21} />
+                Part {part.order || "0"}
+                <ReadCheckmarkIsland sections={partSections} />
+              </span>
+              <strong>{part.title}</strong>
+              <small>{part.wordCount.toLocaleString()} words</small>
+            </Link>
+          );
+        })}
       </section>
     </div>
   );
