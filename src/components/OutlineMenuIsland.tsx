@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Home, ListTree, Search } from "lucide-react";
+import { ChevronDown, ChevronRight, Home, ListTree, Search } from "lucide-react";
 import type { ToolbarOutline } from "@/lib/manuscript-data";
 
 function normalizePath(path: string): string {
@@ -52,13 +52,32 @@ export function OutlineMenuIsland({ outline }: { outline: ToolbarOutline }) {
             [volume.title, volume.subtitle, volume.numberLabel],
             normalizedQuery,
           );
-          const subsections = volume.subsections.filter((subsection) =>
-            matchesQuery([subsection.title], normalizedQuery),
-          );
+          const parts = volume.parts
+            .map((part) => {
+              const partMatches = matchesQuery([part.title], normalizedQuery);
+              const chapters = part.chapters.filter((chapter) =>
+                matchesQuery([chapter.title], normalizedQuery),
+              );
+
+              return {
+                ...part,
+                chapters:
+                  volumeMatches || partMatches || !normalizedQuery
+                    ? part.chapters
+                    : chapters,
+                visible:
+                  volumeMatches ||
+                  partMatches ||
+                  chapters.length > 0 ||
+                  !normalizedQuery,
+              };
+            })
+            .filter((part) => part.visible);
+
           return {
             ...volume,
-            subsections: volumeMatches || !normalizedQuery ? volume.subsections : subsections,
-            visible: volumeMatches || subsections.length > 0 || !normalizedQuery,
+            parts,
+            visible: volumeMatches || parts.length > 0 || !normalizedQuery,
           };
         })
         .filter((volume) => volume.visible),
@@ -164,22 +183,56 @@ export function OutlineMenuIsland({ outline }: { outline: ToolbarOutline }) {
                           <small>{volume.wordCount.toLocaleString()} words</small>
                         </span>
                       </a>
-                      {volume.subsections.length > 0 && (
-                        <div className="outline-subsections">
-                          {volume.subsections.map((subsection) => (
-                            <a
-                              key={subsection.href}
-                              href={subsection.href}
-                              aria-current={
-                                normalizePath(subsection.href) === currentPath
-                                  ? "page"
-                                  : undefined
-                              }
-                            >
-                              <span>{subsection.title}</span>
-                              <small>{subsection.wordCount.toLocaleString()} words</small>
-                            </a>
-                          ))}
+                      {volume.parts.length > 0 && (
+                        <div className="outline-parts">
+                          {volume.parts.map((part) => {
+                            const partPath = normalizePath(part.href);
+                            const partIsCurrent = currentPath.startsWith(partPath);
+                            return (
+                              <details
+                                className="outline-part"
+                                key={part.href}
+                                open={normalizedQuery.length > 0 || partIsCurrent}
+                              >
+                                <summary>
+                                  <span className="outline-part-title">
+                                    <ChevronRight
+                                      className="outline-part-chevron"
+                                      aria-hidden="true"
+                                      size={15}
+                                    />
+                                    <span>{part.title}</span>
+                                  </span>
+                                  <small>{part.wordCount.toLocaleString()} words</small>
+                                </summary>
+                                <div className="outline-chapters">
+                                  <a
+                                    className="outline-part-link"
+                                    href={part.href}
+                                    aria-current={
+                                      partPath === currentPath ? "page" : undefined
+                                    }
+                                  >
+                                    <span>Part overview</span>
+                                  </a>
+                                  {part.chapters.map((chapter) => (
+                                    <a
+                                      key={chapter.href}
+                                      href={chapter.href}
+                                      aria-current={
+                                        normalizePath(chapter.href) === currentPath
+                                          ? "page"
+                                          : undefined
+                                      }
+                                    >
+                                      <span>{chapter.title}</span>
+                                      <small>{chapter.wordCount.toLocaleString()} words</small>
+                                    </a>
+                                  ))}
+                                </div>
+                              </details>
+                            );
+                          })}
                         </div>
                       )}
                     </article>

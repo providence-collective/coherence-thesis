@@ -131,10 +131,16 @@ export type BreadcrumbRoute = {
   href: string;
   crumbs: BreadcrumbCrumb[];
 };
-export type OutlineSubsection = {
+export type OutlineChapter = {
   title: string;
   href: string;
   wordCount: number;
+};
+export type OutlinePart = {
+  title: string;
+  href: string;
+  wordCount: number;
+  chapters: OutlineChapter[];
 };
 export type OutlineVolume = {
   title: string;
@@ -142,7 +148,7 @@ export type OutlineVolume = {
   href: string;
   numberLabel: string;
   wordCount: number;
-  subsections: OutlineSubsection[];
+  parts: OutlinePart[];
 };
 export type ToolbarOutline = {
   home: { title: string; href: string };
@@ -184,10 +190,15 @@ export function toolbarOutline(): ToolbarOutline {
       href: volume.href,
       numberLabel: volume.numberLabel,
       wordCount: volume.wordCount,
-      subsections: volume.parts.slice(0, 3).map((part) => ({
+      parts: volume.parts.map((part) => ({
         title: part.title,
         href: part.href,
         wordCount: part.wordCount,
+        chapters: part.chapters.map((chapter) => ({
+          title: chapter.title,
+          href: chapter.href,
+          wordCount: chapter.wordCount,
+        })),
       })),
     })),
   };
