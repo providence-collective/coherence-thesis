@@ -1,11 +1,14 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { BookOpen, ListTree } from "lucide-react";
 import { AudioPlayerIsland } from "@/components/AudioPlayerIsland";
+import { OutlineMenuIsland } from "@/components/OutlineMenuIsland";
 import { ToolbarBreadcrumbs } from "@/components/ToolbarBreadcrumbs";
 import { ToolbarProgressIsland } from "@/components/ToolbarProgressIsland";
+import { toolbarOutline } from "@/lib/manuscript-data";
 
 export function SiteShell({ children }: { children: ReactNode }) {
+  const outline = toolbarOutline();
+
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main-content">
@@ -18,14 +21,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </Link>
         <ToolbarBreadcrumbs />
         <nav className="site-nav" aria-label="Primary">
-          <Link href="/overview/">
-            <ListTree aria-hidden="true" size={17} />
-            <span className="nav-label">Overview</span>
-          </Link>
-          <Link href="/manuscripts/">
-            <BookOpen aria-hidden="true" size={17} />
-            <span className="nav-label">Manuscripts</span>
-          </Link>
+          <OutlineMenuIsland outline={outline} />
           <AudioPlayerIsland />
           <ToolbarProgressIsland />
         </nav>

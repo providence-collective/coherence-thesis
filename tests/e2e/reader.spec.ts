@@ -125,6 +125,32 @@ test("mobile toolbar and progress menu stay within the viewport", async ({ page 
     expect(layout.headerHeight).toBeLessThanOrEqual(128);
   }
 
+  const outlineButton = page.getByRole("button", { name: /Outline/ });
+  await expect(outlineButton).toBeVisible();
+  await outlineButton.click();
+  const outlineMenu = page.getByRole("region", { name: "Site outline" });
+  await expect(outlineMenu).toBeVisible();
+  await expect(page.getByRole("searchbox", { name: "Filter outline" })).toBeVisible();
+
+  const outlineBox = await outlineMenu.boundingBox();
+  const outlineViewport = page.viewportSize();
+  expect(outlineBox).not.toBeNull();
+  expect(outlineViewport).not.toBeNull();
+
+  if (outlineBox && outlineViewport) {
+    expect(outlineBox.x).toBeGreaterThanOrEqual(-1);
+    expect(outlineBox.x + outlineBox.width).toBeLessThanOrEqual(
+      outlineViewport.width + 1,
+    );
+  }
+
+  await page.getByRole("searchbox", { name: "Filter outline" }).fill("wielding");
+  await expect(
+    outlineMenu.getByRole("link", { name: /Wielding Intelligence/ }),
+  ).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(outlineMenu).toHaveCount(0);
+
   const progressButton = page.getByRole("button", { name: /Progress/ });
   await expect(progressButton).toBeVisible();
   await expect

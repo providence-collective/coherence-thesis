@@ -131,6 +131,24 @@ export type BreadcrumbRoute = {
   href: string;
   crumbs: BreadcrumbCrumb[];
 };
+export type OutlineSubsection = {
+  title: string;
+  href: string;
+  wordCount: number;
+};
+export type OutlineVolume = {
+  title: string;
+  subtitle: string;
+  href: string;
+  numberLabel: string;
+  wordCount: number;
+  subsections: OutlineSubsection[];
+};
+export type ToolbarOutline = {
+  home: { title: string; href: string };
+  overview: { title: string; href: string };
+  volumes: OutlineVolume[];
+};
 
 export const catalog = catalogJson as Catalog;
 
@@ -154,6 +172,25 @@ export function toProgressSection(section: Section): ProgressSection {
 
 export function progressSections(): ProgressSection[] {
   return catalog.sections.map(toProgressSection);
+}
+
+export function toolbarOutline(): ToolbarOutline {
+  return {
+    home: { title: catalog.siteTitle, href: "/" },
+    overview: { title: "Five minute overview", href: "/overview/" },
+    volumes: catalog.volumes.map((volume) => ({
+      title: volume.title,
+      subtitle: volume.subtitle,
+      href: volume.href,
+      numberLabel: volume.numberLabel,
+      wordCount: volume.wordCount,
+      subsections: volume.parts.slice(0, 3).map((part) => ({
+        title: part.title,
+        href: part.href,
+        wordCount: part.wordCount,
+      })),
+    })),
+  };
 }
 
 function addBreadcrumbRoute(
