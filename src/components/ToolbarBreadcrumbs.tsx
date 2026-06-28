@@ -31,7 +31,7 @@ export function ToolbarBreadcrumbs() {
     };
   }, []);
 
-  if (!route) return null;
+  if (!route || route.crumbs.length === 0) return null;
 
   return (
     <nav className="breadcrumb-trail" aria-label="Breadcrumb">

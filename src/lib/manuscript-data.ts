@@ -166,26 +166,24 @@ function addBreadcrumbRoute(
 
 export function breadcrumbRoutes(): BreadcrumbRoute[] {
   const routes = new Map<string, BreadcrumbRoute>();
-  const home = { label: "Home", href: "/" };
   const overview = { label: "Overview", href: "/overview/" };
   const manuscripts = { label: "Manuscripts", href: "/manuscripts/" };
 
-  addBreadcrumbRoute(routes, "/", [home]);
-  addBreadcrumbRoute(routes, "/overview/", [home, overview]);
-  addBreadcrumbRoute(routes, "/manuscripts/", [home, manuscripts]);
+  addBreadcrumbRoute(routes, "/", []);
+  addBreadcrumbRoute(routes, "/overview/", [overview]);
+  addBreadcrumbRoute(routes, "/manuscripts/", [manuscripts]);
 
   for (const volume of catalog.volumes) {
     const volumeCrumb = { label: volume.title, href: volume.href };
-    addBreadcrumbRoute(routes, volume.href, [home, manuscripts, volumeCrumb]);
+    addBreadcrumbRoute(routes, volume.href, [manuscripts, volumeCrumb]);
 
     for (const part of volume.parts) {
       const partCrumb = { label: part.title, href: part.href };
-      addBreadcrumbRoute(routes, part.href, [home, manuscripts, volumeCrumb, partCrumb]);
+      addBreadcrumbRoute(routes, part.href, [manuscripts, volumeCrumb, partCrumb]);
 
       for (const chapter of part.chapters) {
         const chapterCrumb = { label: chapter.title, href: chapter.href };
         addBreadcrumbRoute(routes, chapter.href, [
-          home,
           manuscripts,
           volumeCrumb,
           partCrumb,
@@ -201,7 +199,6 @@ export function breadcrumbRoutes(): BreadcrumbRoute[] {
     const chapter = chapterById(section.volumeId, section.partId, section.chapterId);
     if (!volume || !part || !chapter) continue;
     addBreadcrumbRoute(routes, section.href, [
-      home,
       manuscripts,
       { label: volume.title, href: volume.href },
       { label: part.title, href: part.href },

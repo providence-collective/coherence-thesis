@@ -57,9 +57,6 @@ export default async function SectionPage({
     <div className="page-frame reader-layout">
       <article className="reader-main">
         <header className="manuscript-heading">
-          <p className="eyebrow">
-            {section.volumeTitle} / {section.partTitle} / {section.chapterTitle}
-          </p>
           <h1>{section.title}</h1>
           <p>
             {section.wordCount.toLocaleString()} words, about {section.readingMinutes} minute

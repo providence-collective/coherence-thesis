@@ -14,6 +14,7 @@ test("home page presents the overview and manuscript entry points", async ({ pag
   await page.goto("/");
 
   await expect(page.getByRole("heading", { name: "The Coherence Thesis" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toHaveCount(0);
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
     "https://www.coherence-thesis.com/share/coherence-thesis-og.jpg",
@@ -152,6 +153,11 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
   await page.goto(firstSection.href);
 
   await expect(page.getByRole("heading", { name: firstSection.title })).toBeVisible();
+  await expect(
+    page.getByText(
+      `${firstSection.volumeTitle} / ${firstSection.partTitle} / ${firstSection.chapterTitle}`,
+    ),
+  ).toHaveCount(0);
   const breadcrumbs = page.getByRole("navigation", { name: "Breadcrumb" });
   await expect(breadcrumbs).toBeVisible();
   await expect(breadcrumbs.locator('[aria-current="page"]')).toHaveText(
@@ -159,7 +165,8 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
   );
   const viewport = page.viewportSize();
   if (!viewport || viewport.width > 540) {
-    await expect(breadcrumbs.getByText("Home")).toBeVisible();
+    await expect(breadcrumbs.getByText("Home")).toHaveCount(0);
+    await expect(breadcrumbs.getByText("Manuscripts")).toBeVisible();
     await expect(breadcrumbs.getByText("Humanity's Most Viable Future")).toBeVisible();
   }
   const progressButton = page.getByRole("button", { name: /Progress/ });
