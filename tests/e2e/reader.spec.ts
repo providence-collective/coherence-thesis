@@ -57,6 +57,19 @@ test("home page presents the overview and manuscript entry points", async ({
     catalog.volumes.length,
   );
 
+  const homepageSpacing = await page.evaluate(() => {
+    const hero = document.querySelector(".hero-section")?.getBoundingClientRect();
+    const stats = document.querySelector(".stats-band")?.getBoundingClientRect();
+    return {
+      gap: hero && stats ? stats.top - hero.bottom : 0,
+      heroHeight: hero?.height ?? 0,
+    };
+  });
+  expect(homepageSpacing.gap).toBeGreaterThanOrEqual(24);
+  if (testInfo.project.name === "desktop") {
+    expect(homepageSpacing.heroHeight).toBeLessThanOrEqual(1000);
+  }
+
   const wieldingCard = page.getByRole("link", { name: "Open Wielding Intelligence" });
   const wieldingPanel = wieldingCard.locator(".manuscript-card-panel");
   await expect(wieldingCard.locator("img")).toBeVisible();

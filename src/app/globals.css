@@ -627,7 +627,8 @@ input {
   grid-template-columns: minmax(0, 1fr) minmax(17rem, 28rem);
   align-items: center;
   gap: clamp(2rem, 6vw, 5rem);
-  min-height: calc(100vh - 12rem);
+  max-height: 1000px;
+  min-height: min(calc(100vh - 12rem), 1000px);
 }
 
 .hero-copy h1,
@@ -1037,6 +1038,7 @@ input {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
   overflow: hidden;
+  margin-top: clamp(2rem, 5vw, 4rem);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--line);
@@ -1739,6 +1741,7 @@ input {
   }
 
   .hero-section {
+    max-height: none;
     min-height: auto;
   }
 
