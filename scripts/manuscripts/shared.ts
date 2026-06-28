@@ -7,6 +7,9 @@ export const repoRoot = path.resolve(import.meta.dirname, "../..");
 export const contentRoot = path.join(repoRoot, "content");
 export const manuscriptRoot = path.join(contentRoot, "manuscripts");
 export const overviewRoot = path.join(contentRoot, "overview");
+export const seriesRoot = path.join(contentRoot, "series");
+export const volumeConfigPath = path.join(seriesRoot, "volumes.json");
+export const aliasConfigPath = path.join(seriesRoot, "aliases.json");
 export const generatedRoot = path.join(repoRoot, "src/generated/manuscripts");
 export const catalogPath = path.join(generatedRoot, "catalog.json");
 export const artifactsRoot = path.join(repoRoot, "artifacts/imports");
@@ -43,11 +46,32 @@ export type CompiledSection = ManuscriptFrontmatter & {
   href: string;
   body: string;
   text: string;
+  paragraphs: CompiledParagraph[];
   wordCount: number;
   readingMinutes: number;
   contentHash: string;
   previousSectionId: string | null;
   nextSectionId: string | null;
+};
+
+export type VolumeConfig = {
+  volumeId: string;
+  title: string;
+  subtitle: string;
+  order: number;
+  numberLabel: string;
+  planet: string;
+  coverImage: string;
+  coverAlt: string;
+  sourcePath: string;
+};
+
+export type CompiledParagraph = {
+  paragraphId: string;
+  anchor: string;
+  order: number;
+  contentHash: string;
+  text: string;
 };
 
 export type CompiledChapter = {
@@ -72,7 +96,12 @@ export type CompiledPart = {
 export type CompiledVolume = {
   volumeId: string;
   title: string;
+  subtitle: string;
   order: number;
+  numberLabel: string;
+  planet: string;
+  coverImage: string;
+  coverAlt: string;
   href: string;
   parts: CompiledPart[];
   sectionIds: string[];
@@ -99,6 +128,27 @@ export type OverviewDocument = {
   nodes: OverviewNode[];
 };
 
+export type SectionAliasInput = {
+  sourceHref: string;
+  targetSectionId: string;
+  note?: string;
+};
+
+export type SectionAliasConfig = {
+  version: number;
+  aliases: SectionAliasInput[];
+};
+
+export type SectionAlias = SectionAliasInput & {
+  targetHref: string;
+  sourceRoute: {
+    volumeId: string;
+    partId: string;
+    chapterId: string;
+    sectionId: string;
+  };
+};
+
 export type CompiledCatalog = {
   siteTitle: string;
   generatedFrom: string;
@@ -113,6 +163,7 @@ export type CompiledCatalog = {
   };
   volumes: CompiledVolume[];
   sections: CompiledSection[];
+  aliases: SectionAlias[];
   overview: OverviewDocument;
 };
 
@@ -175,11 +226,30 @@ export function stripMarkdown(value: string): string {
   return value
     .replace(/^---[\s\S]*?---\n?/, "")
     .replace(/```[\s\S]*?```/g, " ")
+    .replace(/^\|.*\|$/gm, " ")
     .replace(/!\[[^\]]*]\([^)]*\)/g, " ")
     .replace(/\[([^\]]+)]\([^)]*\)/g, "$1")
-    .replace(/[*_`>#-]/g, " ")
+    .replace(/[*_`>#|\-]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+export function paragraphFingerprints(markdown: string): CompiledParagraph[] {
+  return markdown
+    .split(/\n{2,}/)
+    .map((block) => block.trim())
+    .filter(Boolean)
+    .map((block, index) => {
+      const order = index + 1;
+      const text = stripMarkdown(block);
+      return {
+        paragraphId: `p-${order}`,
+        anchor: `p-${order}`,
+        order,
+        contentHash: sha256(text || block).slice(0, 16),
+        text,
+      };
+    });
 }
 
 export function markdownFiles(root = manuscriptRoot): string[] {
@@ -377,8 +447,38 @@ export function readOverview(): OverviewDocument {
   return JSON.parse(readUtf8(overviewPath)) as OverviewDocument;
 }
 
+export function readVolumeConfigs(): VolumeConfig[] {
+  if (!fs.existsSync(volumeConfigPath)) return [];
+  return (JSON.parse(readUtf8(volumeConfigPath)) as VolumeConfig[]).sort(
+    (left, right) => left.order - right.order,
+  );
+}
+
+export function readAliasConfig(): SectionAliasConfig {
+  if (!fs.existsSync(aliasConfigPath)) return { version: 1, aliases: [] };
+  return JSON.parse(readUtf8(aliasConfigPath)) as SectionAliasConfig;
+}
+
+function routeFromHref(href: string): SectionAlias["sourceRoute"] {
+  const match = href.match(
+    /^\/manuscripts\/([^/]+)\/([^/]+)\/([^/]+)\/([^/]+)\/?$/,
+  );
+  if (!match) {
+    throw new Error(`Alias sourceHref must be a section route: ${href}`);
+  }
+  return {
+    volumeId: match[1],
+    partId: match[2],
+    chapterId: match[3],
+    sectionId: match[4],
+  };
+}
+
 export function buildCatalog(root = manuscriptRoot): CompiledCatalog {
   const docs = sortDocuments(readMarkdownDocuments(root));
+  const volumeConfigs = new Map(
+    readVolumeConfigs().map((volume) => [volume.volumeId, volume]),
+  );
   const sections = docs.map((doc, index) => {
     const words = wordCount(doc.body);
     return {
@@ -387,6 +487,7 @@ export function buildCatalog(root = manuscriptRoot): CompiledCatalog {
       href: sectionHref(doc.frontmatter),
       body: doc.body,
       text: stripMarkdown(doc.body),
+      paragraphs: paragraphFingerprints(doc.body),
       wordCount: words,
       readingMinutes: readingMinutes(words),
       contentHash: sha256(normalizeNewlines(doc.body)).slice(0, 16),
@@ -402,10 +503,18 @@ export function buildCatalog(root = manuscriptRoot): CompiledCatalog {
   for (const section of sections) {
     let volume = volumeMap.get(section.volumeId);
     if (!volume) {
+      const config = volumeConfigs.get(section.volumeId);
       volume = {
         volumeId: section.volumeId,
-        title: section.volumeTitle,
+        title: config?.title ?? section.volumeTitle,
+        subtitle: config?.subtitle ?? "",
         order: section.volumeOrder,
+        numberLabel: config?.numberLabel ?? String(section.volumeOrder),
+        planet: config?.planet ?? "",
+        coverImage: config?.coverImage ?? "/art/coherence-thesis-purposeful-cover.jpg",
+        coverAlt:
+          config?.coverAlt ??
+          `Cover artwork for ${section.volumeTitle}, part of The Coherence Thesis.`,
         href: volumeHref(section.volumeId),
         parts: [],
         sectionIds: [],
@@ -472,6 +581,20 @@ export function buildCatalog(root = manuscriptRoot): CompiledCatalog {
       sum + volume.parts.reduce((partSum, part) => partSum + part.chapters.length, 0),
     0,
   );
+  const sectionById = new Map(sections.map((section) => [section.sectionId, section]));
+  const aliases = readAliasConfig().aliases.map((alias) => {
+    const target = sectionById.get(alias.targetSectionId);
+    if (!target) {
+      throw new Error(
+        `Alias targetSectionId '${alias.targetSectionId}' does not exist.`,
+      );
+    }
+    return {
+      ...alias,
+      targetHref: target.href,
+      sourceRoute: routeFromHref(alias.sourceHref),
+    };
+  });
 
   return {
     siteTitle: "The Coherence Thesis",
@@ -487,6 +610,7 @@ export function buildCatalog(root = manuscriptRoot): CompiledCatalog {
     },
     volumes,
     sections,
+    aliases,
     overview: readOverview(),
   };
 }

@@ -16,9 +16,9 @@ describe("manuscript compiler helpers", () => {
   it("builds the current catalog from canonical markdown", () => {
     const catalog = buildCatalog();
 
-    expect(catalog.stats.volumeCount).toBe(1);
-    expect(catalog.stats.sectionCount).toBeGreaterThan(100);
-    expect(catalog.sections[0].sectionId).toBe("preface");
-    expect(catalog.overview.nodes.length).toBeGreaterThan(5);
+    expect(catalog.stats.volumeCount).toBe(9);
+    expect(catalog.stats.sectionCount).toBeGreaterThan(500);
+    expect(catalog.sections[0].sectionId).toBe("v01-orientation");
+    expect(catalog.overview.nodes.length).toBe(9);
   });
 });

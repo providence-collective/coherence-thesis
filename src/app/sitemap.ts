@@ -17,6 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.95,
     },
+    {
+      url: `${siteUrl}/manuscripts/`,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
   ];
 
   const manuscriptRoutes: MetadataRoute.Sitemap = [
@@ -45,6 +50,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}${section.href}`,
       changeFrequency: "weekly" as const,
       priority: 0.64,
+    })),
+    ...catalog.aliases.map((alias) => ({
+      url: `${siteUrl}${alias.sourceHref}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.32,
     })),
   ];
 

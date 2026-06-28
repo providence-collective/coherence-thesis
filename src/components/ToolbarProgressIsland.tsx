@@ -106,6 +106,7 @@ export function ToolbarProgressIsland({
     () => recommendNextSections(progress, allSections, 4),
     [allSections, progress],
   );
+  const revisedCount = recommendations.filter((item) => item.isUpdated).length;
   const isRead = section
     ? progress.sections[section.sectionId]?.contentHash === section.contentHash
     : false;
@@ -168,9 +169,16 @@ export function ToolbarProgressIsland({
           )}
           {recommendations.length > 0 && (
             <div className="recommendations">
-              <p className="eyebrow">Recommended next</p>
+              <p className="eyebrow">
+                {revisedCount > 0 ? "Revised sections first" : "Recommended next"}
+              </p>
               {recommendations.map((item) => (
-                <a key={item.sectionId} href={item.href}>
+                <a
+                  key={item.sectionId}
+                  href={item.href}
+                  className={item.isUpdated ? "revised-link" : undefined}
+                >
+                  {item.isUpdated ? "Updated: " : ""}
                   {item.title}
                 </a>
               ))}
