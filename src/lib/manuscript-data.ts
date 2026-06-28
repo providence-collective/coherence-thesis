@@ -127,6 +127,14 @@ export function sectionByRoute(
   );
 }
 
+export function sectionsStartingAt(sectionId: string): Section[] {
+  const startIndex = catalog.sections.findIndex(
+    (section) => section.sectionId === sectionId,
+  );
+  if (startIndex < 0) return [];
+  return catalog.sections.slice(startIndex);
+}
+
 export function sectionsForChapter(
   volumeId: string,
   partId: string,

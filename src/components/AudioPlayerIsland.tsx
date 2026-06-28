@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Pause, Play, Square } from "lucide-react";
 import type { Section } from "@/lib/manuscript-data";
 import {
@@ -33,6 +33,7 @@ export function AudioPlayerIsland({ sections }: { sections: Section[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [supported, setSupported] = useState(true);
+  const playbackTokenRef = useRef(0);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
@@ -62,7 +63,7 @@ export function AudioPlayerIsland({ sections }: { sections: Section[] }) {
     window.localStorage.setItem(voiceStorageKey, JSON.stringify(preference));
   }, [preference]);
 
-  function speak(index = activeIndex): void {
+  function playIndex(index: number, token: number): void {
     const item = queue[index];
     if (!item || !supported) return;
     window.speechSynthesis.cancel();
@@ -72,10 +73,11 @@ export function AudioPlayerIsland({ sections }: { sections: Section[] }) {
     utterance.voice =
       voices.find((voice) => voice.voiceURI === preference.voiceURI) ?? null;
     utterance.onend = () => {
+      if (token !== playbackTokenRef.current) return;
       const nextIndex = index + 1;
       if (queue[nextIndex]) {
         setActiveIndex(nextIndex);
-        speak(nextIndex);
+        playIndex(nextIndex, token);
       } else {
         setPlaying(false);
       }
@@ -84,12 +86,19 @@ export function AudioPlayerIsland({ sections }: { sections: Section[] }) {
     setPlaying(true);
   }
 
+  function speak(index = activeIndex): void {
+    const token = playbackTokenRef.current + 1;
+    playbackTokenRef.current = token;
+    playIndex(index, token);
+  }
+
   function pause(): void {
     window.speechSynthesis.pause();
     setPlaying(false);
   }
 
   function stop(): void {
+    playbackTokenRef.current += 1;
     window.speechSynthesis.cancel();
     setPlaying(false);
   }
