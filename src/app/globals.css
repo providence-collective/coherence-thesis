@@ -799,34 +799,43 @@ input {
   min-width: 0;
   overflow: hidden;
   aspect-ratio: 2 / 3;
-  border: 1px solid rgba(var(--card-rgb), 0.44);
+  border: 1px solid rgb(var(--card-rgb) / 0.44);
   border-radius: var(--radius);
   background: rgba(251, 246, 235, 0.58);
   box-shadow:
-    0 22px 70px rgba(var(--card-rgb), 0.16),
+    0 12px 30px rgba(44, 31, 18, 0.12),
+    0 4px 14px rgb(var(--card-rgb) / 0.1),
     0 2px 0 rgba(255, 255, 255, 0.52) inset;
   color: var(--ink);
   text-decoration: none;
   isolation: isolate;
+  transform: scale(1);
+  transform-origin: center;
   transition:
     border-color 180ms ease,
-    box-shadow 180ms ease;
+    box-shadow 180ms ease,
+    transform 180ms ease;
+  will-change: transform;
 }
 
 .manuscript-cover-card:hover,
 .manuscript-cover-card:focus-visible {
-  border-color: rgba(var(--card-rgb), 0.68);
+  border-color: rgb(var(--card-rgb) / 0.68);
   box-shadow:
-    0 30px 90px rgba(var(--card-rgb), 0.24),
+    0 20px 52px rgba(44, 31, 18, 0.16),
+    0 8px 24px rgb(var(--card-rgb) / 0.18),
     0 2px 0 rgba(255, 255, 255, 0.62) inset;
+  transform: scale(1.025);
   outline: none;
+  z-index: 2;
 }
 
 .manuscript-cover-card:focus-visible {
   box-shadow:
     0 0 0 3px rgba(251, 246, 235, 0.92),
-    0 0 0 6px rgba(var(--card-rgb), 0.54),
-    0 30px 90px rgba(var(--card-rgb), 0.24);
+    0 0 0 6px rgb(var(--card-rgb) / 0.54),
+    0 20px 52px rgba(44, 31, 18, 0.16),
+    0 8px 24px rgb(var(--card-rgb) / 0.18);
 }
 
 .manuscript-cover-card img {
@@ -842,7 +851,7 @@ input {
   z-index: 0;
   background:
     linear-gradient(180deg, transparent 42%, rgba(19, 32, 42, 0.1)),
-    linear-gradient(135deg, rgba(var(--card-rgb), 0.18), transparent 48%);
+    linear-gradient(135deg, rgb(var(--card-rgb) / 0.18), transparent 48%);
   content: "";
   opacity: 0;
   transition: opacity 180ms ease;
@@ -863,7 +872,7 @@ input {
   gap: 0.55rem;
   max-height: min(58%, 22rem);
   overflow: auto;
-  border: 1px solid rgba(var(--card-rgb), 0.32);
+  border: 1px solid rgb(var(--card-rgb) / 0.32);
   border-radius: var(--radius);
   background: rgba(251, 246, 235, 0.72);
   box-shadow:
@@ -933,7 +942,7 @@ input {
 
 .manuscript-card-stats span,
 .manuscript-card-tags span {
-  border: 1px solid rgba(var(--card-rgb), 0.24);
+  border: 1px solid rgb(var(--card-rgb) / 0.24);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.36);
   color: var(--ink-soft);
@@ -943,7 +952,7 @@ input {
 }
 
 .manuscript-card-tags span:first-child {
-  background: rgba(var(--card-rgb), 0.12);
+  background: rgb(var(--card-rgb) / 0.12);
   color: var(--card-accent);
   font-weight: 700;
 }
