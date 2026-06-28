@@ -17,6 +17,13 @@
   --font-ui: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
   --font-display: Baskerville, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --font-body: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --page-background:
+    linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    radial-gradient(circle at 12% 8%, rgba(164, 123, 63, 0.16), transparent 34rem),
+    radial-gradient(circle at 86% 2%, rgba(36, 73, 96, 0.12), transparent 30rem),
+    linear-gradient(180deg, var(--paper-soft), var(--paper) 34%, #eadbbd);
+  --page-background-size: 42px 42px, 42px 42px, auto, auto, auto;
 }
 
 @theme inline {
@@ -32,19 +39,18 @@
 
 html {
   min-height: 100%;
+  background: var(--page-background);
+  background-color: var(--paper);
+  background-size: var(--page-background-size);
   scroll-behavior: smooth;
 }
 
 body {
   min-height: 100%;
   margin: 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
-    radial-gradient(circle at 12% 8%, rgba(164, 123, 63, 0.16), transparent 34rem),
-    radial-gradient(circle at 86% 2%, rgba(36, 73, 96, 0.12), transparent 30rem),
-    linear-gradient(180deg, var(--paper-soft), var(--paper) 34%, #eadbbd);
-  background-size: 42px 42px, 42px 42px, auto, auto, auto;
+  background: var(--page-background);
+  background-color: var(--paper);
+  background-size: var(--page-background-size);
   color: var(--ink);
   font-family: var(--font-ui);
   letter-spacing: 0;
