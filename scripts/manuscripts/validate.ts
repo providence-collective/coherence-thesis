@@ -1,0 +1,66 @@
+import fs from "node:fs";
+import {
+  buildCatalog,
+  catalogPath,
+  readMarkdownDocuments,
+  sectionHref,
+} from "./shared";
+
+function collectOverviewRefs(
+  nodes: Array<{ references?: Array<{ sectionId: string }>; children?: unknown[] }>,
+): string[] {
+  const refs: string[] = [];
+  for (const node of nodes) {
+    refs.push(...(node.references ?? []).map((ref) => ref.sectionId));
+    refs.push(
+      ...collectOverviewRefs(
+        (node.children ?? []) as Array<{
+          references?: Array<{ sectionId: string }>;
+          children?: unknown[];
+        }>,
+      ),
+    );
+  }
+  return refs;
+}
+
+function assert(condition: unknown, message: string): void {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+
+function main(): void {
+  const docs = readMarkdownDocuments();
+  assert(docs.length > 0, "No manuscript Markdown files were found.");
+
+  const seenSectionIds = new Set<string>();
+  const seenPaths = new Set<string>();
+  for (const doc of docs) {
+    const id = doc.frontmatter.sectionId;
+    assert(!seenSectionIds.has(id), `Duplicate sectionId '${id}'.`);
+    seenSectionIds.add(id);
+    const href = sectionHref(doc.frontmatter);
+    assert(!seenPaths.has(href), `Duplicate section route '${href}'.`);
+    seenPaths.add(href);
+    assert(doc.body.trim().length > 0, `Empty manuscript body in ${doc.relativePath}.`);
+  }
+
+  const catalog = buildCatalog();
+  const overviewRefs = collectOverviewRefs(catalog.overview.nodes);
+  for (const sectionId of overviewRefs) {
+    assert(seenSectionIds.has(sectionId), `Overview references missing section '${sectionId}'.`);
+  }
+
+  if (fs.existsSync(catalogPath)) {
+    const current = fs.readFileSync(catalogPath, "utf8");
+    const next = `${JSON.stringify(catalog, null, 2)}\n`;
+    assert(current === next, "Generated manuscript catalog is stale. Run npm run manuscripts:compile.");
+  }
+
+  console.log(
+    `Validated ${docs.length} manuscript files and ${overviewRefs.length} overview references`,
+  );
+}
+
+main();

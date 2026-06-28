@@ -1,0 +1,42 @@
+{
+  "name": "coherence-thesis",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run manuscripts:compile && next build",
+    "start": "serve out -l 3100",
+    "preview:static": "serve out -l 3100",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "manuscripts:import": "tsx scripts/manuscripts/import-docx.ts",
+    "manuscripts:diff-import": "tsx scripts/manuscripts/diff-import.ts",
+    "manuscripts:apply-import": "tsx scripts/manuscripts/apply-import.ts",
+    "manuscripts:compile": "tsx scripts/manuscripts/compile.ts",
+    "manuscripts:validate": "tsx scripts/manuscripts/validate.ts",
+    "readme:update": "tsx scripts/update-readme-status.ts",
+    "validate": "npm run manuscripts:compile && npm run manuscripts:validate && npm run lint && npm run test && npm run build"
+  },
+  "dependencies": {
+    "lucide-react": "^1.21.0",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "mammoth": "^1.12.0",
+    "serve": "^14.2.6",
+    "tailwindcss": "^4",
+    "tsx": "^4.22.4",
+    "typescript": "^5",
+    "vitest": "^4.1.9"
+  }
+}
