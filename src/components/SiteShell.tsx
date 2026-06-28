@@ -30,12 +30,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </nav>
       </header>
       <main id="main-content">{children}</main>
-      <footer className="site-footer">
-        <p>
-          Canonical text lives in this repository. Reader progress stays on this
-          device.
-        </p>
-      </footer>
     </div>
   );
 }

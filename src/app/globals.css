@@ -865,13 +865,6 @@ input {
   font-size: clamp(2rem, 5vw, 3.2rem);
 }
 
-.site-footer {
-  margin-top: auto;
-  border-top: 1px solid var(--line);
-  color: var(--ink-muted);
-  padding: 1.5rem clamp(1rem, 4vw, 3rem);
-}
-
 @media (max-width: 860px) {
   .site-header {
     align-items: flex-start;
