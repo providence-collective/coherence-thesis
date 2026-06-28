@@ -70,6 +70,17 @@ test("home page presents the overview and manuscript entry points", async ({
     expect(homepageSpacing.heroHeight).toBeLessThanOrEqual(1000);
   }
 
+  const homepageCoverShadows = await page.evaluate(() => {
+    const heroImage = document.querySelector(".hero-art img");
+    const coverCard = document.querySelector(".manuscript-cover-card");
+    return {
+      hero: heroImage ? getComputedStyle(heroImage).boxShadow : "",
+      card: coverCard ? getComputedStyle(coverCard).boxShadow : "",
+    };
+  });
+  expect(homepageCoverShadows.hero).toBe(homepageCoverShadows.card);
+  expect(homepageCoverShadows.hero).not.toBe("none");
+
   const wieldingCard = page.getByRole("link", { name: "Open Wielding Intelligence" });
   const wieldingPanel = wieldingCard.locator(".manuscript-card-panel");
   await expect(wieldingCard.locator("img")).toBeVisible();
