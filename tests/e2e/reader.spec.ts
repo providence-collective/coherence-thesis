@@ -13,7 +13,7 @@ const firstOverviewSection = catalog.sections.find(
 test("home page presents the overview and manuscript entry points", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("heading", { name: "The Providence Imperative" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "The Coherence Thesis" })).toBeVisible();
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
     "https://www.coherence-thesis.com/share/coherence-thesis-og.jpg",
@@ -34,17 +34,20 @@ test("home page presents the overview and manuscript entry points", async ({ pag
     "href",
     "/overview/",
   );
-  await expect(page.getByRole("link", { name: /Enter manuscript/ })).toBeVisible();
-  await expect(page.getByText("five minute overview")).toBeVisible();
+  await expect(page.getByRole("link", { name: /Browse manuscripts/ })).toHaveAttribute(
+    "href",
+    "/manuscripts/",
+  );
+  await expect(page.getByText("Nine volume series")).toBeVisible();
 });
 
 test("overview links into canonical manuscript sections", async ({ page }) => {
   await page.goto("/overview/");
 
   await expect(page.getByRole("heading", { name: "The Coherence Thesis" })).toBeVisible();
-  await expect(page.getByRole("link", { name: /The central wound/ }).first()).toBeVisible();
-  await page.getByRole("link", { name: /The central wound/ }).first().click();
-  await expect(page).toHaveURL(/\/manuscripts\/providence-imperative\//);
+  await expect(page.getByRole("link", { name: /The seed/ }).first()).toBeVisible();
+  await page.getByRole("link", { name: /The seed/ }).first().click();
+  await expect(page).toHaveURL(/\/manuscripts\/humanitys-most-viable-future\//);
 });
 
 test("overview references show local read checkmarks", async ({ page }) => {
@@ -157,7 +160,7 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
   const viewport = page.viewportSize();
   if (!viewport || viewport.width > 540) {
     await expect(breadcrumbs.getByText("Home")).toBeVisible();
-    await expect(breadcrumbs.getByText("Providence Imperative")).toBeVisible();
+    await expect(breadcrumbs.getByText("Humanity's Most Viable Future")).toBeVisible();
   }
   const progressButton = page.getByRole("button", { name: /Progress/ });
   await expect(progressButton).toBeVisible();

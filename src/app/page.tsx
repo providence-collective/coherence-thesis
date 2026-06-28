@@ -1,37 +1,37 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, BookOpen, Clock, ListTree } from "lucide-react";
+import { ArrowRight, BookOpen, ListTree } from "lucide-react";
 import { OverviewMap } from "@/components/OverviewMap";
 import { catalog } from "@/lib/manuscript-data";
 
 export default function Home() {
-  const volume = catalog.volumes[0];
+  const firstVolume = catalog.volumes[0];
   return (
     <div className="home-page">
       <section className="hero-section">
         <div className="hero-copy">
-          <p className="eyebrow">Volume Three</p>
-          <h1>The Providence Imperative</h1>
+          <p className="eyebrow">Nine volume series</p>
+          <h1>The Coherence Thesis</h1>
           <p className="hero-deck">
-            A five minute map into a manuscript about coherence, coordination,
-            trust, and the future institutions required for a civilization worth
-            inheriting.
+            A living manuscript body on coherence, intelligence, coordination,
+            human potential, and the future institutions required for a civilization
+            worth inheriting.
           </p>
           <div className="hero-actions">
             <Link className="primary-link" href="/overview/">
               <ListTree aria-hidden="true" size={18} />
               Read the overview
             </Link>
-            <Link className="secondary-link" href={volume?.href ?? "/manuscripts/providence-imperative/"}>
+            <Link className="secondary-link" href="/manuscripts/">
               <BookOpen aria-hidden="true" size={18} />
-              Enter manuscript
+              Browse manuscripts
             </Link>
           </div>
         </div>
         <div className="hero-art" aria-label="Coherence Thesis cover art">
           <Image
-            src="/art/coherence-thesis-purposeful-cover.jpg"
-            alt="The Coherence Thesis cover artwork showing figures, landscape, and geometric lines."
+            src={firstVolume?.coverImage ?? "/art/coherence-thesis-vol1-cover.jpg"}
+            alt={firstVolume?.coverAlt ?? "The Coherence Thesis cover artwork."}
             width={1024}
             height={1536}
             priority
@@ -41,21 +41,51 @@ export default function Home() {
 
       <section className="stats-band" aria-label="Manuscript stats">
         <div>
-          <strong>{catalog.stats.sectionCount}</strong>
-          <span>sections</span>
+          <strong>{catalog.stats.volumeCount}</strong>
+          <span>volumes</span>
         </div>
         <div>
           <strong>{catalog.stats.wordCount.toLocaleString()}</strong>
           <span>words</span>
         </div>
         <div>
-          <strong>{catalog.stats.readingMinutes}</strong>
-          <span>minutes full read</span>
+          <strong>{catalog.stats.sectionCount.toLocaleString()}</strong>
+          <span>sections</span>
         </div>
         <div>
-          <Clock aria-hidden="true" size={22} />
-          <span>five minute overview</span>
+          <strong>{catalog.stats.readingMinutes.toLocaleString()}</strong>
+          <span>minutes full read</span>
         </div>
+      </section>
+
+      <section className="content-band">
+        <div>
+          <p className="eyebrow">Manuscripts</p>
+          <h2>Each volume stands on its own.</h2>
+          <p>
+            The series now publishes each volume as an independent complementary
+            manuscript with its own cover, route, index, progress state, and reading
+            path.
+          </p>
+        </div>
+      </section>
+
+      <section className="volume-grid" aria-label="Published manuscripts">
+        {catalog.volumes.map((volume) => (
+          <Link key={volume.volumeId} href={volume.href} className="volume-card">
+            <Image
+              src={volume.coverImage}
+              alt={volume.coverAlt}
+              width={512}
+              height={768}
+              sizes="(max-width: 720px) 42vw, 180px"
+            />
+            <span>Volume {volume.numberLabel}</span>
+            <strong>{volume.title}</strong>
+            <small>{volume.subtitle}</small>
+            <em>{volume.wordCount.toLocaleString()} words</em>
+          </Link>
+        ))}
       </section>
 
       <section className="content-band">
@@ -63,10 +93,8 @@ export default function Home() {
           <p className="eyebrow">Overview</p>
           <h2>Start with the whole shape, then zoom in.</h2>
           <p>
-            Each node below links into precise manuscript sections. As more
-            volumes enter the repository, this same map can reference the whole
-            body of work without turning into a table of contents in a powdered
-            wig.
+            Each node below links into precise manuscript sections across the full
+            body of work.
           </p>
         </div>
       </section>
@@ -74,9 +102,9 @@ export default function Home() {
       <OverviewMap />
 
       <section className="final-cta">
-        <h2>Ready for the full text?</h2>
-        <Link href={volume?.href ?? "/manuscripts/providence-imperative/"}>
-          Open Volume Three
+        <h2>Ready for the full body?</h2>
+        <Link href="/manuscripts/">
+          Open manuscripts
           <ArrowRight aria-hidden="true" size={18} />
         </Link>
       </section>

@@ -2,23 +2,36 @@
 
 The Coherence Thesis is a living manuscript project about interpersonal coherence, civilizational coordination, and future societies capable of becoming powerful without ceasing to become wise.
 
-This repository is the source of truth for the text. Word documents can seed or update drafts, but canonical manuscripts live here as Markdown.
+This repository is the source of truth for the text. Source manuscripts are Markdown files. Canonical reader sections live here as generated Markdown.
 
 ## Current Focus
 
-Volume Three, **The Providence Imperative**, is seeded from `sources/manuscripts/coherence-thesis-vol3-providence-imperative.docx`.
+Volumes One through Nine are published as independent complementary manuscripts.
 
 The first reader experience is a static Next.js site with:
 
 - A five minute overview map that links into exact manuscript sections
 - Static HTML manuscript routes for search engines and older devices
 - Local first read progress with no login and no server side reading history
+- Section and paragraph fingerprints that reveal updated sections after a reader has read an older version
 - Browser speech audiobook playback with voice preferences
-- A Word import workflow that creates reviewable diffs before updating canonical text
+- A Markdown publishing workflow driven by source files and volume metadata
 
 ## Source of Truth
 
-Canonical text is stored in:
+Source Markdown files are stored in:
+
+```text
+sources/manuscripts/
+```
+
+Volume metadata and manual deep link aliases are stored in:
+
+```text
+content/series/
+```
+
+Generated canonical reader sections are stored in:
 
 ```text
 content/manuscripts/
@@ -30,27 +43,31 @@ Generated app data is stored in:
 src/generated/manuscripts/
 ```
 
-Do not edit generated files by hand. Edit Markdown, then run the compiler.
+Do not edit generated files by hand. Edit source Markdown or series metadata, then run the importer and compiler.
 
 ## Development Status
 
 <!-- BEGIN:development-status -->
 
-Generated: 2026-06-28T00:38:57.578Z
+Generated: 2026-06-28T02:11:00.068Z
 
-- Branch: main
-- Revision: 4dd7220
+- Branch: edit/publish-nine-volumes
+- Revision: 537cb22
 - Working tree: local changes present
 - Next.js: 16.2.9
-- Manuscripts: 1 volume, 9 parts, 29 chapters, 116 sections
-- Canonical words: 41,152
-- Estimated full read: 188 minutes
-- Overview nodes: 8
+- Manuscripts: 9 volume, 47 parts, 408 chapters, 566 sections
+- Canonical words: 198,717
+- Estimated full read: 904 minutes
+- Overview nodes: 9
 
 Recent commits:
 
 ```text
-4dd7220 Initialize Coherence Thesis manuscript site
+537cb22 feat: move audiobook controls to toolbar
+292fb0d feat: continue audiobook across sections
+f6926b3 fix: preserve background during safari overscroll
+c4f2621 fix: deploy static export on vercel
+6873ba1 style: remove site footer copy
 ```
 
 <!-- END:development-status -->
@@ -91,58 +108,56 @@ npm run dev:e2e
 npm run test:e2e:fast:desktop
 ```
 
-## Manuscript Import Workflow
+## Manuscript Publishing Workflow
 
-Seed or draft a Word import:
+Regenerate canonical reader Markdown from source Markdown:
 
 ```bash
-npm run manuscripts:import -- --source sources/manuscripts/coherence-thesis-vol3-providence-imperative.docx
+npm run manuscripts:import
 ```
 
-Seed directly into canonical Markdown only for the initial baseline:
+Compile generated app data:
 
 ```bash
-npm run manuscripts:import -- --apply
+npm run manuscripts:compile
 ```
 
-Compare a draft import with canonical Markdown:
+Validate section IDs, overview references, aliases, and generated catalog freshness:
 
 ```bash
-npm run manuscripts:diff-import -- --draft artifacts/imports/<import-id>/content/manuscripts
+npm run manuscripts:validate
 ```
 
-Apply a reviewed draft:
+After changing a source volume or `content/series/volumes.json`, run:
 
 ```bash
-npm run manuscripts:apply-import -- --draft artifacts/imports/<import-id>/content/manuscripts --force
-```
-
-After applying:
-
-```bash
+npm run manuscripts:import
 npm run manuscripts:compile
 npm run manuscripts:validate
 ```
 
+When a future section route should keep working after a heading or structure change, add an entry to `content/series/aliases.json` instead of forcing new headings to match old paths.
+
 ## Architecture
 
 - `content/manuscripts/` contains author editable Markdown.
+- `sources/manuscripts/` contains source Markdown for the publishing pipeline.
+- `content/series/` contains volume metadata and manual deep link aliases.
 - `content/overview/` contains the curated five minute overview map.
-- `scripts/manuscripts/` owns import, compile, diff, apply, and validation workflows.
+- `scripts/manuscripts/` owns Markdown import, compile, and validation workflows.
 - `src/generated/manuscripts/catalog.json` is generated from Markdown.
 - `src/app/` renders static Next.js routes.
 - Client islands add local progress and audio without making manuscript text dependent on JavaScript.
 
 ## Privacy
 
-V1 uses local progress only. The reader stores section IDs, content hashes, read timestamps, percent read, and audio preferences in the browser.
+V1 uses local progress only. The reader stores section IDs, section hashes, paragraph hashes, read timestamps, percent read, and audio preferences in the browser.
 
 There is no account requirement and no server side reading history. Future cross device sync should be optional and encrypted.
 
 ## Roadmap
 
-- Add the remaining complementary manuscripts and connect them through the overview map.
-- Add richer import conflict review for changed, added, and removed sections.
+- Add final individual cover art for each manuscript.
 - Add spaced repetition flashcards.
 - Add recommendation paths across the full manuscript body.
 - Add optional encrypted progress sync.

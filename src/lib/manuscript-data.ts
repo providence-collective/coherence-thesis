@@ -1,14 +1,128 @@
 import catalogJson from "@/generated/manuscripts/catalog.json";
 
-export type Catalog = typeof catalogJson;
-export type Section = Catalog["sections"][number];
-export type Volume = Catalog["volumes"][number];
-export type Part = Volume["parts"][number];
-export type Chapter = Part["chapters"][number];
+export type ParagraphFingerprint = {
+  paragraphId: string;
+  anchor: string;
+  order: number;
+  contentHash: string;
+  text: string;
+};
+
+export type Section = {
+  volumeId: string;
+  volumeTitle: string;
+  volumeOrder: number;
+  partId: string;
+  partTitle: string;
+  partOrder: number;
+  chapterId: string;
+  chapterTitle: string;
+  chapterOrder: number;
+  sectionId: string;
+  title: string;
+  sectionOrder: number;
+  sourceDoc?: string;
+  sourceHash?: string;
+  sourceParagraphStart?: number;
+  sourceParagraphEnd?: number;
+  aliases?: string[];
+  path: string;
+  href: string;
+  body: string;
+  text: string;
+  paragraphs: ParagraphFingerprint[];
+  wordCount: number;
+  readingMinutes: number;
+  contentHash: string;
+  previousSectionId: string | null;
+  nextSectionId: string | null;
+};
+
+export type Chapter = {
+  chapterId: string;
+  title: string;
+  order: number;
+  href: string;
+  sectionIds: string[];
+  wordCount: number;
+};
+
+export type Part = {
+  partId: string;
+  title: string;
+  order: number;
+  href: string;
+  chapters: Chapter[];
+  sectionIds: string[];
+  wordCount: number;
+};
+
+export type Volume = {
+  volumeId: string;
+  title: string;
+  subtitle: string;
+  order: number;
+  numberLabel: string;
+  planet: string;
+  coverImage: string;
+  coverAlt: string;
+  href: string;
+  parts: Part[];
+  sectionIds: string[];
+  wordCount: number;
+};
+
+export type SectionAlias = {
+  sourceHref: string;
+  targetSectionId: string;
+  note?: string;
+  targetHref: string;
+  sourceRoute: {
+    volumeId: string;
+    partId: string;
+    chapterId: string;
+    sectionId: string;
+  };
+};
+
+export type Catalog = {
+  siteTitle: string;
+  generatedFrom: string;
+  gitRevision: string;
+  stats: {
+    volumeCount: number;
+    partCount: number;
+    chapterCount: number;
+    sectionCount: number;
+    wordCount: number;
+    readingMinutes: number;
+  };
+  volumes: Volume[];
+  sections: Section[];
+  aliases: SectionAlias[];
+  overview: {
+    title: string;
+    subtitle: string;
+    readingMinutes: number;
+    nodes: Array<{
+      id: string;
+      title: string;
+      summary: string;
+      references: Array<{ sectionId: string; label?: string }>;
+      children?: unknown[];
+    }>;
+  };
+};
+export type ProgressParagraph = Pick<
+  ParagraphFingerprint,
+  "paragraphId" | "anchor" | "contentHash"
+>;
 export type ProgressSection = Pick<
   Section,
   "sectionId" | "contentHash" | "title" | "href"
->;
+> & {
+  paragraphs: ProgressParagraph[];
+};
 export type BreadcrumbCrumb = {
   label: string;
   href: string;
@@ -30,6 +144,11 @@ export function toProgressSection(section: Section): ProgressSection {
     contentHash: section.contentHash,
     title: section.title,
     href: section.href,
+    paragraphs: section.paragraphs.map((paragraph) => ({
+      paragraphId: paragraph.paragraphId,
+      anchor: paragraph.anchor,
+      contentHash: paragraph.contentHash,
+    })),
   };
 }
 
@@ -49,22 +168,25 @@ export function breadcrumbRoutes(): BreadcrumbRoute[] {
   const routes = new Map<string, BreadcrumbRoute>();
   const home = { label: "Home", href: "/" };
   const overview = { label: "Overview", href: "/overview/" };
+  const manuscripts = { label: "Manuscripts", href: "/manuscripts/" };
 
   addBreadcrumbRoute(routes, "/", [home]);
   addBreadcrumbRoute(routes, "/overview/", [home, overview]);
+  addBreadcrumbRoute(routes, "/manuscripts/", [home, manuscripts]);
 
   for (const volume of catalog.volumes) {
     const volumeCrumb = { label: volume.title, href: volume.href };
-    addBreadcrumbRoute(routes, volume.href, [home, volumeCrumb]);
+    addBreadcrumbRoute(routes, volume.href, [home, manuscripts, volumeCrumb]);
 
     for (const part of volume.parts) {
       const partCrumb = { label: part.title, href: part.href };
-      addBreadcrumbRoute(routes, part.href, [home, volumeCrumb, partCrumb]);
+      addBreadcrumbRoute(routes, part.href, [home, manuscripts, volumeCrumb, partCrumb]);
 
       for (const chapter of part.chapters) {
         const chapterCrumb = { label: chapter.title, href: chapter.href };
         addBreadcrumbRoute(routes, chapter.href, [
           home,
+          manuscripts,
           volumeCrumb,
           partCrumb,
           chapterCrumb,
@@ -80,6 +202,7 @@ export function breadcrumbRoutes(): BreadcrumbRoute[] {
     if (!volume || !part || !chapter) continue;
     addBreadcrumbRoute(routes, section.href, [
       home,
+      manuscripts,
       { label: volume.title, href: volume.href },
       { label: part.title, href: part.href },
       { label: chapter.title, href: chapter.href },
@@ -127,6 +250,34 @@ export function sectionByRoute(
   );
 }
 
+export function aliasByRoute(
+  volumeId: string,
+  partId: string,
+  chapterId: string,
+  sectionId: string,
+): SectionAlias | undefined {
+  return catalog.aliases.find(
+    (alias) =>
+      alias.sourceRoute.volumeId === volumeId &&
+      alias.sourceRoute.partId === partId &&
+      alias.sourceRoute.chapterId === chapterId &&
+      alias.sourceRoute.sectionId === sectionId,
+  );
+}
+
+export function sectionByRouteOrAlias(
+  volumeId: string,
+  partId: string,
+  chapterId: string,
+  sectionId: string,
+): { section: Section; alias?: SectionAlias } | undefined {
+  const section = sectionByRoute(volumeId, partId, chapterId, sectionId);
+  if (section) return { section };
+  const alias = aliasByRoute(volumeId, partId, chapterId, sectionId);
+  const target = alias ? sectionById(alias.targetSectionId) : undefined;
+  return target ? { section: target, alias } : undefined;
+}
+
 export function sectionsStartingAt(sectionId: string): Section[] {
   const startIndex = catalog.sections.findIndex(
     (section) => section.sectionId === sectionId,
@@ -154,12 +305,15 @@ export function sectionsForPart(volumeId: string, partId: string): Section[] {
 }
 
 export function routeParams() {
-  return catalog.sections.map((section) => ({
-    volumeId: section.volumeId,
-    partId: section.partId,
-    chapterId: section.chapterId,
-    sectionId: section.sectionId,
-  }));
+  return [
+    ...catalog.sections.map((section) => ({
+      volumeId: section.volumeId,
+      partId: section.partId,
+      chapterId: section.chapterId,
+      sectionId: section.sectionId,
+    })),
+    ...catalog.aliases.map((alias) => alias.sourceRoute),
+  ];
 }
 
 export function excerpt(text: string, maxLength = 180): string {

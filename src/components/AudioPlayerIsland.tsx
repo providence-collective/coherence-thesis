@@ -3,13 +3,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Headphones, Pause, Play, Square } from "lucide-react";
-import type { Section } from "@/lib/manuscript-data";
 import {
   defaultVoicePreference,
   queueFromSections,
   type AudioQueueItem,
   type AudioVoicePreference,
 } from "@/lib/audio-queue";
+import { loadReaderSections, type ReaderSectionData } from "@/lib/reader-data";
 
 const voiceStorageKey = "coherence-audio-voice-v1";
 
@@ -29,9 +29,10 @@ function loadPreference(): AudioVoicePreference {
   }
 }
 
-export function AudioPlayerIsland({ sections }: { sections: Section[] }) {
+export function AudioPlayerIsland() {
   const pathname = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [sections, setSections] = useState<ReaderSectionData[]>([]);
   const playbackSections = useMemo(() => {
     const currentPath = normalizePath(pathname);
     if (!currentPath.startsWith("/manuscripts/")) return [];
@@ -56,6 +57,20 @@ export function AudioPlayerIsland({ sections }: { sections: Section[] }) {
   const [playing, setPlaying] = useState(false);
   const [supported, setSupported] = useState(true);
   const playbackTokenRef = useRef(0);
+
+  useEffect(() => {
+    let mounted = true;
+    loadReaderSections()
+      .then((loadedSections) => {
+        if (mounted) setSections(loadedSections);
+      })
+      .catch(() => {
+        if (mounted) setSections([]);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {

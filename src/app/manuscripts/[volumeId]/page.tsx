@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookOpen } from "lucide-react";
@@ -43,12 +44,31 @@ export default async function VolumePage({
   return (
     <div className="page-frame">
       <header className="page-heading volume-heading">
-        <p className="eyebrow">Manuscript</p>
+        <p className="eyebrow">Volume {volume.numberLabel}</p>
         <h1>{volume.title}</h1>
         <p>
-          {volume.parts.length} parts, {volume.wordCount.toLocaleString()} words.
+          {volume.subtitle ? `${volume.subtitle} ` : ""}
+          {volume.parts.length} parts,{" "}
+          {volume.wordCount.toLocaleString()} words.
         </p>
       </header>
+      <section className="volume-feature">
+        <Image
+          src={volume.coverImage}
+          alt={volume.coverAlt}
+          width={512}
+          height={768}
+          priority
+        />
+        <div>
+          <p className="eyebrow">Independent manuscript</p>
+          <h2>{volume.title}</h2>
+          <p>
+            Governed by {volume.planet}. This volume has its own route, cover,
+            section index, reading progress, and generated catalog entries.
+          </p>
+        </div>
+      </section>
       <section className="part-list">
         {volume.parts.map((part) => {
           const partSections = sectionsForPart(volume.volumeId, part.partId).map(

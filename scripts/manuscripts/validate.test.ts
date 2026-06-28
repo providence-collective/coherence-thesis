@@ -17,6 +17,7 @@ function catalogWithRevision(gitRevision: string): CompiledCatalog {
     },
     volumes: [],
     sections: [],
+    aliases: [],
     overview: {
       title: "The Coherence Thesis",
       subtitle: "A five minute map.",

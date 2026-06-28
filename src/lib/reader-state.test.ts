@@ -16,6 +16,10 @@ describe("reader progress", () => {
     expect(progress.sections[section.sectionId]).toMatchObject({
       sectionId: section.sectionId,
       contentHash: section.contentHash,
+      paragraphs: section.paragraphs.map((paragraph) => ({
+        paragraphId: paragraph.paragraphId,
+        contentHash: paragraph.contentHash,
+      })),
       readAt: 1_700_000_000,
       percent: 100,
     });
@@ -39,9 +43,43 @@ describe("reader progress", () => {
     const progress = markRead(emptyProgress(), sections[0]);
 
     expect(readPercent(progress, sections)).toBe(33);
-    expect(recommendNextSections(progress, sections, 2).map((section) => section.sectionId)).toEqual([
-      sections[1].sectionId,
-      sections[2].sectionId,
+    expect(recommendNextSections(progress, sections, 2)).toMatchObject([
+      {
+        sectionId: sections[1].sectionId,
+        href: sections[1].href,
+        isUpdated: false,
+      },
+      {
+        sectionId: sections[2].sectionId,
+        href: sections[2].href,
+        isUpdated: false,
+      },
+    ]);
+  });
+
+  it("prioritizes revised sections with changed paragraph anchors", () => {
+    const sections = allSections().slice(0, 3);
+    const progress = markRead(emptyProgress(), sections[0]);
+    const changed = {
+      ...sections[0],
+      contentHash: "changed",
+      paragraphs: sections[0].paragraphs.map((paragraph, index) => ({
+        ...paragraph,
+        contentHash: index === 1 ? "changed-paragraph" : paragraph.contentHash,
+      })),
+    };
+
+    expect(recommendNextSections(progress, [changed, sections[1], sections[2]], 2)).toMatchObject([
+      {
+        sectionId: sections[0].sectionId,
+        href: `${sections[0].href}#${sections[0].paragraphs[1].anchor}`,
+        isUpdated: true,
+      },
+      {
+        sectionId: sections[1].sectionId,
+        href: sections[1].href,
+        isUpdated: false,
+      },
     ]);
   });
 });

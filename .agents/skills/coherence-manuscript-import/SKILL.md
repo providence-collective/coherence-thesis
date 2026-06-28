@@ -1,16 +1,16 @@
 ---
 name: coherence-manuscript-import
-description: Import and update Coherence Thesis manuscripts from Word documents through the repository review workflow. Use when asked to seed a new manuscript, compare a revised .docx draft, preserve stable section IDs, apply reviewed import output, validate overview references, or regenerate manuscript data.
+description: Import and update Coherence Thesis manuscripts from Markdown sources through the repository publishing workflow. Use when asked to seed or update manuscript sources, preserve public deep links with aliases, validate overview references, or regenerate manuscript data.
 disable-model-invocation: true
 ---
 
 # Manuscript Import
 
-Word documents are import inputs. Repository Markdown is canonical after review.
+Markdown files in `sources/manuscripts/` are import inputs. Generated reader Markdown lives in `content/manuscripts/`.
 
 ## Workflow
 
-1. Confirm the source Word document path and inspect the current git state.
+1. Confirm the source Markdown path or volume manifest change and inspect the current git state.
 2. Confirm canonical Markdown and generated data are currently valid:
 
 ```bash
@@ -18,26 +18,19 @@ npm run manuscripts:compile
 npm run manuscripts:validate
 ```
 
-3. Create a draft import:
+3. Regenerate canonical reader Markdown:
 
 ```bash
-npm run manuscripts:import -- --source /absolute/path/to/manuscript.docx
+npm run manuscripts:import
 ```
 
-4. Compare draft output to canonical Markdown:
+4. Review changed generated sections and the Markdown import report:
 
 ```bash
-npm run manuscripts:diff-import -- --draft artifacts/imports/<import-id>/content/manuscripts
+git diff -- content/manuscripts artifacts/imports/markdown-series-report.json
 ```
 
-5. Review the import report and diff report. Summarize added, changed, unchanged, and removed sections when the change is meaningful.
-6. Apply only after review:
-
-```bash
-npm run manuscripts:apply-import -- --draft artifacts/imports/<import-id>/content/manuscripts --force
-```
-
-7. Regenerate and validate:
+5. Regenerate and validate:
 
 ```bash
 npm run manuscripts:compile
@@ -46,18 +39,18 @@ npm run readme:update
 npm run test
 ```
 
-8. Run `npm run build` when route data, overview references, or generated catalog data changed.
-9. Commit and push the reviewed manuscript update to `origin/main`.
+6. Run `npm run build` when route data, overview references, or generated catalog data changed.
+7. Commit and push the reviewed manuscript update to `origin/main`.
 
 ## Stable IDs
 
-- Preserve existing section IDs when the section is conceptually the same.
-- Create a new ID only for genuinely new sections.
-- If a section is split or merged, document the migration in the import report notes or commit message.
-- Treat removed sections as a review event before applying.
+- Public section routes are preserved through `content/series/aliases.json`.
+- Add an alias when a future route should keep resolving after a section moves, splits, merges, or is renamed.
+- Do not force new headings to mimic old section structures just to preserve links.
+- Paragraph fingerprints are generated into the catalog so local progress can identify changed passages after a reader has read an older section version.
 
 ## Failure Handling
 
-- Stop on duplicate IDs, empty bodies, missing frontmatter, broken overview references, bad ordering, or stale generated data.
-- If the parser collapses or fragments the document, fix the importer or draft output before applying.
+- Stop on duplicate IDs, empty bodies, missing frontmatter, broken overview references, bad aliases, bad ordering, or stale generated data.
+- If the parser collapses or fragments the document, fix the source or importer before publishing.
 - Never normalize a broken import into canonical Markdown.

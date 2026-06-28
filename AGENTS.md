@@ -2,7 +2,7 @@
 
 ## Core Rules
 
-- This repository is the canonical source of truth for The Coherence Thesis. Word documents are import inputs and provenance. Canonical manuscript text lives in `content/manuscripts/`.
+- This repository is the canonical source of truth for The Coherence Thesis. Source manuscripts are Markdown files in `sources/manuscripts/`. Generated canonical reader sections live in `content/manuscripts/`.
 - Do not edit generated manuscript data by hand. Edit Markdown, then run `npm run manuscripts:compile`.
 - After implementing any feature, run the narrowest useful checks during iteration, then run `npm run validate` before commit.
 - For UI changes, use `npm run test:e2e:fast:desktop` for narrow desktop checks and `npm run test:e2e:fast` for broader local checks during iteration. Run `npm run test:e2e` before commit unless the change cannot affect browser behavior.
@@ -15,21 +15,20 @@
 
 ## Manuscripts
 
-- Authors edit Markdown in `content/manuscripts/`.
+- Authors edit source Markdown in `sources/manuscripts/` or series metadata in `content/series/`.
+- Do not edit generated canonical reader sections in `content/manuscripts/` by hand. Run `npm run manuscripts:import`.
 - Overview nodes live in `content/overview/` and must reference real section IDs.
-- Stable section IDs support deep links, read progress, update badges, recommendations, audio queues, and future spaced repetition. Preserve IDs when a section remains conceptually the same.
-- New Word imports must go through the review workflow:
+- Stable section IDs support deep links, read progress, update badges, recommendations, audio queues, and future spaced repetition. Preserve historical deep links from this publishing pipeline forward with `content/series/aliases.json`.
+- New Markdown source updates must go through the publishing workflow:
 
 ```bash
-npm run manuscripts:import -- --source /absolute/path/to/manuscript.docx
-npm run manuscripts:diff-import -- --draft artifacts/imports/<import-id>/content/manuscripts
-npm run manuscripts:apply-import -- --draft artifacts/imports/<import-id>/content/manuscripts --force
+npm run manuscripts:import
 npm run manuscripts:compile
 npm run manuscripts:validate
 ```
 
-- Do not apply a draft import when the parser has collapsed, fragmented, reordered, or renamed sections incorrectly. Fix the draft or importer first.
-- Treat removed sections in an import diff as a review event. Confirm intent before applying.
+- Do not accept an import when the parser has collapsed, fragmented, reordered, or renamed sections incorrectly. Fix the source or importer first.
+- Treat removed or renamed sections as a link preservation event. Add aliases when old public routes should continue to resolve.
 
 ## Interface Rules
 

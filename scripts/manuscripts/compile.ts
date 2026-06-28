@@ -1,21 +1,98 @@
 import path from "node:path";
 import {
   buildCatalog,
+  breadcrumbRoutesPath,
   catalogPath,
   ensureDir,
   generatedRoot,
+  publicDataRoot,
+  readerSectionsPath,
   repoRoot,
   writeJson,
 } from "./shared";
 
+function buildBreadcrumbRoutes(catalog: ReturnType<typeof buildCatalog>) {
+  const routes = new Map<
+    string,
+    { href: string; crumbs: Array<{ label: string; href: string }> }
+  >();
+  const home = { label: "Home", href: "/" };
+  const overview = { label: "Overview", href: "/overview/" };
+  const manuscripts = { label: "Manuscripts", href: "/manuscripts/" };
+  const addRoute = (href: string, crumbs: Array<{ label: string; href: string }>) => {
+    routes.set(href, { href, crumbs });
+  };
+
+  addRoute("/", [home]);
+  addRoute("/overview/", [home, overview]);
+  addRoute("/manuscripts/", [home, manuscripts]);
+
+  for (const volume of catalog.volumes) {
+    const volumeCrumb = { label: volume.title, href: volume.href };
+    addRoute(volume.href, [home, manuscripts, volumeCrumb]);
+
+    for (const part of volume.parts) {
+      const partCrumb = { label: part.title, href: part.href };
+      addRoute(part.href, [home, manuscripts, volumeCrumb, partCrumb]);
+
+      for (const chapter of part.chapters) {
+        const chapterCrumb = { label: chapter.title, href: chapter.href };
+        addRoute(chapter.href, [
+          home,
+          manuscripts,
+          volumeCrumb,
+          partCrumb,
+          chapterCrumb,
+        ]);
+
+        for (const sectionId of chapter.sectionIds) {
+          const section = catalog.sections.find(
+            (candidate) => candidate.sectionId === sectionId,
+          );
+          if (!section) continue;
+          addRoute(section.href, [
+            home,
+            manuscripts,
+            volumeCrumb,
+            partCrumb,
+            chapterCrumb,
+            { label: section.title, href: section.href },
+          ]);
+        }
+      }
+    }
+  }
+
+  return [...routes.values()];
+}
+
 export function compileManuscripts(): void {
   const catalog = buildCatalog();
+  const readerSections = catalog.sections.map((section) => ({
+    sectionId: section.sectionId,
+    title: section.title,
+    href: section.href,
+    text: section.text,
+    contentHash: section.contentHash,
+    paragraphs: section.paragraphs.map((paragraph) => ({
+      paragraphId: paragraph.paragraphId,
+      anchor: paragraph.anchor,
+      order: paragraph.order,
+      contentHash: paragraph.contentHash,
+    })),
+  }));
+  const breadcrumbRoutes = buildBreadcrumbRoutes(catalog);
   ensureDir(generatedRoot);
+  ensureDir(publicDataRoot);
   writeJson(catalogPath, catalog);
+  writeJson(readerSectionsPath, readerSections);
+  writeJson(breadcrumbRoutesPath, breadcrumbRoutes);
   console.log(
     `Compiled ${catalog.stats.sectionCount} sections, ${catalog.stats.wordCount.toLocaleString()} words`,
   );
   console.log(`Catalog: ${path.relative(repoRoot, catalogPath)}`);
+  console.log(`Reader data: ${path.relative(repoRoot, readerSectionsPath)}`);
+  console.log(`Breadcrumb data: ${path.relative(repoRoot, breadcrumbRoutesPath)}`);
 }
 
 compileManuscripts();

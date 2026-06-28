@@ -49,10 +49,12 @@ export function validateManuscripts(): void {
 
   const seenSectionIds = new Set<string>();
   const seenPaths = new Set<string>();
+  const volumeIds = new Set<string>();
   for (const doc of docs) {
     const id = doc.frontmatter.sectionId;
     assert(!seenSectionIds.has(id), `Duplicate sectionId '${id}'.`);
     seenSectionIds.add(id);
+    volumeIds.add(doc.frontmatter.volumeId);
     const href = sectionHref(doc.frontmatter);
     assert(!seenPaths.has(href), `Duplicate section route '${href}'.`);
     seenPaths.add(href);
@@ -63,6 +65,26 @@ export function validateManuscripts(): void {
   const overviewRefs = collectOverviewRefs(catalog.overview.nodes);
   for (const sectionId of overviewRefs) {
     assert(seenSectionIds.has(sectionId), `Overview references missing section '${sectionId}'.`);
+  }
+  const aliasSources = new Set<string>();
+  for (const alias of catalog.aliases) {
+    assert(
+      !seenPaths.has(alias.sourceHref),
+      `Alias sourceHref '${alias.sourceHref}' conflicts with a canonical section route.`,
+    );
+    assert(
+      !aliasSources.has(alias.sourceHref),
+      `Duplicate alias sourceHref '${alias.sourceHref}'.`,
+    );
+    aliasSources.add(alias.sourceHref);
+    assert(
+      seenSectionIds.has(alias.targetSectionId),
+      `Alias target section '${alias.targetSectionId}' is missing.`,
+    );
+  }
+  for (const volume of catalog.volumes) {
+    assert(volumeIds.has(volume.volumeId), `Configured volume '${volume.volumeId}' has no sections.`);
+    assert(volume.coverImage.length > 0, `Volume '${volume.volumeId}' is missing coverImage.`);
   }
 
   if (fs.existsSync(catalogPath)) {

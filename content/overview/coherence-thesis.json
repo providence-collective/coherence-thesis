@@ -1,245 +1,212 @@
 {
   "title": "The Coherence Thesis",
-  "subtitle": "A five minute map into the Providence manuscript body.",
+  "subtitle": "A five minute map across the nine published manuscripts.",
   "readingMinutes": 5,
   "nodes": [
     {
-      "id": "central-claim",
-      "title": "The central claim",
-      "summary": "Civilization does not lack knowledge, tools, or goodwill. It lacks coordination infrastructure trustworthy enough to turn those capacities toward shared survival without sliding into coercion. The Providence Imperative argues that the next institution must coordinate wisdom, trust, care, and action at the scale of the crises now arriving.",
+      "id": "substrate",
+      "title": "The substrate",
+      "summary": "The opening claim is that civilization rests on a substrate. An extractive substrate spends down what it depends on. A coherent substrate keeps physiology, relationship, intelligence, and institutions aligned enough to coordinate under pressure.",
       "references": [
         {
-          "sectionId": "preface",
-          "label": "Preface"
+          "sectionId": "v01-orientation",
+          "label": "Volume I orientation"
         },
         {
-          "sectionId": "the-central-wound-opening",
+          "sectionId": "v01-the-seed",
+          "label": "The seed"
+        },
+        {
+          "sectionId": "v01-the-sprout",
+          "label": "The sprout"
+        },
+        {
+          "sectionId": "v01-the-currency-of-presence",
+          "label": "Currency of Presence"
+        }
+      ]
+    },
+    {
+      "id": "intelligence",
+      "title": "Intelligence in relationship",
+      "summary": "The second volume reframes intelligence as relational rather than private. Humane technology must strengthen the conditions that let people think, trust, regulate, and coordinate together.",
+      "references": [
+        {
+          "sectionId": "v02-what-the-first-volume-left-in-our-hands",
+          "label": "Continuity"
+        },
+        {
+          "sectionId": "v02-toward-humane-technology",
+          "label": "Toward humane technology"
+        },
+        {
+          "sectionId": "v02-the-crisis-beneath-the-crises",
+          "label": "The crisis beneath the crises"
+        },
+        {
+          "sectionId": "v02-relational-coherence",
+          "label": "Relational coherence"
+        }
+      ]
+    },
+    {
+      "id": "providence",
+      "title": "The coordination device",
+      "summary": "The Providence Imperative names the coordination problem directly. It asks how trust, care, wisdom, and action can become legible and portable without becoming coercion or surveillance.",
+      "references": [
+        {
+          "sectionId": "v03-the-central-wound",
           "label": "The central wound"
         },
         {
-          "sectionId": "the-central-wound-on-the-meaning-of-coordination-failure",
-          "label": "Coordination failure"
-        },
-        {
-          "sectionId": "the-central-wound-what-coherence-actually-means",
+          "sectionId": "v03-what-coherence-actually-means",
           "label": "Coherence defined"
+        },
+        {
+          "sectionId": "v03-the-architecture-of-providence",
+          "label": "Architecture of Providence"
+        },
+        {
+          "sectionId": "v03-the-coherence-engine-and-the-reflective-mirror",
+          "label": "Coherence Engine"
         }
       ]
     },
     {
-      "id": "deadline",
-      "title": "Why this cannot wait",
-      "summary": "The book frames the present as a deadline because raw capability is accelerating while trust, ecological stability, and institutional legitimacy are weakening. Coordination becomes the bottleneck precisely when power becomes easier to wield. Infrastructure for trust cannot be assembled in the middle of the crisis that requires it.",
+      "id": "building",
+      "title": "The buildable architecture",
+      "summary": "Architecting Providence turns the design into construction requirements: sequence, funding, governance, technology, human practice, and the first fully embodied community.",
       "references": [
         {
-          "sectionId": "the-coordination-deadline-opening",
-          "label": "The coordination deadline"
+          "sectionId": "v04-what-it-means-to-begin",
+          "label": "What it means to begin"
         },
         {
-          "sectionId": "the-coordination-deadline-the-multiplier-and-the-bottleneck",
-          "label": "Multiplier and bottleneck"
+          "sectionId": "v04-what-volume-iii-left-unbuilt",
+          "label": "What Volume III left unbuilt"
         },
         {
-          "sectionId": "the-coordination-deadline-the-first-force-intelligence-becomes-abundant",
-          "label": "Intelligence abundance"
+          "sectionId": "v04-why-purposeful-exists-and-how-providence-begins",
+          "label": "How Providence begins"
         },
         {
-          "sectionId": "the-coordination-deadline-the-second-force-trust-collapses-as-leverage-rises",
-          "label": "Trust collapse"
-        },
-        {
-          "sectionId": "the-coordination-deadline-the-third-force-the-slow-variables-come-due",
-          "label": "Slow variables"
-        },
-        {
-          "sectionId": "the-coordination-deadline-why-now-and-why-not-later",
-          "label": "Why now"
+          "sectionId": "v04-the-cardinal-scale-seen-from-here",
+          "label": "The Cardinal Scale"
         }
       ]
     },
     {
-      "id": "institutional-lineage",
-      "title": "What older institutions solved and broke",
-      "summary": "The manuscript treats Providence as a synthesis, not a novelty cult. It studies religion, nation-states, corporations, universities, platforms, monasteries, guilds, indigenous governance, mutual aid, scientific process, Quaker practice, stewardship trusts, and commons governance. Each lineage preserved a coordination insight and left a wound Providence must avoid repeating.",
+      "id": "human",
+      "title": "The human center",
+      "summary": "Purposeful brings the series back to the person. The future is not built by abstractions. It is built by people whose gifts are recognized, cultivated, connected, and made useful.",
       "references": [
         {
-          "sectionId": "what-each-institution-solved-and-what-it-broke-opening",
-          "label": "Institutional inheritance"
+          "sectionId": "v05-on-returning-to-the-human",
+          "label": "Returning to the human"
         },
         {
-          "sectionId": "what-each-institution-solved-and-what-it-broke-the-platform-coordinating-attention-toward-its-own-ends",
-          "label": "Platforms and attention"
+          "sectionId": "v05-the-greatest-untapped-resource-on-earth",
+          "label": "Untapped human potential"
         },
         {
-          "sectionId": "the-lineage-opening",
-          "label": "The lineage"
+          "sectionId": "v05-finding-your-people",
+          "label": "Finding your people"
         },
         {
-          "sectionId": "the-lineage-the-monasteries-institutions-that-hold-across-time",
-          "label": "Monasteries"
-        },
-        {
-          "sectionId": "the-lineage-indigenous-governance-coordination-around-the-living-world",
-          "label": "Indigenous governance"
-        },
-        {
-          "sectionId": "the-lineage-stewardship-trusts-and-the-commons-holding-what-must-not-be-sold",
-          "label": "Commons and trusts"
+          "sectionId": "v05-the-cardinal-scale",
+          "label": "The Cardinal Scale"
         }
       ]
     },
     {
-      "id": "wisdom-architecture",
-      "title": "The architecture of wisdom",
-      "summary": "Providence is built around the conditions that allow wisdom to emerge: genuine encounter, practice, mentorship, correction, shared standards, and embodied presence. It proposes seven initiatory capacities and three doors into the network: mentorship, retreats, and a year-long curriculum. The point is not content delivery. The point is forming people who can coordinate well under pressure.",
+      "id": "smallest-nest",
+      "title": "The smallest nest",
+      "summary": "The sixth volume compresses the architecture into its smallest container: current, gift, pathway, seeing, people, loom, currency, right size, dragon, and nest.",
       "references": [
         {
-          "sectionId": "what-coordinates-wisdom-opening",
-          "label": "What coordinates wisdom"
+          "sectionId": "v06-the-whole-briefly",
+          "label": "The whole, briefly"
         },
         {
-          "sectionId": "what-coordinates-wisdom-the-seven-initiates-a-topology-of-the-necessary-capacities",
-          "label": "The seven initiates"
+          "sectionId": "v06-the-current",
+          "label": "The current"
         },
         {
-          "sectionId": "the-architecture-of-providence-opening",
-          "label": "The architecture"
+          "sectionId": "v06-your-people",
+          "label": "Your people"
         },
         {
-          "sectionId": "the-architecture-of-providence-the-first-door-one-on-one-mentorship",
-          "label": "Mentorship"
-        },
-        {
-          "sectionId": "the-architecture-of-providence-the-second-door-the-retreats",
-          "label": "Retreats"
-        },
-        {
-          "sectionId": "the-architecture-of-providence-the-third-door-the-year-long-curriculum",
-          "label": "Year-long curriculum"
+          "sectionId": "v06-the-dragon",
+          "label": "The dragon"
         }
       ]
     },
     {
-      "id": "presence-currency",
-      "title": "Presence as a new coordination currency",
-      "summary": "The central innovation is a currency of presence and presencing. Presence names the quality of genuine human encounter. Presencing names the measurable act of helping that quality emerge in others. The manuscript argues that this can circulate as trust, reputation, matching power, and eventually material support without becoming attention farming or social credit.",
+      "id": "praxis",
+      "title": "The praxis",
+      "summary": "Presencing Genius turns the argument into practice. Presence, presencing, the Seven Initiates, the Twelve Tenets, mentorship, curriculum, retreats, and holding become the inner technologies of coherent civilization.",
       "references": [
         {
-          "sectionId": "the-currency-of-presence-opening",
-          "label": "The currency of presence"
+          "sectionId": "v07-the-internal-technologies",
+          "label": "Internal technologies"
         },
         {
-          "sectionId": "the-currency-of-presence-presence-and-presencing-the-two-levels-at-which-the-currency-is-minted",
-          "label": "Presence and presencing"
+          "sectionId": "v07-presencing-and-the-space-between",
+          "label": "Presencing"
         },
         {
-          "sectionId": "the-currency-of-presence-how-the-currency-circulates",
-          "label": "How it circulates"
+          "sectionId": "v07-the-seven-initiates",
+          "label": "The Seven Initiates"
         },
         {
-          "sectionId": "how-presence-becomes-bread-opening",
-          "label": "How presence becomes bread"
-        },
-        {
-          "sectionId": "how-presence-becomes-bread-the-floor-and-the-height-what-earns-bread-and-what-earns-stewardship",
-          "label": "Floor and height"
-        },
-        {
-          "sectionId": "why-providence-is-not-social-credit-opening",
-          "label": "Not social credit"
+          "sectionId": "v07-the-year-of-initiations",
+          "label": "Year of initiations"
         }
       ]
     },
     {
-      "id": "measurement",
-      "title": "The body as primary text",
-      "summary": "The measurement layer begins from the body rather than from self-report or performance. Voice, heart, pulse, language, and endocrine signals are treated as partial evidence of relational state. The manuscript is careful about uncertainty: these measures are not truth itself. They are signals that must remain corrigible, contextual, and accountable to the people being measured.",
+      "id": "reckoning",
+      "title": "The reckoning",
+      "summary": "A Misanthropic Artifice counts what the extractive order has already built and already damaged. It names the rival architecture so the opposite can be built deliberately.",
       "references": [
         {
-          "sectionId": "the-body-as-primary-text-opening",
-          "label": "The body as primary text"
+          "sectionId": "v08-prologue-two-scenes",
+          "label": "Prologue"
         },
         {
-          "sectionId": "the-body-as-primary-text-a-note-on-evidence-four-tiers-of-certainty",
-          "label": "Evidence tiers"
+          "sectionId": "v08-2-the-accounting",
+          "label": "The accounting"
         },
         {
-          "sectionId": "the-four-streams-opening",
-          "label": "The four streams"
+          "sectionId": "v08-11-the-inversion-the-same-tools-the-opposite-god",
+          "label": "The inversion"
         },
         {
-          "sectionId": "the-four-streams-stream-two-the-voice-as-autonomic-readout",
-          "label": "Voice"
-        },
-        {
-          "sectionId": "the-four-streams-stream-three-the-heart-as-truth-teller",
-          "label": "Heart"
-        },
-        {
-          "sectionId": "the-coherence-engine-and-the-reflective-mirror-the-reflective-mirror-how-the-engine-serves-the-people-it-measures",
-          "label": "Reflective mirror"
+          "sectionId": "v08-16-a-blessing-and-a-door",
+          "label": "A blessing and a door"
         }
       ]
     },
     {
-      "id": "governance-and-failure",
-      "title": "Governance, failure, and anti-capture design",
-      "summary": "The book refuses to treat good intent as sufficient. It names predictable failure modes: bad measurement, bad incentives, centralization, elitism, theater, cult dynamics, surveillance, drift, and capture. Providence therefore needs governance that can correct itself, protect sovereignty, remain open, and refuse the temptation to become the platform it was built to replace.",
+      "id": "cardinal-scale",
+      "title": "The first scale",
+      "summary": "The Cardinal Scale turns the whole series toward one buildable place. A Scale is one complete expression of the thesis: land, doors, membrane, currency, engine, container, and community.",
       "references": [
         {
-          "sectionId": "the-constitutional-problem-opening",
-          "label": "Constitutional problem"
+          "sectionId": "v09-1-the-ninth-turn-where-the-eight-have-brought-us",
+          "label": "The ninth turn"
         },
         {
-          "sectionId": "the-constitutional-problem-the-three-chamber-governance-model",
-          "label": "Three chambers"
+          "sectionId": "v09-2-what-a-scale-is",
+          "label": "What a Scale is"
         },
         {
-          "sectionId": "why-providence-might-fail-opening",
-          "label": "Why it might fail"
+          "sectionId": "v09-3-providence-the-device-that-coordinates-the-many",
+          "label": "Providence as device"
         },
         {
-          "sectionId": "why-providence-might-fail-the-failure-of-drift-surveillance-ranking-and-the-slow-corruption-of-purpose",
-          "label": "Failure of drift"
-        },
-        {
-          "sectionId": "the-federated-imperative-providence-as-protocol-not-platform",
-          "label": "Protocol, not platform"
-        },
-        {
-          "sectionId": "why-it-must-be-open-what-verifiability-actually-requires",
-          "label": "Verifiability"
-        }
-      ]
-    },
-    {
-      "id": "beginning",
-      "title": "How it begins",
-      "summary": "The first step is not civilization-scale deployment. It is a sequence of gatherings, proof, companion tools, financial architecture, and a flywheel that starts in a narrow place where coherence is already valuable. The invitation is to build a network that heals what it inhabits, grows without centralizing, and proves itself through lived trust before claiming scale.",
-      "references": [
-        {
-          "sectionId": "a-system-that-heals-what-it-inhabits-opening",
-          "label": "Heals what it inhabits"
-        },
-        {
-          "sectionId": "how-we-begin-opening",
-          "label": "How we begin"
-        },
-        {
-          "sectionId": "how-we-begin-the-sequence-how-providence-matures-version-by-version",
-          "label": "Maturity sequence"
-        },
-        {
-          "sectionId": "how-we-begin-the-first-gatherings",
-          "label": "First gatherings"
-        },
-        {
-          "sectionId": "the-flywheel-opening",
-          "label": "The flywheel"
-        },
-        {
-          "sectionId": "the-flywheel-how-the-wheel-begins-to-turn",
-          "label": "How the wheel turns"
+          "sectionId": "v09-5-the-invitation-lay-one-stone",
+          "label": "Lay one stone"
         }
       ]
     }
