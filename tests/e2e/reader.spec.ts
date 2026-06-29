@@ -507,14 +507,17 @@ test("reader settings update and persist local appearance preferences", async ({
     settingsMenu.getByRole("button", { name: "Reset theme" }),
   ).toBeVisible();
   const initialAppearance = await page.evaluate(() => {
+    const heading = document.querySelector(".manuscript-heading h1");
     const paragraph = document.querySelector(".manuscript-prose p");
     const toolbarButton = document.querySelector(".settings-menu-button");
     return {
       fontFamily: paragraph ? getComputedStyle(paragraph).fontFamily : "",
+      headingFontFamily: heading ? getComputedStyle(heading).fontFamily : "",
       fontSize: paragraph ? Number.parseFloat(getComputedStyle(paragraph).fontSize) : 0,
       toolbarFontSize: toolbarButton
         ? Number.parseFloat(getComputedStyle(toolbarButton).fontSize)
         : 0,
+      toolbarFontFamily: toolbarButton ? getComputedStyle(toolbarButton).fontFamily : "",
       rootTheme: document.documentElement.dataset.readerTheme ?? "",
     };
   });
@@ -566,16 +569,19 @@ test("reader settings update and persist local appearance preferences", async ({
   await expect(page.locator("html")).toHaveAttribute("data-reader-theme", "black");
 
   const changedAppearance = await page.evaluate(() => {
+    const heading = document.querySelector(".manuscript-heading h1");
     const paragraph = document.querySelector(".manuscript-prose p");
     const toolbarButton = document.querySelector(".settings-menu-button");
     const stored = window.localStorage.getItem("coherence-reader-preferences-v1");
     return {
       bodyBackground: getComputedStyle(document.body).backgroundColor,
       fontFamily: paragraph ? getComputedStyle(paragraph).fontFamily : "",
+      headingFontFamily: heading ? getComputedStyle(heading).fontFamily : "",
       fontSize: paragraph ? Number.parseFloat(getComputedStyle(paragraph).fontSize) : 0,
       toolbarFontSize: toolbarButton
         ? Number.parseFloat(getComputedStyle(toolbarButton).fontSize)
         : 0,
+      toolbarFontFamily: toolbarButton ? getComputedStyle(toolbarButton).fontFamily : "",
       rootTheme: document.documentElement.dataset.readerTheme ?? "",
       stored,
     };
@@ -588,6 +594,8 @@ test("reader settings update and persist local appearance preferences", async ({
     initialAppearance.toolbarFontSize,
   );
   expect(changedAppearance.fontFamily).toContain("Georgia");
+  expect(changedAppearance.headingFontFamily).toContain("Georgia");
+  expect(changedAppearance.toolbarFontFamily).toContain("Georgia");
   expect(changedAppearance.rootTheme).toBe("black");
   expect(changedAppearance.bodyBackground).toBe("rgb(0, 0, 0)");
   expect(changedAppearance.bodyBackground).not.toBe(initialBodyBackground);
@@ -629,6 +637,19 @@ test("reader settings update and persist local appearance preferences", async ({
     fontFamily: "georgia",
     theme: "black",
   });
+
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-reader-theme", "black");
+  const homeAppearance = await page.evaluate(() => {
+    const brandTitle = document.querySelector(".brand-title");
+    const heroHeading = document.querySelector(".hero-copy h1");
+    return {
+      brandFontFamily: brandTitle ? getComputedStyle(brandTitle).fontFamily : "",
+      heroFontFamily: heroHeading ? getComputedStyle(heroHeading).fontFamily : "",
+    };
+  });
+  expect(homeAppearance.brandFontFamily).toContain("Georgia");
+  expect(homeAppearance.heroFontFamily).toContain("Georgia");
 });
 
 test("reader route exposes progress and audio controls", async ({ page }) => {

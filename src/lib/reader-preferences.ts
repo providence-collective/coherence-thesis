@@ -125,11 +125,15 @@ export function applyReaderPreferences(
   preferences: ReaderPreferences,
   root: HTMLElement,
 ): void {
+  const fontStack = fontOptionById(preferences.fontFamily).stack;
+
   root.dataset.readerTheme = preferences.theme;
   root.style.setProperty(
     "--reader-font-scale",
     (preferences.fontSize / 100).toString(),
   );
   root.style.setProperty("--reader-font-scale-percent", `${preferences.fontSize}%`);
-  root.style.setProperty("--font-body", fontOptionById(preferences.fontFamily).stack);
+  root.style.setProperty("--font-body", fontStack);
+  root.style.setProperty("--font-display", fontStack);
+  root.style.setProperty("--font-ui", fontStack);
 }
