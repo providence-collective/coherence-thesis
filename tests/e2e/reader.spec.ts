@@ -98,24 +98,21 @@ test("home page presents the overview and manuscript entry points", async ({
     "https://creativecommons.org/licenses/by-sa/4.0/",
   );
   await expect(licenseLink).toHaveAttribute("target", "_blank");
-  await expect(licenseLink).toHaveAttribute(
-    "rel",
-    /(^| )license( |$).*noopener.*noreferrer/,
-  );
+  await expect(licenseLink).toHaveAttribute("rel", "license");
   const robertLink = footer.getByRole("link", { name: "Robert James Ryan III" });
   await expect(robertLink).toHaveAttribute(
     "href",
     "https://www.instagram.com/allelseis",
   );
   await expect(robertLink).toHaveAttribute("target", "_blank");
-  await expect(robertLink).toHaveAttribute("rel", "noopener noreferrer");
+  await expect(robertLink).toHaveAttribute("rel", "author");
   const aubreyLink = footer.getByRole("link", { name: "Aubrey Falconer" });
   await expect(aubreyLink).toHaveAttribute(
     "href",
     "https://aubreyfalconer.com",
   );
   await expect(aubreyLink).toHaveAttribute("target", "_blank");
-  await expect(aubreyLink).toHaveAttribute("rel", "noopener noreferrer");
+  await expect(aubreyLink).toHaveAttribute("rel", "author");
 
   const homepageSpacing = await page.evaluate(() => {
     const hero = document.querySelector(".hero-section")?.getBoundingClientRect();

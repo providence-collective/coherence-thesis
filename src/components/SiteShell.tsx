@@ -48,7 +48,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           Licensing:{" "}
           <a
             href="https://creativecommons.org/licenses/by-sa/4.0/"
-            rel="license noopener noreferrer"
+            rel="license"
             target="_blank"
           >
             CC BY-SA 4.0
@@ -59,7 +59,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           Custodians:{" "}
           <a
             href="https://www.instagram.com/allelseis"
-            rel="noopener noreferrer"
+            rel="author"
             target="_blank"
           >
             Robert James Ryan III
@@ -67,7 +67,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           {" & "}
           <a
             href="https://aubreyfalconer.com"
-            rel="noopener noreferrer"
+            rel="author"
             target="_blank"
           >
             Aubrey Falconer
