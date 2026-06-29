@@ -91,17 +91,31 @@ test("home page presents the overview and manuscript entry points", async ({
   await expect(
     footer.getByText(`© ${copyrightYearLabel} by the Providence Collective.`),
   ).toBeVisible();
-  await expect(footer.getByRole("link", { name: "CC BY-SA 4.0" })).toHaveAttribute(
+  await expect(footer.getByText("Licensing: CC BY-SA 4.0.")).toBeVisible();
+  const licenseLink = footer.getByRole("link", { name: "CC BY-SA 4.0" });
+  await expect(licenseLink).toHaveAttribute(
     "href",
     "https://creativecommons.org/licenses/by-sa/4.0/",
   );
-  await expect(
-    footer.getByRole("link", { name: "Robert James Ryan III" }),
-  ).toHaveAttribute("href", "https://www.instagram.com/allelseis");
-  await expect(footer.getByRole("link", { name: "Aubrey Falconer" })).toHaveAttribute(
+  await expect(licenseLink).toHaveAttribute("target", "_blank");
+  await expect(licenseLink).toHaveAttribute(
+    "rel",
+    /(^| )license( |$).*noopener.*noreferrer/,
+  );
+  const robertLink = footer.getByRole("link", { name: "Robert James Ryan III" });
+  await expect(robertLink).toHaveAttribute(
+    "href",
+    "https://www.instagram.com/allelseis",
+  );
+  await expect(robertLink).toHaveAttribute("target", "_blank");
+  await expect(robertLink).toHaveAttribute("rel", "noopener noreferrer");
+  const aubreyLink = footer.getByRole("link", { name: "Aubrey Falconer" });
+  await expect(aubreyLink).toHaveAttribute(
     "href",
     "https://aubreyfalconer.com",
   );
+  await expect(aubreyLink).toHaveAttribute("target", "_blank");
+  await expect(aubreyLink).toHaveAttribute("rel", "noopener noreferrer");
 
   const homepageSpacing = await page.evaluate(() => {
     const hero = document.querySelector(".hero-section")?.getBoundingClientRect();

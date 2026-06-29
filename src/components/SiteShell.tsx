@@ -46,15 +46,33 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <p>© {yearLabel} by the Providence Collective.</p>
         <p>
           Licensing:{" "}
-          <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license">
+          <a
+            href="https://creativecommons.org/licenses/by-sa/4.0/"
+            rel="license noopener noreferrer"
+            target="_blank"
+          >
             CC BY-SA 4.0
           </a>
+          .
         </p>
         <p>
           Custodians:{" "}
-          <a href="https://www.instagram.com/allelseis">Robert James Ryan III</a>
+          <a
+            href="https://www.instagram.com/allelseis"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Robert James Ryan III
+          </a>
           {" & "}
-          <a href="https://aubreyfalconer.com">Aubrey Falconer</a>.
+          <a
+            href="https://aubreyfalconer.com"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Aubrey Falconer
+          </a>
+          .
         </p>
       </footer>
     </div>
