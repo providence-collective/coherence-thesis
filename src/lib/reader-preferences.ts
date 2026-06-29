@@ -4,7 +4,7 @@ export const readerFontSizeMin = 85;
 export const readerFontSizeMax = 125;
 export const readerFontSizeStep = 5;
 
-export const readerThemeOptions = ["textured", "light", "dark"] as const;
+export const readerThemeOptions = ["textured", "light", "dark", "black"] as const;
 export type ReaderTheme = (typeof readerThemeOptions)[number];
 
 export const readerFontOptions = [
@@ -130,5 +130,6 @@ export function applyReaderPreferences(
     "--reader-font-scale",
     (preferences.fontSize / 100).toString(),
   );
+  root.style.setProperty("--reader-font-scale-percent", `${preferences.fontSize}%`);
   root.style.setProperty("--font-body", fontOptionById(preferences.fontFamily).stack);
 }

@@ -22,8 +22,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <ToolbarBreadcrumbs />
         <nav className="site-nav" aria-label="Primary">
           <SearchMenuIsland />
-          <OutlineMenuIsland outline={outline} />
           <ToolbarSettingsIsland />
+          <OutlineMenuIsland outline={outline} />
           <AudioPlayerIsland />
           <ToolbarProgressIsland />
         </nav>

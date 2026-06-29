@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Settings } from "lucide-react";
+import { Check, ChevronDown, RotateCcw, Settings } from "lucide-react";
 import {
   applyReaderPreferences,
   defaultReaderPreferences,
@@ -35,15 +35,17 @@ function writeStoredPreferences(preferences: ReaderPreferences): void {
 }
 
 function themeLabel(theme: ReaderTheme): string {
-  if (theme === "textured") return "Textured";
+  if (theme === "textured") return "Parchment";
   if (theme === "light") return "Light";
-  return "Dark";
+  if (theme === "dark") return "Dark";
+  return "Black";
 }
 
 export function ToolbarSettingsIsland() {
   const pathname = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+  const [fontMenuOpen, setFontMenuOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [preferences, setPreferences] = useState<ReaderPreferences>(
     () => defaultReaderPreferences,
@@ -62,6 +64,7 @@ export function ToolbarSettingsIsland() {
   useEffect(() => {
     const closeTimer = window.setTimeout(() => {
       setOpen(false);
+      setFontMenuOpen(false);
     }, 0);
     return () => window.clearTimeout(closeTimer);
   }, [pathname]);
@@ -71,10 +74,17 @@ export function ToolbarSettingsIsland() {
     const onPointerDown = (event: PointerEvent) => {
       if (!containerRef.current?.contains(event.target as Node)) {
         setOpen(false);
+        setFontMenuOpen(false);
       }
     };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        if (fontMenuOpen) {
+          setFontMenuOpen(false);
+          return;
+        }
+        setOpen(false);
+      }
     };
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
@@ -82,7 +92,7 @@ export function ToolbarSettingsIsland() {
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [open]);
+  }, [fontMenuOpen, open]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -97,6 +107,8 @@ export function ToolbarSettingsIsland() {
     }));
   }
 
+  const selectedFont = fontOptionById(preferences.fontFamily);
+
   return (
     <div className="settings-menu" ref={containerRef}>
       <button
@@ -108,8 +120,6 @@ export function ToolbarSettingsIsland() {
         onClick={() => setOpen((current) => !current)}
       >
         <Settings aria-hidden="true" size={17} />
-        <span className="nav-label">Settings</span>
-        <ChevronDown aria-hidden="true" size={16} />
       </button>
       {open && (
         <section
@@ -119,11 +129,25 @@ export function ToolbarSettingsIsland() {
         >
           <div className="settings-heading">
             <p className="eyebrow">Reading settings</p>
-            <strong>{preferences.fontSize}% text</strong>
           </div>
-          <label className="settings-field">
-            <span>Font size</span>
+          <div className="settings-control">
+            <div className="settings-control-row">
+              <label htmlFor="reader-font-size">Font size</label>
+              <button
+                type="button"
+                className="settings-reset-button"
+                aria-label="Reset font size"
+                onClick={() =>
+                  updatePreferences({
+                    fontSize: defaultReaderPreferences.fontSize,
+                  })
+                }
+              >
+                <RotateCcw aria-hidden="true" size={14} />
+              </button>
+            </div>
             <input
+              id="reader-font-size"
               type="range"
               min={readerFontSizeMin}
               max={readerFontSizeMax}
@@ -134,42 +158,102 @@ export function ToolbarSettingsIsland() {
                 updatePreferences({ fontSize: Number(event.target.value) })
               }
             />
-          </label>
-          <label className="settings-field">
-            <span>Font</span>
-            <select
-              value={preferences.fontFamily}
-              aria-label="Reader font"
-              onChange={(event) =>
-                updatePreferences({
-                  fontFamily: event.target.value as ReaderFontId,
-                })
-              }
-            >
-              {readerFontOptions.map((fontOption) => (
-                <option key={fontOption.id} value={fontOption.id}>
-                  {fontOption.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <div className="settings-theme-group" aria-label="Reader theme">
-            {readerThemeOptions.map((theme) => (
-              <button
-                key={theme}
-                type="button"
-                className={`theme-choice theme-choice-${theme}`}
-                aria-pressed={preferences.theme === theme}
-                onClick={() => updatePreferences({ theme })}
-              >
-                <span className="theme-swatch" aria-hidden="true" />
-                <span>{themeLabel(theme)}</span>
-              </button>
-            ))}
           </div>
-          <p className="quiet-copy">
-            Saved in this browser. Current font is {fontOptionById(preferences.fontFamily).label}.
-          </p>
+          <div className="settings-control">
+            <div className="settings-control-row">
+              <span id="reader-font-label">Font</span>
+              <button
+                type="button"
+                className="settings-reset-button"
+                aria-label="Reset font"
+                onClick={() =>
+                  updatePreferences({
+                    fontFamily: defaultReaderPreferences.fontFamily,
+                  })
+                }
+              >
+                <RotateCcw aria-hidden="true" size={14} />
+              </button>
+            </div>
+            <div className="font-select">
+              <button
+                type="button"
+                role="combobox"
+                className="font-select-button"
+                aria-controls="reader-font-options"
+                aria-expanded={fontMenuOpen}
+                aria-haspopup="listbox"
+                aria-label="Reader font"
+                onClick={() => setFontMenuOpen((current) => !current)}
+              >
+                <span style={{ fontFamily: selectedFont.stack }}>
+                  {selectedFont.label}
+                </span>
+                <ChevronDown aria-hidden="true" size={16} />
+              </button>
+              {fontMenuOpen && (
+                <div
+                  id="reader-font-options"
+                  className="font-select-options"
+                  role="listbox"
+                  aria-labelledby="reader-font-label"
+                >
+                  {readerFontOptions.map((fontOption) => (
+                    <button
+                      key={fontOption.id}
+                      type="button"
+                      role="option"
+                      aria-selected={preferences.fontFamily === fontOption.id}
+                      className="font-select-option"
+                      style={{ fontFamily: fontOption.stack }}
+                      onClick={() => {
+                        updatePreferences({
+                          fontFamily: fontOption.id as ReaderFontId,
+                        });
+                        setFontMenuOpen(false);
+                      }}
+                    >
+                      <span>{fontOption.label}</span>
+                      {preferences.fontFamily === fontOption.id && (
+                        <Check aria-hidden="true" size={15} />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="settings-control">
+            <div className="settings-control-row">
+              <span>Theme</span>
+              <button
+                type="button"
+                className="settings-reset-button"
+                aria-label="Reset theme"
+                onClick={() =>
+                  updatePreferences({
+                    theme: defaultReaderPreferences.theme,
+                  })
+                }
+              >
+                <RotateCcw aria-hidden="true" size={14} />
+              </button>
+            </div>
+            <div className="settings-theme-group" aria-label="Reader theme">
+              {readerThemeOptions.map((theme) => (
+                <button
+                  key={theme}
+                  type="button"
+                  className={`theme-choice theme-choice-${theme}`}
+                  aria-pressed={preferences.theme === theme}
+                  onClick={() => updatePreferences({ theme })}
+                >
+                  <span className="theme-swatch" aria-hidden="true" />
+                  <span>{themeLabel(theme)}</span>
+                </button>
+              ))}
+            </div>
+          </div>
         </section>
       )}
     </div>

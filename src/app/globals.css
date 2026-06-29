@@ -26,6 +26,7 @@
   --font-display: Baskerville, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --font-body: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
   --reader-font-scale: 1;
+  --reader-font-scale-percent: 100%;
   --header-background: rgba(244, 234, 215, 0.88);
   --nav-hover-background: rgba(164, 123, 63, 0.11);
   --panel-background: #fbf6eb;
@@ -99,10 +100,38 @@ html[data-reader-theme="dark"] {
   --card-background-hover: rgba(42, 39, 34, 0.9);
   --glass-background: rgba(24, 23, 21, 0.82);
   --page-background:
-    radial-gradient(circle at 18% 4%, rgba(214, 164, 93, 0.16), transparent 28rem),
-    radial-gradient(circle at 84% 0%, rgba(159, 200, 224, 0.1), transparent 30rem),
+    radial-gradient(circle at 18% 4%, rgba(214, 164, 93, 0.08), transparent 30rem),
+    radial-gradient(circle at 84% 0%, rgba(159, 200, 224, 0.05), transparent 32rem),
     linear-gradient(180deg, #11100e, #181715 52%, #0b0a09);
   --page-background-size: auto, auto, auto;
+}
+
+html[data-reader-theme="black"] {
+  --paper: #000000;
+  --paper-deep: #050505;
+  --paper-soft: #050505;
+  --ink: #f7f7f5;
+  --ink-soft: #d0d0ca;
+  --ink-muted: #8c8c86;
+  --bronze: #b8b2a4;
+  --bronze-deep: #e3ded2;
+  --sage: #b8b2a4;
+  --blue: #d0d0ca;
+  --line: rgba(255, 255, 255, 0.18);
+  --shadow: 0 20px 80px rgba(0, 0, 0, 0.76);
+  --header-background: rgba(0, 0, 0, 0.9);
+  --nav-hover-background: rgba(255, 255, 255, 0.08);
+  --panel-background: #050505;
+  --field-background: #000000;
+  --field-background-hover: #101010;
+  --subtle-control-background: rgba(255, 255, 255, 0.05);
+  --item-background: rgba(255, 255, 255, 0.05);
+  --item-background-strong: rgba(255, 255, 255, 0.08);
+  --card-background: rgba(255, 255, 255, 0.05);
+  --card-background-hover: rgba(255, 255, 255, 0.08);
+  --glass-background: rgba(0, 0, 0, 0.82);
+  --page-background: #000000;
+  --page-background-size: auto;
 }
 
 @theme inline {
@@ -124,10 +153,12 @@ html {
   background-color: var(--paper);
   background-size: var(--page-background-size);
   color-scheme: light;
+  font-size: var(--reader-font-scale-percent);
   scroll-behavior: smooth;
 }
 
-html[data-reader-theme="dark"] {
+html[data-reader-theme="dark"],
+html[data-reader-theme="black"] {
   color-scheme: dark;
 }
 
@@ -143,6 +174,7 @@ body {
   background-size: var(--page-background-size);
   color: var(--ink);
   font-family: var(--font-ui);
+  font-size: 1rem;
   letter-spacing: 0;
 }
 
@@ -444,6 +476,11 @@ input {
   color: var(--ink-soft);
   cursor: pointer;
   padding: 0.65rem 0.75rem;
+}
+
+.settings-menu-button {
+  width: 2.75rem;
+  padding: 0;
 }
 
 .audio-menu-button.is-playing {
@@ -917,7 +954,7 @@ input {
 }
 
 .settings-popover {
-  width: min(24rem, calc(100vw - 2rem));
+  width: min(28rem, calc(100vw - 2rem));
 }
 
 .progress-popover {
@@ -1730,57 +1767,151 @@ input {
   margin: 0;
 }
 
-.settings-heading strong {
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 500;
-  line-height: 1.1;
-}
-
-.settings-field {
+.settings-control {
   display: grid;
   gap: 0.5rem;
   color: var(--ink-soft);
   font-size: 0.9rem;
 }
 
-.settings-field input,
-.settings-field select {
-  width: 100%;
+.settings-control-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.6rem;
 }
 
-.settings-field input {
+.settings-control-row label,
+.settings-control-row span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-reset-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--subtle-control-background);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.settings-reset-button:hover,
+.settings-reset-button:focus-visible {
+  border-color: rgba(119, 84, 42, 0.5);
+  background: var(--nav-hover-background);
+  color: var(--ink);
+  outline: none;
+}
+
+.settings-control input {
+  width: 100%;
   accent-color: var(--bronze);
   cursor: pointer;
 }
 
-.settings-field input:focus-visible {
+.settings-control input:focus-visible {
   outline: 2px solid rgba(119, 84, 42, 0.42);
   outline-offset: 0.3rem;
 }
 
-.settings-field select {
+.font-select {
+  position: relative;
+}
+
+.font-select-button,
+.font-select-option {
+  width: 100%;
+  color: var(--ink);
+}
+
+.font-select-button {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.6rem;
   min-height: 2.65rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--field-background);
-  color: var(--ink);
   cursor: pointer;
   padding: 0 0.6rem;
+  text-align: left;
 }
 
-.settings-field select:hover,
-.settings-field select:focus-visible {
+.font-select-button span {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 1.04rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.font-select-button:hover,
+.font-select-button:focus-visible {
   border-color: rgba(119, 84, 42, 0.52);
   background: var(--field-background-hover);
   box-shadow: inset 0 0 0 1px rgba(119, 84, 42, 0.14);
   outline: none;
 }
 
+.font-select-options {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  left: 0;
+  z-index: 25;
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel-background);
+  box-shadow: var(--shadow);
+  padding: 0.25rem;
+}
+
+.font-select-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.6rem;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.04rem;
+  padding: 0.55rem 0.6rem;
+  text-align: left;
+}
+
+.font-select-option span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.font-select-option:hover,
+.font-select-option:focus-visible,
+.font-select-option[aria-selected="true"] {
+  background: var(--nav-hover-background);
+  color: var(--ink);
+  outline: none;
+}
+
 .settings-theme-group {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.45rem;
 }
 
@@ -1840,6 +1971,10 @@ input {
 
 .theme-choice-dark .theme-swatch {
   background: linear-gradient(135deg, #181715, #0b0a09);
+}
+
+.theme-choice-black .theme-swatch {
+  background: #000000;
 }
 
 .reader-status .icon-button {
@@ -1936,7 +2071,7 @@ input {
 .manuscript-prose blockquote {
   margin: 0 0 1.35rem;
   color: var(--ink);
-  font-size: calc(clamp(1.12rem, 2.2vw, 1.28rem) * var(--reader-font-scale));
+  font-size: clamp(1.12rem, 2.2vw, 1.28rem);
   line-height: 1.78;
 }
 
@@ -2320,7 +2455,6 @@ input {
   }
 
   .outline-menu-button .nav-label,
-  .settings-menu-button .nav-label,
   .progress-menu-button .nav-label {
     position: static;
     width: auto;
@@ -2344,9 +2478,12 @@ input {
 
   .outline-menu-button svg:last-child,
   .audio-menu-button .audio-menu-chevron,
-  .settings-menu-button svg:last-child,
   .progress-menu-button svg:last-child {
     display: none;
+  }
+
+  .settings-theme-group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .progress-percent {

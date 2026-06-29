@@ -19,13 +19,13 @@ describe("reader preferences", () => {
         JSON.stringify({
           fontSize: 115,
           fontFamily: "charter",
-          theme: "dark",
+          theme: "black",
         }),
       ),
     ).toEqual({
       fontSize: 115,
       fontFamily: "charter",
-      theme: "dark",
+      theme: "black",
     });
   });
 
