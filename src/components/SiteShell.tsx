@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { AudioPlayerIsland } from "@/components/AudioPlayerIsland";
+import { MobileHomeLinkIsland } from "@/components/MobileHomeLinkIsland";
+import { MobilePageContextIsland } from "@/components/MobilePageContextIsland";
 import { OutlineMenuIsland } from "@/components/OutlineMenuIsland";
 import { PageFadeIsland } from "@/components/PageFadeIsland";
 import { SearchMenuIsland } from "@/components/SearchMenuIsland";
@@ -34,6 +36,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <ToolbarBrandIsland volumes={outline.volumes} />
         <ToolbarBreadcrumbs />
         <nav className="site-nav" aria-label="Primary">
+          <MobileHomeLinkIsland />
           <SearchMenuIsland />
           <ToolbarSettingsIsland />
           <OutlineMenuIsland outline={outline} />
@@ -42,6 +45,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </nav>
       </header>
       <main id="main-content">
+        <MobilePageContextIsland volumes={outline.volumes} />
         <PageFadeIsland>{children}</PageFadeIsland>
       </main>
       <footer className="site-footer" aria-label="Site information">

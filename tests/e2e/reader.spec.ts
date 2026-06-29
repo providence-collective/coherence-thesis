@@ -25,6 +25,9 @@ const wieldingVolume = catalog.volumes.find(
 const wieldingFrontMatter = wieldingVolume.parts.find(
   (part) => part.partId === "front-matter",
 )!;
+const wieldingDiagnosis = wieldingVolume.parts.find(
+  (part) => part.partId === "the-diagnosis",
+)!;
 const wieldingSection = catalog.sections.find(
   (section) => section.volumeId === "wielding-intelligence",
 )!;
@@ -50,10 +53,16 @@ test("home page presents the overview and manuscript entry points", async ({
 }, testInfo) => {
   await page.goto("/");
 
-  await expect(page.getByRole("heading", { name: "The Coherence Thesis" })).toBeVisible();
-  await expect(page.locator(".brand-kicker")).toHaveText("Providence Collective");
+  await expect(
+    page.getByRole("heading", { name: "The Coherence Thesis" }),
+  ).toBeVisible();
+  await expect(page.locator(".brand-kicker")).toHaveText(
+    "Providence Collective",
+  );
   await expect(page.locator(".brand-title")).toHaveText("The Coherence Thesis");
-  await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toHaveCount(0);
+  await expect(
+    page.getByRole("navigation", { name: "Breadcrumb" }),
+  ).toHaveCount(0);
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
     "https://www.coherence-thesis.com/art/coherence-thesis-hero.png",
@@ -62,22 +71,19 @@ test("home page presents the overview and manuscript entry points", async ({
     "content",
     "1024",
   );
-  await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute(
-    "content",
-    "1536",
-  );
+  await expect(
+    page.locator('meta[property="og:image:height"]'),
+  ).toHaveAttribute("content", "1536");
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
     "content",
     "summary_large_image",
   );
-  await expect(page.getByRole("link", { name: /Read the overview/ })).toHaveAttribute(
-    "href",
-    "/overview/",
-  );
-  await expect(page.getByRole("link", { name: /Browse manuscripts/ })).toHaveAttribute(
-    "href",
-    "/manuscripts/",
-  );
+  await expect(
+    page.getByRole("link", { name: /Read the overview/ }),
+  ).toHaveAttribute("href", "/overview/");
+  await expect(
+    page.getByRole("link", { name: /Browse manuscripts/ }),
+  ).toHaveAttribute("href", "/manuscripts/");
   await expect(page.getByText("Nine volume series")).toBeVisible();
   await expect(page.locator(".overview-map")).toHaveCount(0);
   await expect(page.getByText("Ready for the full body")).toHaveCount(0);
@@ -123,8 +129,12 @@ test("home page presents the overview and manuscript entry points", async ({
   await expect(aubreyLink).toHaveAttribute("rel", "author");
 
   const homepageSpacing = await page.evaluate(() => {
-    const hero = document.querySelector(".hero-section")?.getBoundingClientRect();
-    const stats = document.querySelector(".stats-band")?.getBoundingClientRect();
+    const hero = document
+      .querySelector(".hero-section")
+      ?.getBoundingClientRect();
+    const stats = document
+      .querySelector(".stats-band")
+      ?.getBoundingClientRect();
     return {
       gap: hero && stats ? stats.top - hero.bottom : 0,
       heroHeight: hero?.height ?? 0,
@@ -146,7 +156,9 @@ test("home page presents the overview and manuscript entry points", async ({
   expect(homepageCoverShadows.hero).toBe(homepageCoverShadows.card);
   expect(homepageCoverShadows.hero).not.toBe("none");
 
-  const wieldingCard = page.getByRole("link", { name: "Open Wielding Intelligence" });
+  const wieldingCard = page.getByRole("link", {
+    name: "Open Wielding Intelligence",
+  });
   const wieldingPanel = wieldingCard.locator(".manuscript-card-panel");
   await expect(wieldingCard.locator("img")).toBeVisible();
   if (testInfo.project.name === "desktop") {
@@ -156,16 +168,25 @@ test("home page presents the overview and manuscript entry points", async ({
   await expect(wieldingPanel).toBeVisible();
   await expect(wieldingPanel.getByText("Wielding Intelligence")).toBeVisible();
   await expect(
-    wieldingPanel.getByText(`${wieldingVolume.wordCount.toLocaleString()} words`),
+    wieldingPanel.getByText(
+      `${wieldingVolume.wordCount.toLocaleString()} words`,
+    ),
   ).toBeVisible();
 });
 
 test("overview links into canonical manuscript sections", async ({ page }) => {
   await page.goto("/overview/");
 
-  await expect(page.getByRole("heading", { name: "The Coherence Thesis" })).toBeVisible();
-  await expect(page.getByRole("link", { name: /The seed/ }).first()).toBeVisible();
-  await page.getByRole("link", { name: /The seed/ }).first().click();
+  await expect(
+    page.getByRole("heading", { name: "The Coherence Thesis" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /The seed/ }).first(),
+  ).toBeVisible();
+  await page
+    .getByRole("link", { name: /The seed/ })
+    .first()
+    .click();
   await expect(page).toHaveURL(/\/manuscripts\/humanitys-most-viable-future\//);
 });
 
@@ -196,11 +217,17 @@ test("overview references show local read checkmarks", async ({ page }) => {
   await page.goto("/overview/");
 
   const label = firstOverviewReference.label ?? firstOverviewSection.title;
-  const readReference = page.locator(".reference-grid a", { hasText: label }).first();
-  await expect(readReference.locator('[data-read-checkmark="true"]')).toBeVisible();
+  const readReference = page
+    .locator(".reference-grid a", { hasText: label })
+    .first();
+  await expect(
+    readReference.locator('[data-read-checkmark="true"]'),
+  ).toBeVisible();
 });
 
-test("manuscript volume heading does not overlap its stats line", async ({ page }) => {
+test("manuscript volume heading does not overlap its stats line", async ({
+  page,
+}) => {
   const volume = catalog.volumes[0];
   expect(volume).toBeDefined();
 
@@ -217,17 +244,24 @@ test("manuscript volume heading does not overlap its stats line", async ({ page 
   expect(statsBox).not.toBeNull();
 
   if (headingBox && statsBox) {
-    expect(headingBox.y + headingBox.height).toBeLessThanOrEqual(statsBox.y - 1);
+    expect(headingBox.y + headingBox.height).toBeLessThanOrEqual(
+      statsBox.y - 1,
+    );
   }
 });
 
-test("single-section chapter cards open reader content directly", async ({ page }) => {
+test("single-section chapter cards open reader content directly", async ({
+  page,
+}) => {
   await page.goto(singleSectionPart.href);
 
   const chapterCard = page.getByRole("link", {
     name: new RegExp(singleSectionChapterTarget.title),
   });
-  await expect(chapterCard).toHaveAttribute("href", singleSectionChapterTarget.href);
+  await expect(chapterCard).toHaveAttribute(
+    "href",
+    singleSectionChapterTarget.href,
+  );
   await chapterCard.click();
 
   await expect(page).toHaveURL(singleSectionChapterTarget.href);
@@ -244,16 +278,27 @@ test("single-section chapter cards open reader content directly", async ({ page 
   await expect(page.locator(".section-index")).toHaveCount(0);
 });
 
-test("mobile toolbar and progress menu stay within the viewport", async ({ page }) => {
-  await page.goto("/");
+test("mobile toolbar and progress menu stay within the viewport", async ({
+  page,
+}) => {
+  await page.goto(wieldingSection.href);
 
   const layout = await page.evaluate(() => {
-    const header = document.querySelector(".site-header")?.getBoundingClientRect();
+    const header = document
+      .querySelector(".site-header")
+      ?.getBoundingClientRect();
+    const headerElement = document.querySelector(".site-header");
+    const headerStyle = headerElement
+      ? window.getComputedStyle(headerElement)
+      : null;
     return {
       clientWidth: document.documentElement.clientWidth,
       headerHeight: header?.height ?? 0,
       headerLeft: header?.left ?? 0,
       headerRight: header?.right ?? 0,
+      headerPaddingTop: Number.parseFloat(headerStyle?.paddingTop ?? "0"),
+      headerPaddingRight: Number.parseFloat(headerStyle?.paddingRight ?? "0"),
+      headerPaddingLeft: Number.parseFloat(headerStyle?.paddingLeft ?? "0"),
       scrollWidth: document.documentElement.scrollWidth,
     };
   });
@@ -263,21 +308,36 @@ test("mobile toolbar and progress menu stay within the viewport", async ({ page 
   expect(layout.headerRight).toBeLessThanOrEqual(layout.clientWidth + 1);
 
   if (layout.clientWidth <= 540) {
-    expect(layout.headerHeight).toBeLessThanOrEqual(128);
+    expect(layout.headerHeight).toBeLessThanOrEqual(72);
+  }
+  if (layout.clientWidth > 860) {
+    expect(layout.headerPaddingLeft).toBeCloseTo(layout.headerPaddingTop, 1);
+    expect(layout.headerPaddingRight).toBeCloseTo(layout.headerPaddingTop, 1);
   }
 
+  const homeButton = page.locator(".site-nav .mobile-home-link");
   const searchButton = page.getByRole("button", { name: "Search manuscripts" });
   const outlineButton = page.getByRole("button", { name: /Outline/ });
   const settingsButton = page.getByRole("button", { name: "Reader settings" });
+  const audioButton = page.getByRole("button", { name: /Listen/ });
   const progressButton = page.getByRole("button", { name: /Progress/ });
+  if (layout.clientWidth <= 860) {
+    await expect(homeButton).toBeVisible();
+  } else {
+    await expect(homeButton).toBeHidden();
+  }
   await expect(searchButton).toBeVisible();
   await expect(outlineButton).toBeVisible();
   await expect(settingsButton).toBeVisible();
+  await expect(audioButton).toBeVisible();
   await expect(progressButton).toBeVisible();
 
   const toolbarMetrics = await page.evaluate(() => {
     const search = document
       .querySelector(".search-menu-button")
+      ?.getBoundingClientRect();
+    const home = document
+      .querySelector(".mobile-home-menu")
       ?.getBoundingClientRect();
     const outline = document
       .querySelector(".outline-menu-button")
@@ -288,30 +348,142 @@ test("mobile toolbar and progress menu stay within the viewport", async ({ page 
     const settings = document
       .querySelector(".settings-menu-button")
       ?.getBoundingClientRect();
+    const audio = document
+      .querySelector(".audio-menu-button")
+      ?.getBoundingClientRect();
     const progressLabel = document.querySelector(
       ".progress-menu-button .nav-label",
     );
+    const outlineLabel = document.querySelector(
+      ".outline-menu-button .nav-label",
+    );
+    const audioLabel = document.querySelector(".audio-menu-button .nav-label");
+    const outlineChevron = document.querySelector(
+      ".outline-menu-button svg:last-child",
+    );
+    const audioChevron = document.querySelector(
+      ".audio-menu-button .audio-menu-chevron",
+    );
+    const progressChevron = document.querySelector(
+      ".progress-menu-button svg:last-child",
+    );
+    const percent = document.querySelector(".progress-percent");
+    const headerBrand = document.querySelector(".site-header > .brand-mark");
+    const headerBreadcrumb = document.querySelector(
+      ".site-header > .breadcrumb-trail",
+    );
+    const pageContext = document.querySelector(".mobile-page-context");
+    const pageContextBrandTitle = document.querySelector(
+      ".mobile-page-brand-title",
+    );
+    const pageContextBreadcrumb = document.querySelector(
+      ".mobile-page-context .breadcrumb-trail",
+    );
+    const pageHeading = document.querySelector(
+      ".manuscript-heading h1, .page-heading h1",
+    );
+    const headerBrandStyle = headerBrand
+      ? window.getComputedStyle(headerBrand)
+      : null;
+    const headerBreadcrumbStyle = headerBreadcrumb
+      ? window.getComputedStyle(headerBreadcrumb)
+      : null;
+    const pageContextStyle = pageContext
+      ? window.getComputedStyle(pageContext)
+      : null;
     const progressLabelStyle = progressLabel
       ? window.getComputedStyle(progressLabel)
       : null;
+    const outlineLabelStyle = outlineLabel
+      ? window.getComputedStyle(outlineLabel)
+      : null;
+    const audioLabelStyle = audioLabel
+      ? window.getComputedStyle(audioLabel)
+      : null;
+    const outlineChevronStyle = outlineChevron
+      ? window.getComputedStyle(outlineChevron)
+      : null;
+    const audioChevronStyle = audioChevron
+      ? window.getComputedStyle(audioChevron)
+      : null;
+    const progressChevronStyle = progressChevron
+      ? window.getComputedStyle(progressChevron)
+      : null;
+    const percentStyle = percent ? window.getComputedStyle(percent) : null;
+    const pageContextBrandBox = pageContextBrandTitle?.getBoundingClientRect();
+    const pageContextBreadcrumbBox =
+      pageContextBreadcrumb?.getBoundingClientRect();
+    const pageHeadingBox = pageHeading?.getBoundingClientRect();
     return {
+      homeLeft: home?.left ?? 0,
+      homeWidth: home?.width ?? 0,
       searchLeft: search?.left ?? 0,
       settingsLeft: settings?.left ?? 0,
       outlineLeft: outline?.left ?? 0,
+      audioLeft: audio?.left ?? 0,
+      progressLeft: progress?.left ?? 0,
       searchWidth: search?.width ?? 0,
       outlineWidth: outline?.width ?? 0,
       settingsWidth: settings?.width ?? 0,
+      audioWidth: audio?.width ?? 0,
       progressWidth: progress?.width ?? 0,
       progressLabelWidth: progressLabel?.getBoundingClientRect().width ?? 0,
       progressLabelClipped: progressLabelStyle?.clip ?? "",
+      outlineLabelWidth: outlineLabel?.getBoundingClientRect().width ?? 0,
+      audioLabelWidth: audioLabel?.getBoundingClientRect().width ?? 0,
+      outlineLabelClipped: outlineLabelStyle?.clip ?? "",
+      audioLabelClipped: audioLabelStyle?.clip ?? "",
+      outlineChevronDisplay: outlineChevronStyle?.display ?? "",
+      audioChevronDisplay: audioChevronStyle?.display ?? "",
+      progressChevronDisplay: progressChevronStyle?.display ?? "",
+      progressColor: percentStyle?.color ?? "",
+      progressBorderColor: percentStyle?.borderTopColor ?? "",
+      progressBackground: percentStyle?.backgroundColor ?? "",
+      progressText: percent?.textContent ?? "",
+      headerBrandDisplay: headerBrandStyle?.display ?? "",
+      headerBreadcrumbDisplay: headerBreadcrumbStyle?.display ?? "",
+      pageContextDisplay: pageContextStyle?.display ?? "",
+      pageContextBrandTitle: pageContextBrandTitle?.textContent ?? "",
+      pageContextBreadcrumbText: pageContextBreadcrumb?.textContent ?? "",
+      pageContextBrandTop: pageContextBrandBox?.top ?? 0,
+      pageContextBrandBottom: pageContextBrandBox?.bottom ?? 0,
+      pageContextBreadcrumbTop: pageContextBreadcrumbBox?.top ?? 0,
+      pageContextBreadcrumbBottom: pageContextBreadcrumbBox?.bottom ?? 0,
+      pageHeadingTop: pageHeadingBox?.top ?? 0,
     };
   });
 
+  if (layout.clientWidth <= 860) {
+    expect(toolbarMetrics.homeLeft).toBeLessThan(toolbarMetrics.searchLeft);
+    expect(toolbarMetrics.headerBrandDisplay).toBe("none");
+    expect(toolbarMetrics.headerBreadcrumbDisplay).toBe("none");
+    expect(toolbarMetrics.pageContextDisplay).toBe("grid");
+    expect(toolbarMetrics.pageContextBrandTitle).toBe(
+      `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
+    );
+    expect(toolbarMetrics.pageContextBreadcrumbText).toContain(
+      wieldingSection.title,
+    );
+    expect(toolbarMetrics.pageContextBrandBottom).toBeLessThanOrEqual(
+      toolbarMetrics.pageContextBreadcrumbTop,
+    );
+    expect(toolbarMetrics.pageContextBreadcrumbBottom).toBeLessThanOrEqual(
+      toolbarMetrics.pageHeadingTop,
+    );
+  }
   expect(toolbarMetrics.searchLeft).toBeLessThan(toolbarMetrics.settingsLeft);
   expect(toolbarMetrics.settingsLeft).toBeLessThan(toolbarMetrics.outlineLeft);
+  expect(toolbarMetrics.outlineLeft).toBeLessThan(toolbarMetrics.audioLeft);
+  expect(toolbarMetrics.audioLeft).toBeLessThan(toolbarMetrics.progressLeft);
   if (layout.clientWidth <= 540) {
     expect(
+      Math.abs(toolbarMetrics.homeWidth - toolbarMetrics.searchWidth),
+    ).toBeLessThanOrEqual(1);
+    expect(
       Math.abs(toolbarMetrics.searchWidth - toolbarMetrics.outlineWidth),
+    ).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(toolbarMetrics.audioWidth - toolbarMetrics.outlineWidth),
     ).toBeLessThanOrEqual(1);
     expect(
       Math.abs(toolbarMetrics.progressWidth - toolbarMetrics.outlineWidth),
@@ -319,15 +491,35 @@ test("mobile toolbar and progress menu stay within the viewport", async ({ page 
     expect(
       Math.abs(toolbarMetrics.settingsWidth - toolbarMetrics.outlineWidth),
     ).toBeLessThanOrEqual(1);
-    expect(toolbarMetrics.progressLabelWidth).toBeGreaterThan(1);
-    expect(toolbarMetrics.progressLabelClipped).toBe("auto");
+  }
+  if (layout.clientWidth <= 860) {
+    expect(toolbarMetrics.outlineLabelWidth).toBeLessThanOrEqual(1);
+    expect(toolbarMetrics.audioLabelWidth).toBeLessThanOrEqual(1);
+    expect(toolbarMetrics.progressLabelWidth).toBeLessThanOrEqual(1);
+    expect(toolbarMetrics.outlineLabelClipped).toBe("rect(0px, 0px, 0px, 0px)");
+    expect(toolbarMetrics.audioLabelClipped).toBe("rect(0px, 0px, 0px, 0px)");
+    expect(toolbarMetrics.progressLabelClipped).toBe(
+      "rect(0px, 0px, 0px, 0px)",
+    );
+    expect(toolbarMetrics.outlineChevronDisplay).toBe("none");
+    expect(toolbarMetrics.audioChevronDisplay).toBe("none");
+    expect(toolbarMetrics.progressChevronDisplay).toBe("none");
+    expect(toolbarMetrics.progressText).toMatch(/^\d+%$/);
+    expect(toolbarMetrics.progressBorderColor).toBe(
+      toolbarMetrics.progressColor,
+    );
+    expect(toolbarMetrics.progressBackground).toBe("rgba(0, 0, 0, 0)");
   }
 
   await outlineButton.click();
   const outlineMenu = page.getByRole("region", { name: "Site outline" });
   await expect(outlineMenu).toBeVisible();
-  await expect(page.getByRole("searchbox", { name: "Filter outline" })).toBeVisible();
-  await expect(outlineMenu.locator(".outline-volume-link").first()).toBeVisible();
+  await expect(
+    page.getByRole("searchbox", { name: "Filter outline" }),
+  ).toBeVisible();
+  await expect(
+    outlineMenu.locator(".outline-volume-link").first(),
+  ).toBeVisible();
 
   const outlineBox = await outlineMenu.boundingBox();
   const outlineViewport = page.viewportSize();
@@ -341,7 +533,9 @@ test("mobile toolbar and progress menu stay within the viewport", async ({ page 
     );
   }
 
-  await page.getByRole("searchbox", { name: "Filter outline" }).fill("wielding");
+  await page
+    .getByRole("searchbox", { name: "Filter outline" })
+    .fill("wielding");
   await expect(
     outlineMenu.locator("details.outline-part[open]", {
       hasText: "Wielding Intelligence",
@@ -415,7 +609,9 @@ test("mobile toolbar and progress menu stay within the viewport", async ({ page 
 
   if (searchBox && searchViewport) {
     expect(searchBox.x).toBeGreaterThanOrEqual(-1);
-    expect(searchBox.x + searchBox.width).toBeLessThanOrEqual(searchViewport.width + 1);
+    expect(searchBox.x + searchBox.width).toBeLessThanOrEqual(
+      searchViewport.width + 1,
+    );
   }
 
   await searchInput.focus();
@@ -464,7 +660,9 @@ test("mobile toolbar and progress menu stay within the viewport", async ({ page 
 
   if (popoverBox && viewport) {
     expect(popoverBox.x).toBeGreaterThanOrEqual(-1);
-    expect(popoverBox.x + popoverBox.width).toBeLessThanOrEqual(viewport.width + 1);
+    expect(popoverBox.x + popoverBox.width).toBeLessThanOrEqual(
+      viewport.width + 1,
+    );
   }
 
   const progressCopy = popover.getByText(
@@ -722,8 +920,12 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
   });
   await page.goto(firstSection.href);
 
-  await expect(page.getByRole("heading", { name: firstSection.title })).toBeVisible();
-  await expect(page.getByText(`Version ${firstSection.versionHash}`)).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: firstSection.title }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(`Version ${firstSection.versionHash}`),
+  ).toBeVisible();
   await expect(
     page.getByRole("link", { name: `Codified ${firstSectionVersionDate}` }),
   ).toHaveAttribute("href", firstSection.versionUrl);
@@ -738,41 +940,79 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
     firstSection.title,
   );
   await expect(breadcrumbs.getByText("Manuscripts")).toHaveCount(0);
-  await expect(breadcrumbs.getByText("Humanity's Most Viable Future")).toHaveCount(0);
+  await expect(
+    breadcrumbs.getByText("Humanity's Most Viable Future"),
+  ).toHaveCount(0);
   const viewport = page.viewportSize();
   if (!viewport || viewport.width > 540) {
     await expect(breadcrumbs.getByText("Home")).toHaveCount(0);
   }
   const readerLayout = await page.evaluate(() => {
-    const header = document.querySelector(".site-header")?.getBoundingClientRect();
+    const header = document
+      .querySelector(".site-header")
+      ?.getBoundingClientRect();
     const frame = document
       .querySelector(".page-frame.reader-layout")
       ?.getBoundingClientRect();
-    const reader = document.querySelector(".reader-main")?.getBoundingClientRect();
+    const reader = document
+      .querySelector(".reader-main")
+      ?.getBoundingClientRect();
+    const pageContext = document
+      .querySelector(".mobile-page-context")
+      ?.getBoundingClientRect();
+    const pageContextStyle = document.querySelector(".mobile-page-context")
+      ? window.getComputedStyle(document.querySelector(".mobile-page-context")!)
+      : null;
     const frameStyle = frame
-      ? window.getComputedStyle(document.querySelector(".page-frame.reader-layout")!)
+      ? window.getComputedStyle(
+          document.querySelector(".page-frame.reader-layout")!,
+        )
       : null;
     const viewportWidth = document.documentElement.clientWidth;
 
     return {
-      framePaddingLeft: frameStyle ? Number.parseFloat(frameStyle.paddingLeft) : 0,
-      framePaddingRight: frameStyle ? Number.parseFloat(frameStyle.paddingRight) : 0,
-      framePaddingTop: frameStyle ? Number.parseFloat(frameStyle.paddingTop) : 0,
+      framePaddingLeft: frameStyle
+        ? Number.parseFloat(frameStyle.paddingLeft)
+        : 0,
+      framePaddingRight: frameStyle
+        ? Number.parseFloat(frameStyle.paddingRight)
+        : 0,
+      framePaddingTop: frameStyle
+        ? Number.parseFloat(frameStyle.paddingTop)
+        : 0,
+      hasMobilePageContext: pageContextStyle?.display !== "none",
+      pageContextBottom: pageContext?.bottom ?? 0,
       readerLeft: reader?.left ?? 0,
       readerRight: reader ? viewportWidth - reader.right : 0,
+      readerTop: reader?.top ?? 0,
       topInset: header && reader ? reader.top - header.bottom : 0,
     };
   });
   expect(
     Math.abs(readerLayout.framePaddingLeft - readerLayout.framePaddingRight),
   ).toBeLessThanOrEqual(1);
-  expect(
-    Math.abs(readerLayout.framePaddingLeft - readerLayout.framePaddingTop),
-  ).toBeLessThanOrEqual(1);
+  if (readerLayout.hasMobilePageContext) {
+    expect(readerLayout.framePaddingTop).toBe(0);
+    expect(readerLayout.pageContextBottom).toBeLessThanOrEqual(
+      readerLayout.topInset + readerLayout.framePaddingLeft + 80,
+    );
+  } else {
+    expect(
+      Math.abs(readerLayout.framePaddingLeft - readerLayout.framePaddingTop),
+    ).toBeLessThanOrEqual(1);
+  }
   expect(
     Math.abs(readerLayout.readerLeft - readerLayout.readerRight),
   ).toBeLessThanOrEqual(2);
-  expect(readerLayout.readerLeft).toBeGreaterThanOrEqual(readerLayout.topInset - 2);
+  if (readerLayout.hasMobilePageContext) {
+    expect(readerLayout.readerTop).toBeGreaterThanOrEqual(
+      readerLayout.pageContextBottom - 2,
+    );
+  } else {
+    expect(readerLayout.readerLeft).toBeGreaterThanOrEqual(
+      readerLayout.topInset - 2,
+    );
+  }
   const progressButton = page.getByRole("button", { name: /Progress/ });
   await expect(progressButton).toBeVisible();
   await expect
@@ -874,48 +1114,77 @@ test("reader shows subtle revision status for previously read sections", async (
   await expect(chapterCard.locator('[data-read-checkmark="true"]')).toHaveCount(0);
 });
 
-test("toolbar brand owns the active manuscript identity", async ({ page }) => {
+test("toolbar brand owns the active manuscript identity", async ({
+  page,
+}, testInfo) => {
   await page.goto("/");
   const brand = page.locator(".brand-mark");
+  if (testInfo.project.name === "mobile") {
+    await expect(brand).toBeHidden();
+    await expect(page.locator(".mobile-page-context")).toHaveCount(0);
+
+    await page.goto(wieldingVolume.href);
+    await expect(brand).toBeHidden();
+    await expect(page.locator(".mobile-page-brand-title")).toHaveText(
+      `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
+    );
+    await expect(page.locator(".site-nav .mobile-home-link")).toBeVisible();
+    return;
+  }
+
   await expect(brand).toHaveAttribute(
     "aria-label",
     "Providence Collective The Coherence Thesis home",
   );
-  await expect(brand.locator(".brand-kicker")).toHaveText("Providence Collective");
-  await expect(brand.locator(".brand-title")).toHaveText("The Coherence Thesis");
+  await expect(brand.locator(".brand-kicker")).toHaveText(
+    "Providence Collective",
+  );
+  await expect(brand.locator(".brand-title-full")).toHaveText(
+    "The Coherence Thesis",
+  );
 
   await page.goto(wieldingVolume.href);
   await expect(brand).toHaveAttribute(
     "aria-label",
-    `The Coherent Thesis V${wieldingVolume.numberLabel} · ${wieldingVolume.title} home`,
+    `The Coherence Thesis Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title} home`,
   );
-  await expect(brand.locator(".brand-kicker")).toHaveText("The Coherent Thesis");
-  await expect(brand.locator(".brand-title")).toHaveText(
-    `V${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
+  await expect(brand.locator(".brand-kicker")).toHaveText(
+    "The Coherence Thesis",
   );
-  await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toHaveCount(0);
+  await expect(brand.locator(".brand-title-full")).toHaveText(
+    `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
+  );
+  await expect(brand.locator(".brand-title-mobile")).toHaveText(
+    `Volume ${wieldingVolume.numberLabel}`,
+  );
+  await expect(
+    page.getByRole("navigation", { name: "Breadcrumb" }),
+  ).toHaveCount(0);
 
   const brandStyles = await brand.evaluate((element) => ({
     background: window.getComputedStyle(element).backgroundColor,
-    titleBorder: window.getComputedStyle(
-      element.querySelector(".brand-title")!,
-    ).borderBottomColor,
+    titleBorder: window.getComputedStyle(element.querySelector(".brand-title")!)
+      .borderBottomColor,
   }));
   await brand.hover();
   await page.waitForTimeout(200);
   const brandHoverStyles = await brand.evaluate((element) => ({
     background: window.getComputedStyle(element).backgroundColor,
-    titleBorder: window.getComputedStyle(
-      element.querySelector(".brand-title")!,
-    ).borderBottomColor,
+    titleBorder: window.getComputedStyle(element.querySelector(".brand-title")!)
+      .borderBottomColor,
   }));
   expect(brandHoverStyles.background).toBe(brandStyles.background);
   expect(brandHoverStyles.titleBorder).not.toBe(brandStyles.titleBorder);
+  if (page.viewportSize()?.width && page.viewportSize()!.width > 860) {
+    await expect(page.getByRole("tooltip")).toHaveCount(0);
+  }
 
   await page.goto(wieldingFrontMatter.href);
-  await expect(brand.locator(".brand-kicker")).toHaveText("The Coherent Thesis");
-  await expect(brand.locator(".brand-title")).toHaveText(
-    `V${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
+  await expect(brand.locator(".brand-kicker")).toHaveText(
+    "The Coherence Thesis",
+  );
+  await expect(brand.locator(".brand-title-full")).toHaveText(
+    `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
   );
 
   const breadcrumbs = page.getByRole("navigation", { name: "Breadcrumb" });
@@ -923,7 +1192,48 @@ test("toolbar brand owns the active manuscript identity", async ({ page }) => {
   await expect(breadcrumbs.getByText("Manuscripts")).toHaveCount(0);
   await expect(breadcrumbs.getByText("Wielding Intelligence")).toHaveCount(0);
   await expect(breadcrumbs.locator("li")).toHaveCount(1);
-  await expect(breadcrumbs.locator('[aria-current="page"]')).toHaveText("Front Matter");
+  await expect(breadcrumbs.locator('[aria-current="page"]')).toHaveText(
+    "Front Matter",
+  );
+
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto(wieldingDiagnosis.href);
+  await expect(brand.locator(".brand-title-full")).toBeVisible();
+  await expect(brand.locator(".brand-title-full")).toHaveText(
+    `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
+  );
+  await expect(brand.locator(".brand-title-mobile")).toBeHidden();
+  const desktopTitleMetrics = await brand
+    .locator(".brand-title-full")
+    .evaluate((element) => ({
+      titleRight: element.getBoundingClientRect().right,
+      shellRight: element.parentElement?.getBoundingClientRect().right ?? 0,
+      textOverflow: window.getComputedStyle(element.parentElement!)
+        .textOverflow,
+    }));
+  expect(desktopTitleMetrics.titleRight).toBeLessThanOrEqual(
+    desktopTitleMetrics.shellRight + 1,
+  );
+  expect(desktopTitleMetrics.textOverflow).toBe("clip");
+
+  const narrowBrandStyle = await page.addStyleTag({
+    content: ".brand-mark-active { max-width: 8rem !important; }",
+  });
+  await page.evaluate(() => window.dispatchEvent(new Event("resize")));
+  await expect(brand.locator(".brand-title-full")).toBeHidden();
+  await expect(brand.locator(".brand-title-mobile")).toBeVisible();
+  await expect(brand.locator(".brand-title-mobile")).toHaveText(
+    `Volume ${wieldingVolume.numberLabel}`,
+  );
+  await brand.hover();
+  const brandTooltip = page.getByRole("tooltip");
+  await expect(brandTooltip).toBeVisible();
+  await expect(brandTooltip).toHaveText(
+    `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
+  );
+  await page.mouse.move(4, 4);
+  await expect(brandTooltip).toHaveCount(0);
+  await narrowBrandStyle.evaluate((element) => element.remove());
 
   await page.goto(wieldingSection.href);
   const firstBreadcrumbLink = page
@@ -937,10 +1247,84 @@ test("toolbar brand owns the active manuscript identity", async ({ page }) => {
   }));
   await firstBreadcrumbLink.hover();
   await page.waitForTimeout(200);
-  const breadcrumbHoverStyles = await firstBreadcrumbLink.evaluate((element) => ({
-    background: window.getComputedStyle(element).backgroundColor,
-    border: window.getComputedStyle(element).borderBottomColor,
-  }));
+  const breadcrumbHoverStyles = await firstBreadcrumbLink.evaluate(
+    (element) => ({
+      background: window.getComputedStyle(element).backgroundColor,
+      border: window.getComputedStyle(element).borderBottomColor,
+    }),
+  );
   expect(breadcrumbHoverStyles.background).toBe(breadcrumbStyles.background);
   expect(breadcrumbHoverStyles.border).not.toBe(breadcrumbStyles.border);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(wieldingVolume.href);
+  await expect(brand).toBeHidden();
+  await expect(page.locator(".mobile-page-brand-title")).toHaveText(
+    `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
+  );
+});
+
+test("truncated breadcrumb labels reveal their full title in a tooltip", async ({
+  page,
+}, testInfo) => {
+  test.skip(
+    testInfo.project.name !== "desktop",
+    "Hover tooltips are verified in the desktop project.",
+  );
+
+  const longBreadcrumbLabel =
+    "The Second Link: Perception Makes New Coordination Possible";
+
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto(
+    "/manuscripts/providence-imperative/the-living-reality/the-second-link-perception-makes-new-coordination-possible/",
+  );
+
+  const breadcrumbs = page.getByRole("navigation", { name: "Breadcrumb" });
+  await expect(breadcrumbs).toBeVisible();
+
+  const labels = breadcrumbs.locator(".breadcrumb-label");
+  await expect(labels.first()).toBeVisible();
+
+  const labelMetrics = await labels.evaluateAll((elements) =>
+    elements.map((element, index) => ({
+      index,
+      text: element.textContent?.trim() ?? "",
+      truncated: element.scrollWidth > element.clientWidth + 1,
+    })),
+  );
+  const target = labelMetrics.find(
+    (item) => item.text === longBreadcrumbLabel && item.truncated,
+  );
+  expect(target).toBeDefined();
+
+  const currentLabel = labels.nth(target!.index);
+  const currentLabelBorder = await currentLabel.evaluate(
+    (element) => window.getComputedStyle(element).borderBottomColor,
+  );
+  await currentLabel.hover();
+  const currentLabelHoverBorder = await currentLabel.evaluate(
+    (element) => window.getComputedStyle(element).borderBottomColor,
+  );
+  expect(currentLabelHoverBorder).toBe(currentLabelBorder);
+
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toBeVisible();
+  await expect(tooltip).toHaveText(longBreadcrumbLabel);
+
+  const tooltipBox = await tooltip.boundingBox();
+  const viewport = page.viewportSize();
+  expect(tooltipBox).not.toBeNull();
+  expect(viewport).not.toBeNull();
+  expect(tooltipBox!.x).toBeGreaterThanOrEqual(0);
+  expect(tooltipBox!.x + tooltipBox!.width).toBeLessThanOrEqual(
+    viewport!.width,
+  );
+  expect(tooltipBox!.y).toBeGreaterThanOrEqual(0);
+  expect(tooltipBox!.y + tooltipBox!.height).toBeLessThanOrEqual(
+    viewport!.height,
+  );
+
+  await page.mouse.move(4, viewport!.height - 4);
+  await expect(tooltip).toHaveCount(0);
 });
