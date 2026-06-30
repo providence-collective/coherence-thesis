@@ -147,12 +147,16 @@ test("home page presents the overview and manuscript entry points", async ({
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "The Coherence Thesis" }),
+    page.getByRole("heading", {
+      name: "Nine-volume series: a living manuscript body on coherence.",
+    }),
   ).toBeVisible();
   await expect(page.locator(".brand-kicker")).toHaveText(
     "Providence Collective",
   );
-  await expect(page.locator(".brand-title")).toHaveText("The Coherence Thesis");
+  await expect(page.locator(".brand-title-full")).toHaveText(
+    "The Coherence Thesis",
+  );
   await expect(
     page.getByRole("navigation", { name: "Breadcrumb" }),
   ).toHaveCount(0);
@@ -195,7 +199,7 @@ test("home page presents the overview and manuscript entry points", async ({
   await expect(
     page.getByRole("link", { name: /Browse manuscripts/ }),
   ).toHaveAttribute("href", "#manuscripts");
-  await expect(page.getByText("Nine volume series")).toBeVisible();
+  await expect(page.getByText("Nine volume series")).toHaveCount(0);
   await expect(page.locator(".overview-map")).toHaveCount(0);
   await expect(page.getByText("Ready for the full body")).toHaveCount(0);
   await expect(page.locator(".manuscript-cover-card")).toHaveCount(
@@ -206,10 +210,14 @@ test("home page presents the overview and manuscript entry points", async ({
       (volume) => `/art/coherence-thesis-vol${volume.order}-cover.png`,
     ),
   );
-  await expect(page.locator(".hero-art img")).toHaveAttribute(
-    "src",
-    "/art/coherence-thesis-hero.png",
-  );
+  if (testInfo.project.name === "mobile") {
+    await expect(page.locator(".hero-art")).toBeHidden();
+  } else {
+    await expect(page.locator(".hero-art img")).toHaveAttribute(
+      "src",
+      "/art/coherence-thesis-hero.png",
+    );
+  }
   const footer = page.getByRole("contentinfo", { name: "Site information" });
   await expect(footer).toBeVisible();
   await expect(footer).toHaveCSS("border-top-width", "0px");
@@ -256,16 +264,18 @@ test("home page presents the overview and manuscript entry points", async ({
     expect(homepageSpacing.heroHeight).toBeLessThanOrEqual(1000);
   }
 
-  const homepageCoverShadows = await page.evaluate(() => {
-    const heroImage = document.querySelector(".hero-art img");
-    const coverCard = document.querySelector(".manuscript-cover-card");
-    return {
-      hero: heroImage ? getComputedStyle(heroImage).boxShadow : "",
-      card: coverCard ? getComputedStyle(coverCard).boxShadow : "",
-    };
-  });
-  expect(homepageCoverShadows.hero).toBe(homepageCoverShadows.card);
-  expect(homepageCoverShadows.hero).not.toBe("none");
+  if (testInfo.project.name === "desktop") {
+    const homepageCoverShadows = await page.evaluate(() => {
+      const heroImage = document.querySelector(".hero-art img");
+      const coverCard = document.querySelector(".manuscript-cover-card");
+      return {
+        hero: heroImage ? getComputedStyle(heroImage).boxShadow : "",
+        card: coverCard ? getComputedStyle(coverCard).boxShadow : "",
+      };
+    });
+    expect(homepageCoverShadows.hero).toBe(homepageCoverShadows.card);
+    expect(homepageCoverShadows.hero).not.toBe("none");
+  }
 
   const wieldingCard = page.getByRole("link", {
     name: "Open Wielding Intelligence",
@@ -600,6 +610,10 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
       progressBackground: percentStyle?.backgroundColor ?? "",
       progressText: percent?.textContent ?? "",
       headerBrandDisplay: headerBrandStyle?.display ?? "",
+      headerBrandLeft: headerBrand?.getBoundingClientRect().left ?? 0,
+      headerBrandRight: headerBrand?.getBoundingClientRect().right ?? 0,
+      headerBrandMobileLogo:
+        headerBrand?.querySelector(".brand-title-mobile-logo")?.textContent ?? "",
       headerBreadcrumbDisplay: headerBreadcrumbStyle?.display ?? "",
       pageContextDisplay: pageContextStyle?.display ?? "",
       pageContextBrandTitle: pageContextBrandTitle?.textContent ?? "",
@@ -614,7 +628,12 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
 
   if (layout.clientWidth <= 860) {
     expect(toolbarMetrics.homeLeft).toBeLessThan(toolbarMetrics.searchLeft);
-    expect(toolbarMetrics.headerBrandDisplay).toBe("none");
+    expect(["flex", "inline-flex"]).toContain(toolbarMetrics.headerBrandDisplay);
+    expect(toolbarMetrics.headerBrandMobileLogo).toBe("Coherence Thesis");
+    expect(toolbarMetrics.headerBrandLeft).toBeLessThan(toolbarMetrics.homeLeft);
+    expect(toolbarMetrics.headerBrandRight).toBeLessThanOrEqual(
+      toolbarMetrics.homeLeft,
+    );
     expect(toolbarMetrics.headerBreadcrumbDisplay).toBe("none");
     expect(toolbarMetrics.pageContextDisplay).toBe("grid");
     expect(toolbarMetrics.pageContextBrandTitle).toBe(
@@ -634,6 +653,13 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
   expect(toolbarMetrics.settingsLeft).toBeLessThan(toolbarMetrics.outlineLeft);
   expect(toolbarMetrics.outlineLeft).toBeLessThan(toolbarMetrics.audioLeft);
   expect(toolbarMetrics.audioLeft).toBeLessThan(toolbarMetrics.progressLeft);
+  if (layout.clientWidth <= 860) {
+    const toolbarRightGap =
+      layout.clientWidth -
+      toolbarMetrics.progressLeft -
+      toolbarMetrics.progressWidth;
+    expect(toolbarRightGap).toBeLessThanOrEqual(layout.headerPaddingRight + 2);
+  }
   if (layout.clientWidth <= 540) {
     expect(
       Math.abs(toolbarMetrics.homeWidth - toolbarMetrics.searchWidth),
@@ -865,6 +891,18 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
 });
 
 test("reader share menu exposes page sharing and PDF downloads", async ({ page }) => {
+  await page.route("**/downloads/**", async (route) => {
+    if (route.request().method() === "HEAD") {
+      await route.fulfill({
+        status: 200,
+        headers: { "content-type": "application/pdf" },
+      });
+      return;
+    }
+
+    await route.continue();
+  });
+
   await page.addInitScript(() => {
     Object.defineProperty(window.navigator, "share", {
       configurable: true,
@@ -1030,6 +1068,32 @@ test("singleton section share menu offers both PDF downloads", async ({
     "download",
     firstManuscriptPdfFileName,
   );
+});
+
+test("homepage share menu only exposes page sharing", async ({ page }) => {
+  await page.goto("/");
+
+  const shareButton = page.getByRole("button", { name: "Share and downloads" });
+  await expect(shareButton).toBeVisible();
+  await shareButton.click();
+
+  const shareMenu = page.getByRole("region", { name: "Share and downloads" });
+  await expect(shareMenu).toBeVisible();
+  await expect(
+    shareMenu.getByRole("button", { name: "Share this page" }),
+  ).toBeVisible();
+  await expect(
+    shareMenu.getByRole("link", { name: /Download this section/ }),
+  ).toHaveCount(0);
+  await expect(
+    shareMenu.getByRole("link", { name: /Download full manuscript/ }),
+  ).toHaveCount(0);
+  await expect(
+    shareMenu.getByRole("button", { name: /Download this section/ }),
+  ).toHaveCount(0);
+  await expect(
+    shareMenu.getByRole("button", { name: /Download full manuscript/ }),
+  ).toHaveCount(0);
 });
 
 test("reader settings update and persist local appearance preferences", async ({
@@ -1634,11 +1698,17 @@ test("toolbar brand owns the active manuscript identity", async ({
   await page.goto("/");
   const brand = page.locator(".brand-mark");
   if (testInfo.project.name === "mobile") {
-    await expect(brand).toBeHidden();
+    await expect(brand).toBeVisible();
+    await expect(brand.locator(".brand-title-mobile-logo")).toHaveText(
+      "Coherence Thesis",
+    );
     await expect(page.locator(".mobile-page-context")).toHaveCount(0);
 
     await page.goto(wieldingVolume.href);
-    await expect(brand).toBeHidden();
+    await expect(brand).toBeVisible();
+    await expect(brand.locator(".brand-title-mobile-logo")).toHaveText(
+      "Coherence Thesis",
+    );
     await expect(page.locator(".mobile-page-brand-title")).toHaveText(
       `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
     );
@@ -1791,7 +1861,10 @@ test("toolbar brand owns the active manuscript identity", async ({
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(wieldingVolume.href);
-  await expect(brand).toBeHidden();
+  await expect(brand).toBeVisible();
+  await expect(brand.locator(".brand-title-mobile-logo")).toHaveText(
+    "Coherence Thesis",
+  );
   await expect(page.locator(".mobile-page-brand-title")).toHaveText(
     `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
   );

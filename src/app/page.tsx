@@ -21,13 +21,7 @@ export default function Home() {
     <div className="home-page">
       <section className="hero-section">
         <div className="hero-copy">
-          <p className="eyebrow">Nine volume series</p>
-          <h1>The Coherence Thesis</h1>
-          <p className="hero-deck">
-            A living manuscript body on coherence, intelligence, coordination,
-            human potential, and the future institutions required for a civilization
-            worth inheriting.
-          </p>
+          <h1>Nine-volume series: a living manuscript body on coherence.</h1>
           <div className="hero-actions">
             <Link className="primary-link" href="/overview/">
               <ListTree aria-hidden="true" size={18} />
