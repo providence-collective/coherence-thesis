@@ -3117,9 +3117,22 @@ input {
   }
 
   .section-nav-link {
+    border-top: 0;
     grid-template-columns: 1.25rem minmax(0, 1fr);
     min-height: 0;
     padding: 0.95rem 0;
+  }
+
+  .section-nav-link-previous {
+    order: 1;
+  }
+
+  .section-nav-link-next {
+    order: 2;
+  }
+
+  .section-nav-link-parent {
+    order: 3;
   }
 
   .section-nav-link-parent,
@@ -3134,7 +3147,12 @@ input {
     justify-content: flex-start;
   }
 
-  .section-nav-link-parent .section-nav-kicker,
+  .section-nav-link-parent .section-nav-kicker {
+    grid-column: 1 / -1;
+    justify-self: start;
+    max-width: none;
+  }
+
   .section-nav-link-parent strong {
     grid-column: 2;
     justify-self: start;

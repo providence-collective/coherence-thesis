@@ -1600,7 +1600,7 @@ test("reader shows subtle revision status for previously read sections", async (
 
 test("reader footer links adjacent sections and the containing chapter", async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto(sectionWithNeighbors.href);
 
   const footerNav = page.getByRole("navigation", { name: "Page navigation" });
@@ -1637,6 +1637,47 @@ test("reader footer links adjacent sections and the containing chapter", async (
   await expect(nextLink).toHaveAttribute("href", nextSection.href);
   await expect(nextLink.locator("small")).toHaveText("Next");
   await expect(nextLink.locator("strong")).toHaveText(nextSection.title);
+
+  if (testInfo.project.name === "mobile") {
+    const mobileFooterLayout = await footerNav.evaluate((nav) => {
+      const rows = [
+        ["previous", ".section-nav-link-previous"],
+        ["next", ".section-nav-link-next"],
+        ["parent", ".section-nav-link-parent"],
+      ] as const;
+
+      return rows.map(([name, selector]) => {
+        const link = nav.querySelector(selector)!;
+        const icon = link.querySelector(".section-nav-icon")!;
+        const linkBox = link.getBoundingClientRect();
+        const iconBox = icon.getBoundingClientRect();
+        const linkStyle = window.getComputedStyle(link);
+
+        return {
+          name,
+          borderTopWidth: linkStyle.borderTopWidth,
+          iconLeft: iconBox.left,
+          top: linkBox.top,
+        };
+      });
+    });
+    expect(mobileFooterLayout.map((row) => row.name)).toEqual([
+      "previous",
+      "next",
+      "parent",
+    ]);
+    expect([...mobileFooterLayout].sort((a, b) => a.top - b.top).map((row) => row.name)).toEqual([
+      "previous",
+      "next",
+      "parent",
+    ]);
+    for (const row of mobileFooterLayout) {
+      expect(row.borderTopWidth).toBe("0px");
+      expect(Math.abs(row.iconLeft - mobileFooterLayout[0]!.iconLeft)).toBeLessThanOrEqual(
+        1,
+      );
+    }
+  }
 
   const footerLinkLayout = await footerNav.evaluate((nav) =>
     [...nav.querySelectorAll(".section-nav-link")].map((link) => {
