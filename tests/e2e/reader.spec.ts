@@ -1278,6 +1278,11 @@ test("home page presents an interactive cover flow", async ({ page }) => {
     const active = flow.querySelector<HTMLElement>(
       '.cover-flow-card[aria-current="true"]',
     );
+    const cards = Array.from(
+      flow.querySelectorAll<HTMLElement>(".cover-flow-card"),
+    );
+    const firstCardRect = cards[0]?.getBoundingClientRect();
+    const secondCardRect = cards[1]?.getBoundingClientRect();
     const sideCard =
       (flow.querySelector<HTMLElement>(".cover-flow-card.is-active")
         ?.previousElementSibling as HTMLElement | null) ??
@@ -1289,19 +1294,30 @@ test("home page presents an interactive cover flow", async ({ page }) => {
       activeScale: active?.style.getPropertyValue("--cover-flow-scale") ?? "",
       activeTransform: active ? getComputedStyle(active).transform : "",
       cardGap: window.getComputedStyle(flow.querySelector(".cover-flow-track")!).gap,
+      flowWidth: flow.getBoundingClientRect().width,
+      overlap:
+        firstCardRect && secondCardRect
+          ? firstCardRect.right - secondCardRect.left
+          : 0,
       panelVisible:
         active?.querySelector(".cover-flow-card-panel") &&
         window.getComputedStyle(active.querySelector(".cover-flow-card-panel")!)
           .backdropFilter,
       sideRotate: sideCard?.style.getPropertyValue("--cover-flow-rotate") ?? "",
       sideScale: sideCard?.style.getPropertyValue("--cover-flow-scale") ?? "",
+      viewportWidth: document.documentElement.clientWidth,
     };
   });
   expect(Math.abs(Number.parseFloat(coverFlowTransforms.activeRotate))).toBeLessThan(1);
   expect(Number.parseFloat(coverFlowTransforms.activeScale)).toBeGreaterThan(1.05);
   expect(coverFlowTransforms.activeTransform).not.toBe("none");
-  expect(Number.parseFloat(coverFlowTransforms.cardGap)).toBeGreaterThan(16);
-  expect(Number.parseFloat(coverFlowTransforms.cardGap)).toBeLessThan(42);
+  expect(Number.parseFloat(coverFlowTransforms.cardGap)).toBeLessThan(1);
+  expect(coverFlowTransforms.flowWidth).toBeGreaterThanOrEqual(
+    coverFlowTransforms.viewportWidth,
+  );
+  expect(coverFlowTransforms.overlap).toBeGreaterThan(
+    coverFlowTransforms.viewportWidth < 720 ? 90 : 140,
+  );
   expect(coverFlowTransforms.panelVisible).not.toBe("none");
   expect(coverFlowTransforms.sideRotate).not.toBe("0deg");
   expect(Number.parseFloat(coverFlowTransforms.sideScale)).toBeLessThan(1);

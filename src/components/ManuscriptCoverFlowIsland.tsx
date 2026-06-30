@@ -72,16 +72,21 @@ export function ManuscriptCoverFlowIsland({
       const offset = (cardCenter - center) / rect.width;
       const distance = Math.abs(offset);
       const clampedOffset = Math.max(-2.6, Math.min(2.6, offset));
-      const rotate = Math.max(-64, Math.min(64, clampedOffset * -48));
-      const scale = Math.max(0.72, 1.1 - distance * 0.18);
-      const z = Math.max(-240, distance * -112);
-      const opacity = Math.max(0.38, 1 - distance * 0.2);
+      const rotate = Math.max(-68, Math.min(68, clampedOffset * -76));
+      const scale = Math.max(0.68, 1.12 - distance * 0.36);
+      const z = Math.max(-280, distance * -150);
+      const opacity = Math.max(0.34, 1 - distance * 0.24);
+      const layer = Math.max(1, 100 - Math.round(distance * 20));
 
       card.style.setProperty("--cover-flow-rotate", `${rotate}deg`);
       card.style.setProperty("--cover-flow-scale", scale.toFixed(3));
       card.style.setProperty("--cover-flow-z", `${z}px`);
       card.style.setProperty("--cover-flow-opacity", opacity.toFixed(3));
-      card.style.setProperty("--cover-flow-panel-opacity", distance < 0.58 ? "1" : "0.62");
+      card.style.setProperty(
+        "--cover-flow-panel-opacity",
+        distance < 0.34 ? "1" : distance < 1 ? "0.1" : "0.06",
+      );
+      card.style.zIndex = String(layer);
 
       if (distance < closestDistance) {
         closestDistance = distance;
