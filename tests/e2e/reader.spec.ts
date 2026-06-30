@@ -972,6 +972,7 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
       copyTextAlign: copyStyle?.textAlign ?? "",
       recommendationLeft: recommendationBox?.left ?? 0,
       recommendationRight: recommendationBox?.right ?? 0,
+      recommendationWidth: recommendationBox?.width ?? 0,
       recommendationTextAlign: recommendationStyle?.textAlign ?? "",
       recommendationWhiteSpace: recommendationStyle?.whiteSpace ?? "",
       panelLeft: panel.left,
@@ -982,13 +983,14 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
   expect(progressMenuMetrics.copyFontSize).toBeLessThanOrEqual(18);
   expect(progressMenuMetrics.copyTextAlign).toBe("left");
   expect(progressMenuMetrics.recommendationTextAlign).toBe("left");
-  expect(progressMenuMetrics.recommendationWhiteSpace).toBe("nowrap");
+  expect(progressMenuMetrics.recommendationWhiteSpace).toBe("normal");
   expect(progressMenuMetrics.recommendationLeft).toBeGreaterThanOrEqual(
     progressMenuMetrics.panelLeft,
   );
   expect(progressMenuMetrics.recommendationRight).toBeLessThanOrEqual(
     progressMenuMetrics.panelRight + 1,
   );
+  expect(progressMenuMetrics.recommendationWidth).toBeGreaterThan(220);
 });
 
 test("reader share menu exposes page sharing and PDF downloads", async ({ page }) => {
@@ -1540,23 +1542,45 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
     .toBe("true");
   const popover = page.getByRole("region", { name: "Reader progress" });
   const markReadButton = popover.getByRole("button", {
-    name: /^(Mark read|Read)$/,
+    name: /^(Mark current section as read|Current section is marked read)$/,
   });
   await expect(markReadButton).toBeVisible();
   const markReadButtonStyle = await markReadButton.evaluate((element) => {
+    const sectionStyle = window.getComputedStyle(element.closest(".reader-actions")!);
     const style = window.getComputedStyle(element);
     return {
+      sectionBorderTopWidth: sectionStyle.borderTopWidth,
       justifyContent: style.justifyContent,
       textAlign: style.textAlign,
     };
   });
+  expect(markReadButtonStyle.sectionBorderTopWidth).toBe("0px");
   expect(markReadButtonStyle.justifyContent).toBe("flex-start");
   expect(markReadButtonStyle.textAlign).toBe("left");
+  await expect(markReadButton).toHaveText("Mark current section as read");
   await markReadButton.click();
+  await expect(markReadButton).toHaveText("Current section is marked read");
   await expect(popover.getByText("Recently read")).toBeVisible();
   await expect(popover.locator(".recently-read a").first()).toContainText(
     firstSection.title,
   );
+  const recentLinkMetrics = await popover.locator(".recently-read a").first().evaluate(
+    (element) => {
+      const style = window.getComputedStyle(element);
+      const box = element.getBoundingClientRect();
+      const panel = element.closest(".reader-status")!.getBoundingClientRect();
+
+      return {
+        textOverflow: style.textOverflow,
+        whiteSpace: style.whiteSpace,
+        width: box.width,
+        panelWidth: panel.width,
+      };
+    },
+  );
+  expect(recentLinkMetrics.textOverflow).toBe("clip");
+  expect(recentLinkMetrics.whiteSpace).toBe("normal");
+  expect(recentLinkMetrics.width).toBeGreaterThan(recentLinkMetrics.panelWidth - 80);
   const listenButton = page.getByRole("button", { name: /Listen/ });
   await expect(listenButton).toBeVisible();
   const idleListenButtonWidth = await listenButton.evaluate(

@@ -2265,6 +2265,11 @@ input {
   border-top: 1px solid rgba(119, 84, 42, 0.16);
 }
 
+.progress-section + .reader-actions {
+  padding-top: 0;
+  border-top: 0;
+}
+
 .reader-status .reader-actions {
   margin-top: 0;
 }
@@ -2543,17 +2548,29 @@ input {
 }
 
 .progress-link-list {
-  display: grid;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
   gap: 0.18rem;
+  width: 100%;
   min-width: 0;
   margin-top: 0.55rem;
 }
 
+.progress-link-list a + a {
+  margin-top: 0;
+}
+
 .progress-link-list a {
-  display: block;
-  max-width: 100%;
-  min-width: 0;
-  overflow: hidden;
+  display: flex;
+  flex: none;
+  align-self: stretch;
+  width: calc(22rem - 2.4rem);
+  inline-size: calc(22rem - 2.4rem);
+  max-width: none;
+  min-width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
   border: 1px solid transparent;
   border-radius: var(--radius);
   color: var(--ink);
@@ -2563,8 +2580,9 @@ input {
   text-decoration: none;
   text-decoration-color: rgba(19, 32, 42, 0.28);
   text-underline-offset: 0.2em;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: anywhere;
   transition:
     background 160ms ease,
     border-color 160ms ease,
@@ -3050,6 +3068,12 @@ input {
     max-height: calc(100svh - env(safe-area-inset-top) - 5rem);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .progress-popover .progress-link-list a {
+    width: calc(100vw - 4.1rem);
+    inline-size: calc(100vw - 4.1rem);
+    min-width: 0;
   }
 
   .outline-popover {
