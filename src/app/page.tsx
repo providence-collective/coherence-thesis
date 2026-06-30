@@ -17,6 +17,18 @@ const manuscriptTags: Record<string, string[]> = {
   "cardinal-scale": ["Iconic patterning", "Cardinal orientation"],
 };
 
+const planetSymbols: Record<string, string> = {
+  Jupiter: "♃",
+  Mars: "♂",
+  Mercury: "☿",
+  Moon: "☽",
+  Neptune: "♆",
+  Saturn: "♄",
+  Sun: "☉",
+  Uranus: "♅",
+  Venus: "♀",
+};
+
 export default function Home() {
   return (
     <div className="home-page">
@@ -70,11 +82,8 @@ export default function Home() {
         aria-label="Published manuscripts"
       >
         {catalog.volumes.map((volume) => {
-          const chapterCount = volume.parts.reduce(
-            (total, part) => total + part.chapters.length,
-            0,
-          );
           const tags = manuscriptTags[volume.volumeId] ?? [volume.planet];
+          const planetSymbol = planetSymbols[volume.planet] ?? "";
 
           return (
             <Link
@@ -95,17 +104,20 @@ export default function Home() {
                 <span className="manuscript-card-kicker">
                   Volume {volume.numberLabel}
                 </span>
+                {planetSymbol ? (
+                  <span
+                    className="manuscript-card-symbol"
+                    aria-label={volume.planet}
+                  >
+                    {planetSymbol}
+                  </span>
+                ) : null}
                 <strong>{volume.title}</strong>
                 <span className="manuscript-card-description">
                   {volume.subtitle}
                 </span>
-                <span className="manuscript-card-stats">
-                  <span>{formatReadingDurationForWords(volume.wordCount)}</span>
-                  <span>{volume.parts.length.toLocaleString()} parts</span>
-                  <span>{chapterCount.toLocaleString()} chapters</span>
-                </span>
                 <span className="manuscript-card-tags">
-                  <span>{volume.planet}</span>
+                  <span>{formatReadingDurationForWords(volume.wordCount)}</span>
                   {tags.map((tag) => (
                     <span key={tag}>{tag}</span>
                   ))}

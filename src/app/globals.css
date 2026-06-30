@@ -1552,6 +1552,7 @@ input {
     0 1px 0 rgba(255, 255, 255, 0.54) inset;
   color: var(--ink);
   padding: clamp(0.9rem, 2vw, 1.15rem);
+  padding-top: clamp(1.05rem, 2.3vw, 1.35rem);
   opacity: 0;
   transform: translateY(0.9rem);
   transition:
@@ -1572,7 +1573,6 @@ input {
 }
 
 .manuscript-card-kicker,
-.manuscript-card-stats,
 .manuscript-card-tags {
   font-family: var(--font-ui);
 }
@@ -1586,7 +1586,31 @@ input {
   text-transform: uppercase;
 }
 
+.manuscript-card-symbol {
+  position: absolute;
+  top: clamp(0.72rem, 1.7vw, 1rem);
+  right: clamp(0.72rem, 1.7vw, 1rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgb(var(--card-rgb) / 0.28);
+  border-radius: 999px;
+  background: rgb(var(--card-rgb) / 0.1);
+  color: var(--card-accent);
+  font-family:
+    "Apple Symbols",
+    "Segoe UI Symbol",
+    "Noto Sans Symbols 2",
+    "Noto Sans Symbols",
+    sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
 .manuscript-card-panel strong {
+  padding-right: 2.25rem;
   color: var(--ink);
   font-family: var(--font-display);
   font-size: clamp(1.55rem, 3.1vw, 2.35rem);
@@ -1605,14 +1629,12 @@ input {
   -webkit-line-clamp: 3;
 }
 
-.manuscript-card-stats,
 .manuscript-card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
 }
 
-.manuscript-card-stats span,
 .manuscript-card-tags span {
   border: 1px solid rgb(var(--card-rgb) / 0.24);
   border-radius: 999px;

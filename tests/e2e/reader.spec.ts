@@ -291,6 +291,29 @@ test("home page presents the overview and manuscript entry points", async ({
   await expect(
     wieldingPanel.getByText(formatReadingDurationForWords(wieldingVolume.wordCount)),
   ).toBeVisible();
+  await expect(wieldingPanel.getByText("Moon")).toHaveCount(0);
+  await expect(wieldingPanel.getByText(`${wieldingVolume.parts.length} parts`)).toHaveCount(0);
+  await expect(wieldingPanel.getByText(/chapters/)).toHaveCount(0);
+  await expect(wieldingPanel.locator(".manuscript-card-symbol")).toHaveText("☽");
+
+  const cardinalVolume = catalog.volumes.find(
+    (volume) => volume.volumeId === "cardinal-scale",
+  )!;
+  const cardinalPanel = page
+    .getByRole("link", { name: "Open The Cardinal Scale" })
+    .locator(".manuscript-card-panel");
+  if (testInfo.project.name === "desktop") {
+    await page.getByRole("link", { name: "Open The Cardinal Scale" }).hover();
+  }
+  await expect(cardinalPanel.locator(".manuscript-card-symbol")).toHaveText("♂");
+  await expect(
+    cardinalPanel.getByText(formatReadingDurationForWords(cardinalVolume.wordCount)),
+  ).toBeVisible();
+  await expect(cardinalPanel.getByText("Iconic patterning")).toBeVisible();
+  await expect(cardinalPanel.getByText("Cardinal orientation")).toBeVisible();
+  await expect(cardinalPanel.getByText("Mars")).toHaveCount(0);
+  await expect(cardinalPanel.getByText(`${cardinalVolume.parts.length} parts`)).toHaveCount(0);
+  await expect(cardinalPanel.getByText(/chapters/)).toHaveCount(0);
 });
 
 test("overview links into canonical manuscript sections", async ({ page }) => {
