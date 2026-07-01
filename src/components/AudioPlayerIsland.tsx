@@ -192,12 +192,19 @@ export function AudioPlayerIsland({
       >
         {playing ? (
           <>
-            <span className="audio-waveform" aria-hidden="true">
-              <span />
-              <span />
-              <span />
+            <span className="audio-menu-button-sizer" aria-hidden="true">
+              <Headphones aria-hidden="true" size={17} />
+              <span>Listen</span>
+              <ChevronDown className="audio-menu-chevron" aria-hidden="true" size={16} />
             </span>
-            <Pause aria-hidden="true" size={15} />
+            <span className="audio-playing-indicator" aria-hidden="true">
+              <span className="audio-waveform">
+                <span />
+                <span />
+                <span />
+              </span>
+              <Pause aria-hidden="true" size={15} />
+            </span>
           </>
         ) : (
           <Headphones aria-hidden="true" size={17} />
@@ -244,7 +251,7 @@ export function AudioPlayerIsland({
             </select>
           </div>
           <label className="range-field">
-            Rate
+            Speed
             <input
               type="range"
               min="0.75"
