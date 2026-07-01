@@ -1872,6 +1872,10 @@ test("toolbar brand owns the active manuscript identity", async ({
     const overviewBrandOverflow = await page
       .locator(".mobile-page-brand")
       .evaluate((element) => ({
+        navLogoColor: window.getComputedStyle(
+          document.querySelector(".brand-title-mobile-logo")!,
+        ).color,
+        brandColor: window.getComputedStyle(element).color,
         kickerColor: window.getComputedStyle(
           element.querySelector(".mobile-page-brand-kicker")!,
         ).color,
@@ -1885,7 +1889,13 @@ test("toolbar brand owns the active manuscript identity", async ({
           element.querySelector(".mobile-page-brand-title")!,
         ).textOverflow,
       }));
+    expect(overviewBrandOverflow.navLogoColor).toBe(
+      overviewBrandOverflow.kickerColor,
+    );
     expect(overviewBrandOverflow.titleColor).toBe(
+      overviewBrandOverflow.brandColor,
+    );
+    expect(overviewBrandOverflow.titleColor).not.toBe(
       overviewBrandOverflow.kickerColor,
     );
     expect(overviewBrandOverflow.kicker).not.toBe("ellipsis");

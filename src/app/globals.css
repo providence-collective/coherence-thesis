@@ -2920,6 +2920,7 @@ input {
   }
 
   .site-header .brand-title-mobile-logo {
+    color: var(--bronze-deep);
     display: inline;
   }
 
@@ -2954,7 +2955,6 @@ input {
 
   .mobile-page-brand-title {
     overflow: visible;
-    color: var(--bronze-deep);
     font-family: var(--font-display);
     font-size: clamp(1.05rem, 5vw, 1.55rem);
     line-height: 1.05;
