@@ -689,6 +689,10 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
       headerBrandDisplay: headerBrandStyle?.display ?? "",
       headerBrandLeft: headerBrand?.getBoundingClientRect().left ?? 0,
       headerBrandRight: headerBrand?.getBoundingClientRect().right ?? 0,
+      headerBrandPaddingLeft: headerBrandStyle?.paddingLeft ?? "",
+      headerBrandTitleBorderColor:
+        headerBrandTitleStyle?.borderBottomColor ?? "",
+      headerBrandLogoFontSize: headerBrandLogoInitialsStyle?.fontSize ?? "",
       headerBrandMobileLogo:
         [
           headerBrandLogoFullStyle?.display !== "none"
@@ -718,13 +722,17 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
 
   if (layout.clientWidth <= 860) {
     expect(["flex", "inline-flex"]).toContain(toolbarMetrics.headerBrandDisplay);
-    expect(["Coherence Thesis", "CT"]).toContain(
-      toolbarMetrics.headerBrandMobileLogo,
-    );
+    expect(toolbarMetrics.headerBrandMobileLogo).toBe("CT");
     expect(toolbarMetrics.headerBrandTitleOverflow).not.toBe("ellipsis");
     expect(toolbarMetrics.headerBrandLeft).toBeLessThan(toolbarMetrics.searchLeft);
     expect(toolbarMetrics.headerBrandRight).toBeLessThanOrEqual(
       toolbarMetrics.searchLeft,
+    );
+    expect(Number.parseFloat(toolbarMetrics.headerBrandPaddingLeft)).toBeGreaterThan(
+      0,
+    );
+    expect(Number.parseFloat(toolbarMetrics.headerBrandLogoFontSize)).toBeGreaterThan(
+      20,
     );
     expect(toolbarMetrics.headerBreadcrumbDisplay).toBe("none");
     expect(toolbarMetrics.pageContextDisplay).toBe("grid");
@@ -1923,9 +1931,10 @@ test("toolbar brand owns the active manuscript identity", async ({
 
     await page.setViewportSize({ width: 500, height: 760 });
     await expect(brand).toBeVisible();
-    await expect(brand.locator(".brand-title-mobile-logo-full")).toBeVisible();
-    await expect(brand.locator(".brand-title-mobile-logo-full")).toHaveText(
-      "Coherence Thesis",
+    await expect(brand.locator(".brand-title-mobile-logo-full")).toBeHidden();
+    await expect(brand.locator(".brand-title-mobile-logo-initials")).toBeVisible();
+    await expect(brand.locator(".brand-title-mobile-logo-initials")).toHaveText(
+      "CT",
     );
 
     await page.setViewportSize({ width: 390, height: 760 });
