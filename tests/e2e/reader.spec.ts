@@ -896,11 +896,13 @@ test("reader share menu exposes page sharing and PDF downloads", async ({ page }
     name: `Download this section as PDF: ${firstSection.title}`,
   });
   const manuscriptDownload = shareMenu.getByRole("link", {
-    name: `Download this manuscript as PDF: ${firstSection.volumeTitle}`,
+    name: `Download full manuscript as PDF: ${firstSection.volumeTitle}`,
   });
 
+  await expect(sectionDownload).toContainText("Download this section");
   await expect(sectionDownload).toHaveAttribute("href", sectionPdfHref);
   await expect(sectionDownload).toHaveAttribute("download", "");
+  await expect(manuscriptDownload).toContainText("Download full manuscript");
   await expect(manuscriptDownload).toHaveAttribute("href", manuscriptPdfHref);
   await expect(manuscriptDownload).toHaveAttribute("download", "");
 
@@ -930,6 +932,90 @@ test("reader share menu exposes page sharing and PDF downloads", async ({ page }
   );
   expect(shareData?.title).toContain(firstSection.title);
   expect(shareData?.url).toContain(firstSection.href);
+});
+
+test("volume share menu only offers the full manuscript download", async ({
+  page,
+}) => {
+  await page.goto(firstSectionVolume.href);
+
+  const shareButton = page.getByRole("button", { name: "Share and downloads" });
+  await expect(shareButton).toBeVisible();
+  await shareButton.click();
+
+  const shareMenu = page.getByRole("region", { name: "Share and downloads" });
+  await expect(shareMenu).toBeVisible();
+  await expect(shareMenu.getByText("Download this section")).toHaveCount(0);
+
+  const manuscriptDownload = shareMenu.getByRole("link", {
+    name: `Download full manuscript as PDF: ${firstSectionVolume.title}`,
+  });
+  await expect(manuscriptDownload).toBeVisible();
+  await expect(manuscriptDownload).toContainText("Download full manuscript");
+  await expect(manuscriptDownload).toHaveAttribute(
+    "href",
+    `/downloads/manuscripts/${firstSectionVolume.volumeId}.pdf`,
+  );
+  await expect(manuscriptDownload).toHaveAttribute("download", "");
+
+  const actionMetrics = await manuscriptDownload.evaluate((element) => {
+    const panel = element.closest(".reader-share")?.getBoundingClientRect();
+    const label = element.querySelector(".share-action-label");
+    const labelBox = label?.getBoundingClientRect();
+    const style = window.getComputedStyle(element);
+    return {
+      display: style.display,
+      labelWidth: labelBox?.width ?? 0,
+      panelLeft: panel?.left ?? 0,
+      panelRight: panel?.right ?? 0,
+      rowLeft: element.getBoundingClientRect().left,
+      rowRight: element.getBoundingClientRect().right,
+    };
+  });
+
+  expect(actionMetrics.display).toBe("grid");
+  expect(actionMetrics.labelWidth).toBeGreaterThan(120);
+  expect(actionMetrics.rowLeft).toBeGreaterThanOrEqual(actionMetrics.panelLeft);
+  expect(actionMetrics.rowRight).toBeLessThanOrEqual(
+    actionMetrics.panelRight + 1,
+  );
+});
+
+test("singleton section share menu offers both PDF downloads", async ({
+  page,
+}) => {
+  const singletonSectionHref = firstSection.href.replace(
+    `/${firstSection.sectionId}/`,
+    "/",
+  );
+  await page.goto(singletonSectionHref);
+
+  const shareButton = page.getByRole("button", { name: "Share and downloads" });
+  await expect(shareButton).toBeVisible();
+  await shareButton.click();
+
+  const shareMenu = page.getByRole("region", { name: "Share and downloads" });
+  await expect(shareMenu).toBeVisible();
+
+  const sectionDownload = shareMenu.getByRole("link", {
+    name: `Download this section as PDF: ${firstSection.title}`,
+  });
+  const manuscriptDownload = shareMenu.getByRole("link", {
+    name: `Download full manuscript as PDF: ${firstSectionVolume.title}`,
+  });
+
+  await expect(sectionDownload).toBeVisible();
+  await expect(sectionDownload).toContainText("Download this section");
+  await expect(sectionDownload).toHaveAttribute(
+    "href",
+    `/downloads/sections/${firstSection.sectionId}.pdf`,
+  );
+  await expect(manuscriptDownload).toBeVisible();
+  await expect(manuscriptDownload).toContainText("Download full manuscript");
+  await expect(manuscriptDownload).toHaveAttribute(
+    "href",
+    `/downloads/manuscripts/${firstSectionVolume.volumeId}.pdf`,
+  );
 });
 
 test("reader settings update and persist local appearance preferences", async ({

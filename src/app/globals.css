@@ -2084,10 +2084,11 @@ input {
   text-align: left;
 }
 
-.share-action {
+.reader-share .share-action {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
+  justify-content: stretch;
   gap: 0.55rem;
   min-height: 2.65rem;
   width: 100%;
@@ -2102,38 +2103,41 @@ input {
   padding: 0.55rem 0.6rem;
   text-align: left;
   text-decoration: none;
+  white-space: normal;
   transition:
     background 160ms ease,
     border-color 160ms ease,
     color 160ms ease;
 }
 
-.share-action span {
+.reader-share .share-action-label {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.share-action svg {
+.reader-share .share-action svg {
   flex: 0 0 auto;
 }
 
-.share-action:hover,
-.share-action:focus-visible {
+.site-nav .reader-share .share-action:hover,
+.site-nav .reader-share .share-action:focus-visible,
+.reader-share .share-action:hover,
+.reader-share .share-action:focus-visible {
   border-color: rgba(119, 84, 42, 0.24);
   background: rgba(164, 123, 63, 0.1);
   color: var(--ink);
   outline: none;
 }
 
-.share-action:disabled {
+.reader-share .share-action:disabled {
   cursor: not-allowed;
   opacity: 0.55;
 }
 
-.share-action:disabled:hover,
-.share-action:disabled:focus-visible {
+.reader-share .share-action:disabled:hover,
+.reader-share .share-action:disabled:focus-visible {
   border-color: transparent;
   background: transparent;
 }
