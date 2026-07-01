@@ -1601,6 +1601,7 @@ input {
   justify-content: center;
   width: 2rem;
   height: 2rem;
+  padding-top: 0.12rem;
   border: 1px solid rgb(var(--card-rgb) / 0.28);
   border-radius: 999px;
   background: rgb(var(--card-rgb) / 0.1);

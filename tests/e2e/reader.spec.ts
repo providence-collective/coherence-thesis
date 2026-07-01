@@ -307,6 +307,31 @@ test("home page presents the overview and manuscript entry points", async ({
   await expect(wieldingPanel.getByText(`${wieldingVolume.parts.length} parts`)).toHaveCount(0);
   await expect(wieldingPanel.getByText(/chapters/)).toHaveCount(0);
   await expect(wieldingPanel.locator(".manuscript-card-symbol")).toHaveText("☽");
+  const symbolAlignment = await wieldingPanel
+    .locator(".manuscript-card-symbol")
+    .evaluate((element) => {
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      const badgeBox = element.getBoundingClientRect();
+      const glyphBox = range.getBoundingClientRect();
+      range.detach();
+
+      return {
+        badgeCenter: badgeBox.top + badgeBox.height / 2,
+        badgeHeight: badgeBox.height,
+        glyphCenter: glyphBox.top + glyphBox.height / 2,
+        paddingTop: window.getComputedStyle(element).paddingTop,
+      };
+    });
+  expect(Number.parseFloat(symbolAlignment.paddingTop)).toBeGreaterThan(0);
+  expect(symbolAlignment.badgeHeight).toBeGreaterThan(28);
+  expect(symbolAlignment.badgeHeight).toBeLessThan(34);
+  expect(symbolAlignment.glyphCenter).toBeGreaterThan(
+    symbolAlignment.badgeCenter,
+  );
+  expect(symbolAlignment.glyphCenter - symbolAlignment.badgeCenter).toBeLessThan(
+    4,
+  );
 
   const cardinalVolume = catalog.volumes.find(
     (volume) => volume.volumeId === "cardinal-scale",
