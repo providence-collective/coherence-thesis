@@ -577,10 +577,6 @@ input {
   gap: 0.45rem;
 }
 
-.site-nav .mobile-home-menu {
-  display: none;
-}
-
 .site-nav a,
 .outline-menu-button,
 .search-menu-button,
@@ -2958,6 +2954,7 @@ input {
 
   .mobile-page-brand-title {
     overflow: visible;
+    color: var(--bronze-deep);
     font-family: var(--font-display);
     font-size: clamp(1.05rem, 5vw, 1.55rem);
     line-height: 1.05;
@@ -3005,12 +3002,7 @@ input {
     min-width: 0;
   }
 
-  .site-nav .mobile-home-menu {
-    display: block;
-  }
-
   .site-nav a,
-  .mobile-home-menu,
   .outline-menu,
   .search-menu,
   .share-menu,
@@ -3048,7 +3040,6 @@ input {
     white-space: nowrap;
   }
 
-  .outline-menu-button svg:last-child,
   .audio-menu-button .audio-menu-chevron,
   .progress-menu-button svg:last-child {
     display: none;
@@ -3240,7 +3231,6 @@ input {
     padding-left: 0.35rem;
   }
 
-  .outline-menu-button svg:last-child,
   .audio-menu-button .audio-menu-chevron,
   .progress-menu-button svg:last-child {
     display: none;

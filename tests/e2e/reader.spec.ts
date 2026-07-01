@@ -541,17 +541,12 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
     expect(layout.headerPaddingRight).toBeCloseTo(layout.headerPaddingTop, 1);
   }
 
-  const homeButton = page.locator(".site-nav .mobile-home-link");
   const searchButton = page.getByRole("button", { name: "Search manuscripts" });
   const outlineButton = page.getByRole("button", { name: /Outline/ });
   const settingsButton = page.getByRole("button", { name: "Reader settings" });
   const audioButton = page.getByRole("button", { name: /Listen/ });
   const progressButton = page.getByRole("button", { name: /Progress/ });
-  if (layout.clientWidth <= 860) {
-    await expect(homeButton).toBeVisible();
-  } else {
-    await expect(homeButton).toBeHidden();
-  }
+  await expect(page.locator(".site-nav .mobile-home-link")).toHaveCount(0);
   await expect(searchButton).toBeVisible();
   await expect(outlineButton).toBeVisible();
   await expect(settingsButton).toBeVisible();
@@ -561,9 +556,6 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
   const toolbarMetrics = await page.evaluate(() => {
     const search = document
       .querySelector(".search-menu-button")
-      ?.getBoundingClientRect();
-    const home = document
-      .querySelector(".mobile-home-menu")
       ?.getBoundingClientRect();
     const outline = document
       .querySelector(".outline-menu-button")
@@ -584,9 +576,7 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
       ".outline-menu-button .nav-label",
     );
     const audioLabel = document.querySelector(".audio-menu-button .nav-label");
-    const outlineChevron = document.querySelector(
-      ".outline-menu-button svg:last-child",
-    );
+    const outlineIcon = document.querySelector(".outline-menu-button svg");
     const audioChevron = document.querySelector(
       ".audio-menu-button .audio-menu-chevron",
     );
@@ -651,8 +641,8 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
     const audioLabelStyle = audioLabel
       ? window.getComputedStyle(audioLabel)
       : null;
-    const outlineChevronStyle = outlineChevron
-      ? window.getComputedStyle(outlineChevron)
+    const outlineIconStyle = outlineIcon
+      ? window.getComputedStyle(outlineIcon)
       : null;
     const audioChevronStyle = audioChevron
       ? window.getComputedStyle(audioChevron)
@@ -666,8 +656,6 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
       pageContextBreadcrumb?.getBoundingClientRect();
     const pageHeadingBox = pageHeading?.getBoundingClientRect();
     return {
-      homeLeft: home?.left ?? 0,
-      homeWidth: home?.width ?? 0,
       searchLeft: search?.left ?? 0,
       settingsLeft: settings?.left ?? 0,
       outlineLeft: outline?.left ?? 0,
@@ -684,7 +672,7 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
       audioLabelWidth: audioLabel?.getBoundingClientRect().width ?? 0,
       outlineLabelClipped: outlineLabelStyle?.clip ?? "",
       audioLabelClipped: audioLabelStyle?.clip ?? "",
-      outlineChevronDisplay: outlineChevronStyle?.display ?? "",
+      outlineIconDisplay: outlineIconStyle?.display ?? "",
       audioChevronDisplay: audioChevronStyle?.display ?? "",
       progressChevronDisplay: progressChevronStyle?.display ?? "",
       progressColor: percentStyle?.color ?? "",
@@ -722,15 +710,14 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
   });
 
   if (layout.clientWidth <= 860) {
-    expect(toolbarMetrics.homeLeft).toBeLessThan(toolbarMetrics.searchLeft);
     expect(["flex", "inline-flex"]).toContain(toolbarMetrics.headerBrandDisplay);
     expect(["Coherence Thesis", "CT"]).toContain(
       toolbarMetrics.headerBrandMobileLogo,
     );
     expect(toolbarMetrics.headerBrandTitleOverflow).not.toBe("ellipsis");
-    expect(toolbarMetrics.headerBrandLeft).toBeLessThan(toolbarMetrics.homeLeft);
+    expect(toolbarMetrics.headerBrandLeft).toBeLessThan(toolbarMetrics.searchLeft);
     expect(toolbarMetrics.headerBrandRight).toBeLessThanOrEqual(
-      toolbarMetrics.homeLeft,
+      toolbarMetrics.searchLeft,
     );
     expect(toolbarMetrics.headerBreadcrumbDisplay).toBe("none");
     expect(toolbarMetrics.pageContextDisplay).toBe("grid");
@@ -763,9 +750,6 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
   }
   if (layout.clientWidth <= 540) {
     expect(
-      Math.abs(toolbarMetrics.homeWidth - toolbarMetrics.searchWidth),
-    ).toBeLessThanOrEqual(1);
-    expect(
       Math.abs(toolbarMetrics.searchWidth - toolbarMetrics.outlineWidth),
     ).toBeLessThanOrEqual(1);
     expect(
@@ -791,7 +775,7 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
     expect(["", "rect(0px, 0px, 0px, 0px)"]).toContain(
       toolbarMetrics.progressLabelClipped,
     );
-    expect(["", "none"]).toContain(toolbarMetrics.outlineChevronDisplay);
+    expect(toolbarMetrics.outlineIconDisplay).not.toBe("none");
     expect(["", "none"]).toContain(toolbarMetrics.audioChevronDisplay);
     expect(["", "none"]).toContain(toolbarMetrics.progressChevronDisplay);
     expect(toolbarMetrics.progressText).toMatch(/^\d+%$/);
@@ -1881,9 +1865,19 @@ test("toolbar brand owns the active manuscript identity", async ({
     await expect(page.locator(".mobile-page-brand-title")).toHaveText(
       "The Coherence Thesis",
     );
+    await expect(page.locator(".mobile-page-brand")).toHaveAttribute(
+      "href",
+      "/",
+    );
     const overviewBrandOverflow = await page
       .locator(".mobile-page-brand")
       .evaluate((element) => ({
+        kickerColor: window.getComputedStyle(
+          element.querySelector(".mobile-page-brand-kicker")!,
+        ).color,
+        titleColor: window.getComputedStyle(
+          element.querySelector(".mobile-page-brand-title")!,
+        ).color,
         kicker: window.getComputedStyle(
           element.querySelector(".mobile-page-brand-kicker")!,
         ).textOverflow,
@@ -1891,6 +1885,9 @@ test("toolbar brand owns the active manuscript identity", async ({
           element.querySelector(".mobile-page-brand-title")!,
         ).textOverflow,
       }));
+    expect(overviewBrandOverflow.titleColor).toBe(
+      overviewBrandOverflow.kickerColor,
+    );
     expect(overviewBrandOverflow.kicker).not.toBe("ellipsis");
     expect(overviewBrandOverflow.title).not.toBe("ellipsis");
 
@@ -1901,7 +1898,7 @@ test("toolbar brand owns the active manuscript identity", async ({
     await expect(page.locator(".mobile-page-brand-title")).toHaveText(
       `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
     );
-    await expect(page.locator(".site-nav .mobile-home-link")).toBeVisible();
+    await expect(page.locator(".site-nav .mobile-home-link")).toHaveCount(0);
 
     await page.setViewportSize({ width: 500, height: 760 });
     await expect(brand).toBeVisible();
