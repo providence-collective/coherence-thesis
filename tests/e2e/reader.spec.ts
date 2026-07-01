@@ -8,7 +8,8 @@ const firstSection = catalog.sections[0];
 const firstSectionVolume = catalog.volumes.find(
   (volume) => volume.volumeId === firstSection.volumeId,
 )!;
-const firstSectionPdfFileName = "The Coherence Thesis - 01.001 - Orientation.pdf";
+const firstSectionPdfFileName =
+  "The Coherence Thesis - 01.001 - Orientation.pdf";
 const firstManuscriptPdfFileName =
   "The Coherence Thesis - 01 - Humanity's Most Viable Future.pdf";
 const firstSectionVersionDate = new Intl.DateTimeFormat("en-US", {
@@ -41,7 +42,9 @@ const volumeWithNeighborsIndex = catalog.volumes.findIndex(
 const volumeWithNeighbors = catalog.volumes[volumeWithNeighborsIndex]!;
 const previousVolume = catalog.volumes[volumeWithNeighborsIndex - 1]!;
 const nextVolume = catalog.volumes[volumeWithNeighborsIndex + 1]!;
-const partNavigationVolume = catalog.volumes.find((volume) => volume.parts.length > 2)!;
+const partNavigationVolume = catalog.volumes.find(
+  (volume) => volume.parts.length > 2,
+)!;
 const partWithNeighborsIndex = partNavigationVolume.parts.findIndex(
   (_part, index) => index > 0 && index < partNavigationVolume.parts.length - 1,
 );
@@ -63,11 +66,17 @@ const chapterNavigationContext = catalog.volumes
   )
   .find((context) => context.chapterIndex > 0)!;
 const chapterWithNeighbors =
-  chapterNavigationContext.part.chapters[chapterNavigationContext.chapterIndex]!;
+  chapterNavigationContext.part.chapters[
+    chapterNavigationContext.chapterIndex
+  ]!;
 const previousChapter =
-  chapterNavigationContext.part.chapters[chapterNavigationContext.chapterIndex - 1]!;
+  chapterNavigationContext.part.chapters[
+    chapterNavigationContext.chapterIndex - 1
+  ]!;
 const nextChapter =
-  chapterNavigationContext.part.chapters[chapterNavigationContext.chapterIndex + 1]!;
+  chapterNavigationContext.part.chapters[
+    chapterNavigationContext.chapterIndex + 1
+  ]!;
 const wieldingSection = catalog.sections.find(
   (section) => section.volumeId === "wielding-intelligence",
 )!;
@@ -92,19 +101,17 @@ const centralWoundPart = partById(
   centralWoundSection.volumeId,
   centralWoundSection.partId,
 )!;
-const sectionWithNeighbors = catalog.sections.find(
-  (section) => {
-    const chapter = partById(section.volumeId, section.partId)?.chapters.find(
-      (candidate) => candidate.chapterId === section.chapterId,
-    );
-    return Boolean(
-      section.previousSectionId &&
-        section.nextSectionId &&
-        chapter &&
-        chapter.sectionIds.length > 1,
-    );
-  },
-)!;
+const sectionWithNeighbors = catalog.sections.find((section) => {
+  const chapter = partById(section.volumeId, section.partId)?.chapters.find(
+    (candidate) => candidate.chapterId === section.chapterId,
+  );
+  return Boolean(
+    section.previousSectionId &&
+    section.nextSectionId &&
+    chapter &&
+    chapter.sectionIds.length > 1,
+  );
+})!;
 const previousSection = catalog.sections.find(
   (section) => section.sectionId === sectionWithNeighbors.previousSectionId,
 )!;
@@ -114,7 +121,9 @@ const nextSection = catalog.sections.find(
 const parentChapter = catalog.volumes
   .find((volume) => volume.volumeId === sectionWithNeighbors.volumeId)!
   .parts.find((part) => part.partId === sectionWithNeighbors.partId)!
-  .chapters.find((chapter) => chapter.chapterId === sectionWithNeighbors.chapterId)!;
+  .chapters.find(
+    (chapter) => chapter.chapterId === sectionWithNeighbors.chapterId,
+  )!;
 
 const currentYear = new Date().getFullYear();
 const copyrightYearLabel =
@@ -148,7 +157,7 @@ test("home page presents the overview and manuscript entry points", async ({
 
   await expect(
     page.getByRole("heading", {
-      name: "Nine-volume series: a living manuscript body on coherence.",
+      name: "The Coherence Thesis",
     }),
   ).toBeVisible();
   await expect(page.locator(".brand-kicker")).toHaveText(
@@ -197,12 +206,21 @@ test("home page presents the overview and manuscript entry points", async ({
     page.getByRole("link", { name: /Read the overview/ }),
   ).toHaveAttribute("href", "/overview/");
   await expect(
+    page.getByRole("link", { name: /Begin Volume I/ }),
+  ).toHaveAttribute("href", catalog.volumes[0]!.href);
+  await expect(
     page.getByRole("link", { name: /Browse manuscripts/ }),
-  ).toHaveAttribute("href", "#manuscripts");
+  ).toHaveCount(0);
   await expect(page.getByText("Nine volume series")).toHaveCount(0);
+  await expect(
+    page.getByText(
+      "Nine living manuscripts on coherence, trust, and the future institutions required for a civilization worth inheriting.",
+    ),
+  ).toBeVisible();
   await expect(page.locator(".overview-map")).toHaveCount(0);
+  await expect(page.locator(".stats-band")).toHaveCount(0);
   await expect(page.getByText("Ready for the full body")).toHaveCount(0);
-  await expect(page.locator(".manuscript-cover-card")).toHaveCount(
+  await expect(page.locator(".cover-flow-card")).toHaveCount(
     catalog.volumes.length,
   );
   expect(catalog.volumes.map((volume) => volume.coverImage)).toEqual(
@@ -244,7 +262,9 @@ test("home page presents the overview and manuscript entry points", async ({
   );
   await expect(licenseLink).toHaveAttribute("target", "_blank");
   await expect(licenseLink).toHaveAttribute("rel", "license");
-  const robertLink = footer.getByRole("link", { name: "Robert James Ryan III" });
+  const robertLink = footer.getByRole("link", {
+    name: "Robert James Ryan III",
+  });
   await expect(robertLink).toHaveAttribute(
     "href",
     "https://www.instagram.com/allelseis",
@@ -263,11 +283,11 @@ test("home page presents the overview and manuscript entry points", async ({
     const hero = document
       .querySelector(".hero-section")
       ?.getBoundingClientRect();
-    const stats = document
-      .querySelector(".stats-band")
+    const coverFlow = document
+      .querySelector(".cover-flow")
       ?.getBoundingClientRect();
     return {
-      gap: hero && stats ? stats.top - hero.bottom : 0,
+      gap: hero && coverFlow ? coverFlow.top - hero.bottom : 0,
       heroHeight: hero?.height ?? 0,
     };
   });
@@ -276,37 +296,43 @@ test("home page presents the overview and manuscript entry points", async ({
     expect(homepageSpacing.heroHeight).toBeLessThanOrEqual(1000);
   }
 
-  if (testInfo.project.name === "desktop") {
-    const homepageCoverShadows = await page.evaluate(() => {
-      const heroImage = document.querySelector(".hero-art img");
-      const coverCard = document.querySelector(".manuscript-cover-card");
-      return {
-        hero: heroImage ? getComputedStyle(heroImage).boxShadow : "",
-        card: coverCard ? getComputedStyle(coverCard).boxShadow : "",
-      };
-    });
-    expect(homepageCoverShadows.hero).toBe(homepageCoverShadows.card);
-    expect(homepageCoverShadows.hero).not.toBe("none");
-  }
+  const homepageCoverShadows = await page.evaluate(() => {
+    const heroImage = document.querySelector(".hero-art img");
+    const coverCard = document.querySelector(".cover-flow-image-frame");
+    return {
+      hero: heroImage ? getComputedStyle(heroImage).boxShadow : "",
+      card: coverCard ? getComputedStyle(coverCard).boxShadow : "",
+    };
+  });
+  expect(homepageCoverShadows.card).not.toBe("none");
+  expect(homepageCoverShadows.hero).not.toBe("none");
 
+  await page.getByRole("button", { name: "Next manuscript" }).click();
   const wieldingCard = page.getByRole("link", {
     name: "Open Wielding Intelligence",
   });
-  const wieldingPanel = wieldingCard.locator(".manuscript-card-panel");
+  const wieldingPanel = wieldingCard.locator(".cover-flow-card-panel");
   await expect(wieldingCard.locator("img")).toBeVisible();
-  if (testInfo.project.name === "desktop") {
-    await expect(wieldingPanel).toBeHidden();
-    await wieldingCard.hover();
-  }
   await expect(wieldingPanel).toBeVisible();
   await expect(wieldingPanel.getByText("Wielding Intelligence")).toBeVisible();
   await expect(
-    wieldingPanel.getByText(formatReadingDurationForWords(wieldingVolume.wordCount)),
+    wieldingPanel.getByText(
+      formatReadingDurationForWords(wieldingVolume.wordCount),
+    ),
   ).toBeVisible();
   await expect(wieldingPanel.getByText("Moon")).toHaveCount(0);
-  await expect(wieldingPanel.getByText(`${wieldingVolume.parts.length} parts`)).toHaveCount(0);
+  await expect(
+    wieldingPanel.getByText(`${wieldingVolume.parts.length} parts`),
+  ).toHaveCount(0);
   await expect(wieldingPanel.getByText(/chapters/)).toHaveCount(0);
-  await expect(wieldingPanel.locator(".manuscript-card-symbol")).toHaveText("☽");
+  const detailTagHeight = await wieldingPanel
+    .locator(".manuscript-card-tags span")
+    .first()
+    .evaluate((element) => element.getBoundingClientRect().height);
+  expect(detailTagHeight).toBeLessThanOrEqual(24);
+  await expect(wieldingPanel.locator(".manuscript-card-symbol")).toHaveText(
+    "☽",
+  );
   const symbolAlignment = await wieldingPanel
     .locator(".manuscript-card-symbol")
     .evaluate((element) => {
@@ -325,32 +351,14 @@ test("home page presents the overview and manuscript entry points", async ({
     });
   expect(Number.parseFloat(symbolAlignment.paddingTop)).toBeGreaterThan(0);
   expect(symbolAlignment.badgeHeight).toBeGreaterThan(28);
-  expect(symbolAlignment.badgeHeight).toBeLessThan(34);
+  expect(symbolAlignment.badgeHeight).toBeLessThan(40);
   expect(symbolAlignment.glyphCenter).toBeGreaterThan(
     symbolAlignment.badgeCenter,
   );
-  expect(symbolAlignment.glyphCenter - symbolAlignment.badgeCenter).toBeLessThan(
-    4,
-  );
+  expect(
+    symbolAlignment.glyphCenter - symbolAlignment.badgeCenter,
+  ).toBeLessThan(4);
 
-  const cardinalVolume = catalog.volumes.find(
-    (volume) => volume.volumeId === "cardinal-scale",
-  )!;
-  const cardinalPanel = page
-    .getByRole("link", { name: "Open The Cardinal Scale" })
-    .locator(".manuscript-card-panel");
-  if (testInfo.project.name === "desktop") {
-    await page.getByRole("link", { name: "Open The Cardinal Scale" }).hover();
-  }
-  await expect(cardinalPanel.locator(".manuscript-card-symbol")).toHaveText("♂");
-  await expect(
-    cardinalPanel.getByText(formatReadingDurationForWords(cardinalVolume.wordCount)),
-  ).toBeVisible();
-  await expect(cardinalPanel.getByText("Iconic patterning")).toBeVisible();
-  await expect(cardinalPanel.getByText("Cardinal orientation")).toBeVisible();
-  await expect(cardinalPanel.getByText("Mars")).toHaveCount(0);
-  await expect(cardinalPanel.getByText(`${cardinalVolume.parts.length} parts`)).toHaveCount(0);
-  await expect(cardinalPanel.getByText(/chapters/)).toHaveCount(0);
 });
 
 test("overview links into canonical manuscript sections", async ({ page }) => {
@@ -372,6 +380,47 @@ test("overview links into canonical manuscript sections", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "The Coherence Thesis" }),
   ).toBeVisible();
+  const overviewLayout = await page.evaluate(() => {
+    const heading = document
+      .querySelector(".page-heading")
+      ?.getBoundingClientRect();
+    const stats = document
+      .querySelector(".stats-band")
+      ?.getBoundingClientRect();
+    const map = document
+      .querySelector(".overview-map")
+      ?.getBoundingClientRect();
+
+    return {
+      statsAfterHeading: heading && stats ? stats.top - heading.bottom : 0,
+      mapAfterStats: stats && map ? map.top - stats.bottom : 0,
+      statsWidth: stats?.width ?? 0,
+      mapWidth: map?.width ?? 0,
+    };
+  });
+  expect(overviewLayout.statsAfterHeading).toBeGreaterThanOrEqual(24);
+  expect(overviewLayout.mapAfterStats).toBeGreaterThanOrEqual(24);
+  expect(overviewLayout.statsWidth).toBeLessThanOrEqual(768);
+  expect(overviewLayout.mapWidth).toBeLessThanOrEqual(768);
+  const overviewStats = page.locator(".stats-band");
+  await expect(overviewStats.getByText("volumes")).toBeVisible();
+  await expect(overviewStats.getByText("parts")).toBeVisible();
+  await expect(overviewStats.getByText("sections")).toBeVisible();
+  await expect(overviewStats.getByText("full read")).toBeVisible();
+  await expect(
+    overviewStats.getByText(catalog.stats.volumeCount.toLocaleString()),
+  ).toBeVisible();
+  await expect(
+    overviewStats.getByText(catalog.stats.partCount.toLocaleString()),
+  ).toBeVisible();
+  await expect(
+    overviewStats.getByText(catalog.stats.sectionCount.toLocaleString()),
+  ).toBeVisible();
+  await expect(
+    overviewStats.getByText(
+      formatReadingDurationForWords(catalog.stats.wordCount),
+    ),
+  ).toBeVisible();
   await expect(page.getByRole("button", { name: "Listen" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: /The seed/ }).first(),
@@ -381,40 +430,6 @@ test("overview links into canonical manuscript sections", async ({ page }) => {
     .first()
     .click();
   await expect(page).toHaveURL(/\/manuscripts\/humanitys-most-viable-future\//);
-});
-
-test("homepage manuscript tiles reveal and show panels at the mobile grid breakpoint", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 720, height: 820 });
-  await page.goto("/");
-
-  const firstCard = page.locator(".manuscript-cover-card").first();
-  const firstPanel = firstCard.locator(".manuscript-card-panel");
-
-  const breakpointState = await page.evaluate(() => {
-    const showcase = document.querySelector(".manuscript-showcase");
-    const panel = document.querySelector(".manuscript-card-panel");
-    const columns = showcase
-      ? getComputedStyle(showcase).gridTemplateColumns.split(" ").length
-      : 0;
-    const panelStyle = panel ? getComputedStyle(panel) : null;
-
-    return {
-      columns,
-      panelOpacity: panelStyle?.opacity ?? "",
-      panelVisibility: panelStyle?.visibility ?? "",
-    };
-  });
-
-  expect(breakpointState.columns).toBe(2);
-  expect(breakpointState.panelOpacity).toBe("1");
-  expect(breakpointState.panelVisibility).toBe("visible");
-
-  await firstCard.scrollIntoViewIfNeeded();
-  await expect(firstCard).toHaveClass(/manuscript-cover-card-revealed/);
-  await expect(firstPanel).toBeVisible();
-  await expect(firstPanel.getByText(catalog.volumes[0]!.title)).toBeVisible();
 });
 
 test("overview references show local read checkmarks", async ({ page }) => {
@@ -733,15 +748,14 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
       headerBrandTitleBorderColor:
         headerBrandTitleStyle?.borderBottomColor ?? "",
       headerBrandLogoFontSize: headerBrandLogoInitialsStyle?.fontSize ?? "",
-      headerBrandMobileLogo:
-        [
-          headerBrandLogoFullStyle?.display !== "none"
-            ? headerBrandLogoFull?.textContent
-            : "",
-          headerBrandLogoInitialsStyle?.display !== "none"
-            ? headerBrandLogoInitials?.textContent
-            : "",
-        ].join(""),
+      headerBrandMobileLogo: [
+        headerBrandLogoFullStyle?.display !== "none"
+          ? headerBrandLogoFull?.textContent
+          : "",
+        headerBrandLogoInitialsStyle?.display !== "none"
+          ? headerBrandLogoInitials?.textContent
+          : "",
+      ].join(""),
       headerBrandTitleOverflow: headerBrandTitleStyle?.textOverflow ?? "",
       headerBreadcrumbDisplay: headerBreadcrumbStyle?.display ?? "",
       pageContextDisplay: pageContextStyle?.display ?? "",
@@ -761,10 +775,14 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
   });
 
   if (layout.clientWidth <= 860) {
-    expect(["flex", "inline-flex"]).toContain(toolbarMetrics.headerBrandDisplay);
+    expect(["flex", "inline-flex"]).toContain(
+      toolbarMetrics.headerBrandDisplay,
+    );
     expect(toolbarMetrics.headerBrandMobileLogo).toBe("CT");
     expect(toolbarMetrics.headerBrandTitleOverflow).not.toBe("ellipsis");
-    expect(toolbarMetrics.headerBrandLeft).toBeLessThan(toolbarMetrics.searchLeft);
+    expect(toolbarMetrics.headerBrandLeft).toBeLessThan(
+      toolbarMetrics.searchLeft,
+    );
     expect(toolbarMetrics.headerBrandRight).toBeLessThanOrEqual(
       toolbarMetrics.searchLeft,
     );
@@ -776,12 +794,12 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
     expect(
       toolbarMetrics.searchLeft - toolbarMetrics.headerBrandRight,
     ).toBeGreaterThan(8);
-    expect(Number.parseFloat(toolbarMetrics.headerBrandPaddingLeft)).toBeGreaterThan(
-      0,
-    );
-    expect(Number.parseFloat(toolbarMetrics.headerBrandLogoFontSize)).toBeGreaterThan(
-      20,
-    );
+    expect(
+      Number.parseFloat(toolbarMetrics.headerBrandPaddingLeft),
+    ).toBeGreaterThan(0);
+    expect(
+      Number.parseFloat(toolbarMetrics.headerBrandLogoFontSize),
+    ).toBeGreaterThan(20);
     expect(toolbarMetrics.headerBreadcrumbDisplay).toBe("none");
     expect(toolbarMetrics.pageContextDisplay).toBe("grid");
     expect(toolbarMetrics.pageContextBrandKicker).toBe("The Coherence Thesis");
@@ -1100,7 +1118,9 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
   expect(progressMenuMetrics.recommendationWidth).toBeGreaterThan(220);
 });
 
-test("reader share menu exposes page sharing and PDF downloads", async ({ page }) => {
+test("reader share menu exposes page sharing and PDF downloads", async ({
+  page,
+}) => {
   await page.route("**/downloads/**", async (route) => {
     if (route.request().method() === "HEAD") {
       await route.fulfill({
@@ -1117,7 +1137,8 @@ test("reader share menu exposes page sharing and PDF downloads", async ({ page }
     Object.defineProperty(window.navigator, "share", {
       configurable: true,
       value: async (data: ShareData) => {
-        (window as Window & { __lastShareData?: ShareData }).__lastShareData = data;
+        (window as Window & { __lastShareData?: ShareData }).__lastShareData =
+          data;
       },
     });
   });
@@ -1152,7 +1173,10 @@ test("reader share menu exposes page sharing and PDF downloads", async ({ page }
 
   await expect(sectionDownload).toContainText("Download this section");
   await expect(sectionDownload).toHaveAttribute("href", sectionPdfHref);
-  await expect(sectionDownload).toHaveAttribute("download", firstSectionPdfFileName);
+  await expect(sectionDownload).toHaveAttribute(
+    "download",
+    firstSectionPdfFileName,
+  );
   await expect(manuscriptDownload).toContainText("Download full manuscript");
   await expect(manuscriptDownload).toHaveAttribute("href", manuscriptPdfHref);
   await expect(manuscriptDownload).toHaveAttribute(
@@ -1162,19 +1186,27 @@ test("reader share menu exposes page sharing and PDF downloads", async ({ page }
 
   const sectionPdfResponse = await page.request.get(encodeURI(sectionPdfHref));
   expect(sectionPdfResponse.ok()).toBe(true);
-  expect(sectionPdfResponse.headers()["content-type"]).toContain("application/pdf");
+  expect(sectionPdfResponse.headers()["content-type"]).toContain(
+    "application/pdf",
+  );
   const sectionPdfBytes = await sectionPdfResponse.body();
   expect(pdfPageCount(sectionPdfBytes)).toBeGreaterThanOrEqual(2);
   expect(pdfPageCount(sectionPdfBytes)).toBeLessThanOrEqual(4);
   expect(pdfImageCount(sectionPdfBytes)).toBeGreaterThanOrEqual(1);
   expect(sectionPdfBytes.byteLength).toBeLessThan(450_000);
-  const manuscriptPdfResponse = await page.request.get(encodeURI(manuscriptPdfHref));
+  const manuscriptPdfResponse = await page.request.get(
+    encodeURI(manuscriptPdfHref),
+  );
   expect(manuscriptPdfResponse.ok()).toBe(true);
-  expect(manuscriptPdfResponse.headers()["content-type"]).toContain("application/pdf");
+  expect(manuscriptPdfResponse.headers()["content-type"]).toContain(
+    "application/pdf",
+  );
   const manuscriptPdfBytes = await manuscriptPdfResponse.body();
   const manuscriptPageCount = pdfPageCount(manuscriptPdfBytes);
   expect(manuscriptPageCount).toBeGreaterThan(2);
-  expect(manuscriptPageCount).toBeLessThan(firstSectionVolume.sectionIds.length);
+  expect(manuscriptPageCount).toBeLessThan(
+    firstSectionVolume.sectionIds.length,
+  );
   expect(pdfImageCount(manuscriptPdfBytes)).toBeGreaterThanOrEqual(1);
   expect(manuscriptPdfBytes.byteLength).toBeLessThan(700_000);
 
@@ -1273,7 +1305,10 @@ test("singleton section share menu offers both PDF downloads", async ({
     "href",
     `/downloads/manuscripts/${firstManuscriptPdfFileName}`,
   );
-  await expect(sectionDownload).toHaveAttribute("download", firstSectionPdfFileName);
+  await expect(sectionDownload).toHaveAttribute(
+    "download",
+    firstSectionPdfFileName,
+  );
   await expect(manuscriptDownload).toHaveAttribute(
     "download",
     firstManuscriptPdfFileName,
@@ -1349,11 +1384,15 @@ test("reader settings update and persist local appearance preferences", async ({
     return {
       fontFamily: paragraph ? getComputedStyle(paragraph).fontFamily : "",
       headingFontFamily: heading ? getComputedStyle(heading).fontFamily : "",
-      fontSize: paragraph ? Number.parseFloat(getComputedStyle(paragraph).fontSize) : 0,
+      fontSize: paragraph
+        ? Number.parseFloat(getComputedStyle(paragraph).fontSize)
+        : 0,
       toolbarFontSize: toolbarButton
         ? Number.parseFloat(getComputedStyle(toolbarButton).fontSize)
         : 0,
-      toolbarFontFamily: toolbarButton ? getComputedStyle(toolbarButton).fontFamily : "",
+      toolbarFontFamily: toolbarButton
+        ? getComputedStyle(toolbarButton).fontFamily
+        : "",
       rootTheme: document.documentElement.dataset.readerTheme ?? "",
     };
   });
@@ -1400,13 +1439,19 @@ test("reader settings update and persist local appearance preferences", async ({
   );
   await settingsMenu.getByRole("button", { name: "Dark" }).click();
 
-  await expect(page.locator("html")).toHaveAttribute("data-reader-theme", "dark");
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-reader-theme",
+    "dark",
+  );
   await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
     "content",
     "#11100e",
   );
   await settingsMenu.getByRole("button", { name: "Black" }).click();
-  await expect(page.locator("html")).toHaveAttribute("data-reader-theme", "black");
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-reader-theme",
+    "black",
+  );
   await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
     "content",
     "#000000",
@@ -1417,17 +1462,23 @@ test("reader settings update and persist local appearance preferences", async ({
     const paragraph = document.querySelector(".manuscript-prose p");
     const header = document.querySelector(".site-header");
     const toolbarButton = document.querySelector(".settings-menu-button");
-    const stored = window.localStorage.getItem("coherence-reader-preferences-v1");
+    const stored = window.localStorage.getItem(
+      "coherence-reader-preferences-v1",
+    );
     return {
       bodyBackground: getComputedStyle(document.body).backgroundColor,
       headerBackground: header ? getComputedStyle(header).backgroundColor : "",
       fontFamily: paragraph ? getComputedStyle(paragraph).fontFamily : "",
       headingFontFamily: heading ? getComputedStyle(heading).fontFamily : "",
-      fontSize: paragraph ? Number.parseFloat(getComputedStyle(paragraph).fontSize) : 0,
+      fontSize: paragraph
+        ? Number.parseFloat(getComputedStyle(paragraph).fontSize)
+        : 0,
       toolbarFontSize: toolbarButton
         ? Number.parseFloat(getComputedStyle(toolbarButton).fontSize)
         : 0,
-      toolbarFontFamily: toolbarButton ? getComputedStyle(toolbarButton).fontFamily : "",
+      toolbarFontFamily: toolbarButton
+        ? getComputedStyle(toolbarButton).fontFamily
+        : "",
       rootTheme: document.documentElement.dataset.readerTheme ?? "",
       stored,
     };
@@ -1461,13 +1512,18 @@ test("reader settings update and persist local appearance preferences", async ({
     .locator(".section-nav-link-next")
     .click();
   await expect(page).toHaveURL(/on-form-timing-and-why-this-book-exists/);
-  await expect(page.locator("html")).toHaveAttribute("data-reader-theme", "black");
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-reader-theme",
+    "black",
+  );
 
   await page.getByRole("button", { name: "Reader settings" }).click();
-  await expect(page.getByRole("slider", { name: "Font size" })).toHaveValue("125");
-  await expect(page.getByRole("combobox", { name: "Reader font" })).toContainText(
-    "Georgia",
+  await expect(page.getByRole("slider", { name: "Font size" })).toHaveValue(
+    "125",
   );
+  await expect(
+    page.getByRole("combobox", { name: "Reader font" }),
+  ).toContainText("Georgia");
 
   const storedAfterReload = await page.evaluate((key) => {
     const paragraph = document.querySelector(".manuscript-prose p");
@@ -1485,13 +1541,20 @@ test("reader settings update and persist local appearance preferences", async ({
   });
 
   await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("data-reader-theme", "black");
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-reader-theme",
+    "black",
+  );
   const homeAppearance = await page.evaluate(() => {
     const brandTitle = document.querySelector(".brand-title");
     const heroHeading = document.querySelector(".hero-copy h1");
     return {
-      brandFontFamily: brandTitle ? getComputedStyle(brandTitle).fontFamily : "",
-      heroFontFamily: heroHeading ? getComputedStyle(heroHeading).fontFamily : "",
+      brandFontFamily: brandTitle
+        ? getComputedStyle(brandTitle).fontFamily
+        : "",
+      heroFontFamily: heroHeading
+        ? getComputedStyle(heroHeading).fontFamily
+        : "",
     };
   });
   expect(homeAppearance.brandFontFamily).toContain("Georgia");
@@ -1537,11 +1600,16 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
   await expect(
     page.getByText(`Version ${firstSection.versionHash}`),
   ).toHaveCount(0);
-  await expect(page.getByText(`Codified ${firstSectionVersionDate}`)).toHaveCount(0);
+  await expect(
+    page.getByText(`Codified ${firstSectionVersionDate}`),
+  ).toHaveCount(0);
   const lastUpdatedLink = page.getByRole("link", {
     name: `${firstSectionVersionDate}, open version on GitHub`,
   });
-  await expect(lastUpdatedLink).toHaveAttribute("href", firstSection.versionUrl);
+  await expect(lastUpdatedLink).toHaveAttribute(
+    "href",
+    firstSection.versionUrl,
+  );
   await expect(lastUpdatedLink).toHaveAttribute("target", "_blank");
   await expect(lastUpdatedLink).toHaveAttribute("rel", /noopener/);
   const versionIconOpacity = await lastUpdatedLink
@@ -1549,10 +1617,9 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
     .evaluate((element) => window.getComputedStyle(element).opacity);
   expect(versionIconOpacity).toBe("0");
   await lastUpdatedLink.hover();
-  await expect(lastUpdatedLink.locator(".section-version-link-icons")).toHaveCSS(
-    "opacity",
-    "1",
-  );
+  await expect(
+    lastUpdatedLink.locator(".section-version-link-icons"),
+  ).toHaveCSS("opacity", "1");
   await expect(
     page.getByText(
       `${firstSection.volumeTitle} / ${firstSection.partTitle} / ${firstSection.chapterTitle}`,
@@ -1653,7 +1720,9 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
   });
   await expect(markReadButton).toBeVisible();
   const markReadButtonStyle = await markReadButton.evaluate((element) => {
-    const sectionStyle = window.getComputedStyle(element.closest(".reader-actions")!);
+    const sectionStyle = window.getComputedStyle(
+      element.closest(".reader-actions")!,
+    );
     const style = window.getComputedStyle(element);
     return {
       sectionBorderTopWidth: sectionStyle.borderTopWidth,
@@ -1671,8 +1740,10 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
   await expect(popover.locator(".recently-read a").first()).toContainText(
     firstSection.title,
   );
-  const recentLinkMetrics = await popover.locator(".recently-read a").first().evaluate(
-    (element) => {
+  const recentLinkMetrics = await popover
+    .locator(".recently-read a")
+    .first()
+    .evaluate((element) => {
       const style = window.getComputedStyle(element);
       const box = element.getBoundingClientRect();
       const panel = element.closest(".reader-status")!.getBoundingClientRect();
@@ -1683,11 +1754,12 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
         width: box.width,
         panelWidth: panel.width,
       };
-    },
-  );
+    });
   expect(recentLinkMetrics.textOverflow).toBe("clip");
   expect(recentLinkMetrics.whiteSpace).toBe("normal");
-  expect(recentLinkMetrics.width).toBeGreaterThan(recentLinkMetrics.panelWidth - 80);
+  expect(recentLinkMetrics.width).toBeGreaterThan(
+    recentLinkMetrics.panelWidth - 80,
+  );
   const listenButton = page.getByRole("button", { name: /Listen/ });
   await expect(listenButton).toBeVisible();
   const idleListenButtonWidth = await listenButton.evaluate(
@@ -1709,7 +1781,9 @@ test("reader route exposes progress and audio controls", async ({ page }) => {
   const activeListenButtonWidth = await activeListenButton.evaluate(
     (element) => element.getBoundingClientRect().width,
   );
-  expect(Math.abs(activeListenButtonWidth - idleListenButtonWidth)).toBeLessThanOrEqual(1);
+  expect(
+    Math.abs(activeListenButtonWidth - idleListenButtonWidth),
+  ).toBeLessThanOrEqual(1);
   await expect(activeListenButton.locator(".audio-waveform")).toBeVisible();
   await expect(activeListenButton.locator(".nav-label")).toHaveCount(0);
 
@@ -1737,10 +1811,15 @@ test("reader shows subtle revision status for previously read sections", async (
               sectionId: section.sectionId,
               contentHash: "older-section-hash",
               paragraphs: section.paragraphs.map(
-                (paragraph: { paragraphId: string; contentHash: string }, index: number) => ({
+                (
+                  paragraph: { paragraphId: string; contentHash: string },
+                  index: number,
+                ) => ({
                   paragraphId: paragraph.paragraphId,
                   contentHash:
-                    index === 0 ? `older-${paragraph.contentHash}` : paragraph.contentHash,
+                    index === 0
+                      ? `older-${paragraph.contentHash}`
+                      : paragraph.contentHash,
                 }),
               ),
               readAt: Date.now() - 1000,
@@ -1762,15 +1841,26 @@ test("reader shows subtle revision status for previously read sections", async (
   await expect(revisionNotice).toBeVisible();
   await expect(revisionNotice).toContainText("Revised since you read this.");
   await expect(
-    revisionNotice.getByRole("link", { name: "Jump to the first changed passage" }),
-  ).toHaveAttribute("href", `${firstSection.href}#${firstSection.paragraphs[0].anchor}`);
+    revisionNotice.getByRole("link", {
+      name: "Jump to the first changed passage",
+    }),
+  ).toHaveAttribute(
+    "href",
+    `${firstSection.href}#${firstSection.paragraphs[0].anchor}`,
+  );
 
-  await page.goto(`/manuscripts/${firstSection.volumeId}/${firstSection.partId}/`);
+  await page.goto(
+    `/manuscripts/${firstSection.volumeId}/${firstSection.partId}/`,
+  );
   const chapterCard = page.locator(".chapter-card", {
     hasText: firstSection.chapterTitle,
   });
-  await expect(chapterCard.locator('[data-updated-marker="true"]')).toBeVisible();
-  await expect(chapterCard.locator('[data-read-checkmark="true"]')).toHaveCount(0);
+  await expect(
+    chapterCard.locator('[data-updated-marker="true"]'),
+  ).toBeVisible();
+  await expect(chapterCard.locator('[data-read-checkmark="true"]')).toHaveCount(
+    0,
+  );
 });
 
 test("reader footer links adjacent sections and the containing chapter", async ({
@@ -1784,14 +1874,18 @@ test("reader footer links adjacent sections and the containing chapter", async (
   const previousLink = footerNav.locator(".section-nav-link-previous");
   await expect(previousLink).toHaveAttribute("href", previousSection.href);
   await expect(previousLink.locator("small")).toHaveText("Previous");
-  await expect(previousLink.locator("strong")).toHaveText(previousSection.title);
+  await expect(previousLink.locator("strong")).toHaveText(
+    previousSection.title,
+  );
 
   const parentLink = footerNav.locator(".section-nav-link-parent");
   await expect(parentLink).toHaveAttribute("href", parentChapter.href);
   await expect(parentLink.locator("small")).toHaveText("Up");
   await expect(parentLink.locator("strong")).toHaveText(parentChapter.title);
   const parentLinkLayout = await parentLink.evaluate((link) => {
-    const icon = link.querySelector(".section-nav-icon")?.getBoundingClientRect();
+    const icon = link
+      .querySelector(".section-nav-icon")
+      ?.getBoundingClientRect();
     const label = link.querySelector("small")?.getBoundingClientRect();
 
     return {
@@ -1841,16 +1935,16 @@ test("reader footer links adjacent sections and the containing chapter", async (
       "next",
       "parent",
     ]);
-    expect([...mobileFooterLayout].sort((a, b) => a.top - b.top).map((row) => row.name)).toEqual([
-      "previous",
-      "next",
-      "parent",
-    ]);
+    expect(
+      [...mobileFooterLayout]
+        .sort((a, b) => a.top - b.top)
+        .map((row) => row.name),
+    ).toEqual(["previous", "next", "parent"]);
     for (const row of mobileFooterLayout) {
       expect(row.borderTopWidth).toBe("0px");
-      expect(Math.abs(row.iconLeft - mobileFooterLayout[0]!.iconLeft)).toBeLessThanOrEqual(
-        1,
-      );
+      expect(
+        Math.abs(row.iconLeft - mobileFooterLayout[0]!.iconLeft),
+      ).toBeLessThanOrEqual(1);
     }
   }
 
@@ -1862,8 +1956,12 @@ test("reader footer links adjacent sections and the containing chapter", async (
       const label = link.querySelector("small")?.getBoundingClientRect();
       const title = link.querySelector("strong")?.getBoundingClientRect();
       const linkStyle = window.getComputedStyle(link);
-      const labelStyle = labelElement ? window.getComputedStyle(labelElement) : null;
-      const titleStyle = titleElement ? window.getComputedStyle(titleElement) : null;
+      const labelStyle = labelElement
+        ? window.getComputedStyle(labelElement)
+        : null;
+      const titleStyle = titleElement
+        ? window.getComputedStyle(titleElement)
+        : null;
 
       return {
         bodyColor: bodyStyle.color,
@@ -1871,11 +1969,15 @@ test("reader footer links adjacent sections and the containing chapter", async (
         labelColor: labelStyle?.color ?? "",
         labelDecorationLine: labelStyle?.textDecorationLine ?? "",
         labelDecorationStyle: labelStyle?.textDecorationStyle ?? "",
-        labelFontWeight: labelStyle ? Number.parseFloat(labelStyle.fontWeight) : 0,
+        labelFontWeight: labelStyle
+          ? Number.parseFloat(labelStyle.fontWeight)
+          : 0,
         linkColor: linkStyle.color,
         lineHeight: titleStyle ? Number.parseFloat(titleStyle.lineHeight) : 0,
         titleColor: titleStyle?.color ?? "",
-        titleFontWeight: titleStyle ? Number.parseFloat(titleStyle.fontWeight) : 0,
+        titleFontWeight: titleStyle
+          ? Number.parseFloat(titleStyle.fontWeight)
+          : 0,
         titleHeight: title?.height ?? 0,
         titleFontSize: titleStyle ? Number.parseFloat(titleStyle.fontSize) : 0,
         titleTop: title?.top ?? 0,
@@ -1912,7 +2014,97 @@ test("reader footer links adjacent sections and the containing chapter", async (
   expect(hoverDecoration.title).not.toContain("underline");
 });
 
-test("organizational manuscript routes expose page navigation", async ({ page }) => {
+test("home page presents an interactive cover flow", async ({ page }) => {
+  await page.goto("/");
+  const coverFlow = page.locator(".cover-flow");
+  const initialActiveIndex = 0;
+  const initialActiveVolume = catalog.volumes[initialActiveIndex]!;
+
+  await expect(coverFlow).toBeVisible();
+  await expect(page.locator(".manuscript-showcase")).toHaveCount(0);
+  await expect(coverFlow.locator(".cover-flow-card")).toHaveCount(
+    catalog.volumes.length,
+  );
+  await expect(
+    coverFlow.locator('.cover-flow-card[aria-current="true"]'),
+  ).toHaveAttribute("href", initialActiveVolume.href);
+  await expect(
+    coverFlow.locator(
+      ".cover-flow-card.is-active .cover-flow-card-panel strong",
+    ),
+  ).toHaveText(initialActiveVolume.title);
+
+  const coverFlowTransforms = await coverFlow.evaluate((flow) => {
+    const active = flow.querySelector<HTMLElement>(
+      '.cover-flow-card[aria-current="true"]',
+    );
+    const shells = Array.from(
+      flow.querySelectorAll<HTMLElement>(".cover-flow-card-shell"),
+    );
+    const firstShellRect = shells[0]?.getBoundingClientRect();
+    const secondShellRect = shells[1]?.getBoundingClientRect();
+    const activeShell = active?.closest<HTMLElement>(".cover-flow-card-shell");
+    const sideCard =
+      activeShell?.previousElementSibling?.querySelector<HTMLElement>(
+        ".cover-flow-card",
+      ) ??
+      activeShell?.nextElementSibling?.querySelector<HTMLElement>(
+        ".cover-flow-card",
+      ) ??
+      null;
+
+    return {
+      activeRotate: active?.style.getPropertyValue("--cover-flow-rotate") ?? "",
+      activeScale: active?.style.getPropertyValue("--cover-flow-scale") ?? "",
+      activeTransform: active ? getComputedStyle(active).transform : "",
+      cardGap: window.getComputedStyle(flow.querySelector(".cover-flow-track")!)
+        .gap,
+      flowWidth: flow.getBoundingClientRect().width,
+      overlap:
+        firstShellRect && secondShellRect
+          ? firstShellRect.right - secondShellRect.left
+          : 0,
+      panelVisible:
+        active?.querySelector(".cover-flow-card-panel") &&
+        window.getComputedStyle(active.querySelector(".cover-flow-card-panel")!)
+          .backdropFilter,
+      sideRotate: sideCard?.style.getPropertyValue("--cover-flow-rotate") ?? "",
+      sideScale: sideCard?.style.getPropertyValue("--cover-flow-scale") ?? "",
+      viewportWidth: document.documentElement.clientWidth,
+    };
+  });
+  expect(
+    Math.abs(Number.parseFloat(coverFlowTransforms.activeRotate)),
+  ).toBeLessThan(1);
+  expect(Number.parseFloat(coverFlowTransforms.activeScale)).toBeGreaterThan(
+    1.05,
+  );
+  expect(coverFlowTransforms.activeTransform).not.toBe("none");
+  expect(Number.parseFloat(coverFlowTransforms.cardGap)).toBeLessThan(1);
+  expect(coverFlowTransforms.flowWidth).toBeGreaterThanOrEqual(
+    coverFlowTransforms.viewportWidth,
+  );
+  expect(coverFlowTransforms.overlap).toBeGreaterThan(
+    coverFlowTransforms.viewportWidth < 720 ? 90 : 140,
+  );
+  expect(coverFlowTransforms.panelVisible).not.toBe("none");
+  expect(coverFlowTransforms.sideRotate).not.toBe("0deg");
+  expect(Number.parseFloat(coverFlowTransforms.sideScale)).toBeLessThan(1);
+
+  await page.getByRole("button", { name: "Next manuscript" }).click();
+  await expect(
+    coverFlow.locator('.cover-flow-card[aria-current="true"]'),
+  ).toHaveAttribute("href", catalog.volumes[initialActiveIndex + 1]!.href);
+  await expect(
+    coverFlow.locator(
+      ".cover-flow-card.is-active .cover-flow-card-panel strong",
+    ),
+  ).toHaveText(catalog.volumes[initialActiveIndex + 1]!.title);
+});
+
+test("organizational manuscript pages expose page navigation", async ({
+  page,
+}) => {
   await page.goto("/manuscripts/");
   await expect(page).toHaveURL("/");
 
@@ -1973,7 +2165,9 @@ test("toolbar brand owns the active manuscript identity", async ({
   if (testInfo.project.name === "mobile") {
     await expect(brand).toBeVisible();
     await expect(brand.locator(".brand-title-mobile-logo-full")).toBeHidden();
-    await expect(brand.locator(".brand-title-mobile-logo-initials")).toBeVisible();
+    await expect(
+      brand.locator(".brand-title-mobile-logo-initials"),
+    ).toBeVisible();
     await expect(brand.locator(".brand-title-mobile-logo-initials")).toHaveText(
       "CT",
     );
@@ -1981,7 +2175,9 @@ test("toolbar brand owns the active manuscript identity", async ({
 
     await page.goto("/overview");
     await expect(brand.locator(".brand-title-mobile-logo-full")).toBeHidden();
-    await expect(brand.locator(".brand-title-mobile-logo-initials")).toBeVisible();
+    await expect(
+      brand.locator(".brand-title-mobile-logo-initials"),
+    ).toBeVisible();
     await expect(page.locator(".mobile-page-brand-kicker")).toHaveText(
       "Providence Collective",
     );
@@ -2027,11 +2223,14 @@ test("toolbar brand owns the active manuscript identity", async ({
     await page.goto(wieldingVolume.href);
     await expect(brand).toBeVisible();
     await expect(brand.locator(".brand-title-mobile-logo-full")).toBeHidden();
-    await expect(brand.locator(".brand-title-mobile-logo-initials")).toBeVisible();
+    await expect(
+      brand.locator(".brand-title-mobile-logo-initials"),
+    ).toBeVisible();
     await expect(page.locator(".mobile-page-brand-title")).toHaveText(
       `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
     );
     await expect(page.locator(".site-nav .mobile-home-link")).toHaveCount(0);
+    await expect(brand).toHaveClass(/brand-mark-compact/);
     await brand.focus();
     const mobileBrandTooltip = page.getByRole("tooltip");
     await expect(mobileBrandTooltip).toBeVisible();
@@ -2075,7 +2274,9 @@ test("toolbar brand owns the active manuscript identity", async ({
     await page.setViewportSize({ width: 500, height: 760 });
     await expect(brand).toBeVisible();
     await expect(brand.locator(".brand-title-mobile-logo-full")).toBeHidden();
-    await expect(brand.locator(".brand-title-mobile-logo-initials")).toBeVisible();
+    await expect(
+      brand.locator(".brand-title-mobile-logo-initials"),
+    ).toBeVisible();
     await expect(brand.locator(".brand-title-mobile-logo-initials")).toHaveText(
       "CT",
     );
@@ -2083,7 +2284,9 @@ test("toolbar brand owns the active manuscript identity", async ({
     await page.setViewportSize({ width: 390, height: 760 });
     await expect(brand).toBeVisible();
     await expect(brand.locator(".brand-title-mobile-logo-full")).toBeHidden();
-    await expect(brand.locator(".brand-title-mobile-logo-initials")).toBeVisible();
+    await expect(
+      brand.locator(".brand-title-mobile-logo-initials"),
+    ).toBeVisible();
     await expect(brand.locator(".brand-title-mobile-logo-initials")).toHaveText(
       "CT",
     );
@@ -2091,7 +2294,9 @@ test("toolbar brand owns the active manuscript identity", async ({
     await page.setViewportSize({ width: 320, height: 760 });
     await expect(brand).toBeVisible();
     await expect(brand.locator(".brand-title-mobile-logo-full")).toBeHidden();
-    await expect(brand.locator(".brand-title-mobile-logo-initials")).toBeVisible();
+    await expect(
+      brand.locator(".brand-title-mobile-logo-initials"),
+    ).toBeVisible();
     await expect(brand.locator(".brand-title-mobile-logo-initials")).toHaveText(
       "CT",
     );
@@ -2138,7 +2343,9 @@ test("toolbar brand owns the active manuscript identity", async ({
   );
   const homepageBrandTitleSize = await brand
     .locator(".brand-title")
-    .evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize));
+    .evaluate((element) =>
+      Number.parseFloat(getComputedStyle(element).fontSize),
+    );
 
   await page.goto("/overview/");
   const overviewBrandTitleMetrics = await brand.evaluate((element) => {
@@ -2177,7 +2384,9 @@ test("toolbar brand owns the active manuscript identity", async ({
   );
   const activeBrandTitleSize = await brand
     .locator(".brand-title")
-    .evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize));
+    .evaluate((element) =>
+      Number.parseFloat(getComputedStyle(element).fontSize),
+    );
   expect(activeBrandTitleSize).toBeLessThan(homepageBrandTitleSize);
   await expect(
     page.getByRole("navigation", { name: "Breadcrumb" }),
@@ -2281,11 +2490,13 @@ test("toolbar brand owns the active manuscript identity", async ({
   expect(breadcrumbStyles.currentColor).toBe(breadcrumbStyles.bodyColor);
   await firstBreadcrumbLink.hover();
   await page.waitForTimeout(200);
-  const breadcrumbHoverStyles = await firstBreadcrumbLink.evaluate((element) => ({
-    background: window.getComputedStyle(element).backgroundColor,
-    border: window.getComputedStyle(element).borderBottomColor,
-    color: window.getComputedStyle(element).color,
-  }));
+  const breadcrumbHoverStyles = await firstBreadcrumbLink.evaluate(
+    (element) => ({
+      background: window.getComputedStyle(element).backgroundColor,
+      border: window.getComputedStyle(element).borderBottomColor,
+      color: window.getComputedStyle(element).color,
+    }),
+  );
   expect(breadcrumbHoverStyles.background).toBe(breadcrumbStyles.background);
   expect(breadcrumbHoverStyles.border).not.toBe(breadcrumbStyles.border);
   expect(breadcrumbHoverStyles.color).toBe(breadcrumbStyles.bodyColor);
@@ -2294,7 +2505,9 @@ test("toolbar brand owns the active manuscript identity", async ({
   await page.goto(wieldingVolume.href);
   await expect(brand).toBeVisible();
   await expect(brand.locator(".brand-title-mobile-logo-full")).toBeHidden();
-  await expect(brand.locator(".brand-title-mobile-logo-initials")).toBeVisible();
+  await expect(
+    brand.locator(".brand-title-mobile-logo-initials"),
+  ).toBeVisible();
   await expect(brand.locator(".brand-title-mobile-logo-initials")).toHaveText(
     "CT",
   );

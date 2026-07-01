@@ -1,48 +1,27 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { BookOpen, ListTree } from "lucide-react";
-import { ManuscriptTileRevealIsland } from "@/components/ManuscriptTileRevealIsland";
+import { ManuscriptCoverFlowIsland } from "@/components/ManuscriptCoverFlowIsland";
 import { catalog } from "@/lib/manuscript-data";
-import { formatReadingDurationForWords } from "@/lib/reading-time";
-
-const manuscriptTags: Record<string, string[]> = {
-  "humanitys-most-viable-future": ["Post-extractive civilization", "Social substrate"],
-  "wielding-intelligence": ["Humane technology", "AI coordination"],
-  "providence-imperative": ["Coordination infrastructure", "Civilizational design"],
-  "architecting-providence": ["Systems architecture", "Coherent governance"],
-  purposeful: ["Builder discovery", "Human purpose"],
-  "smallest-nest": ["Planetary containment", "Living scale"],
-  "presencing-genius": ["Presence praxis", "Collective genius"],
-  "misanthropic-artifice": ["Academic critique", "Saturnine inquiry"],
-  "cardinal-scale": ["Iconic patterning", "Cardinal orientation"],
-};
-
-const planetSymbols: Record<string, string> = {
-  Jupiter: "♃",
-  Mars: "♂",
-  Mercury: "☿",
-  Moon: "☽",
-  Neptune: "♆",
-  Saturn: "♄",
-  Sun: "☉",
-  Uranus: "♅",
-  Venus: "♀",
-};
 
 export default function Home() {
   return (
     <div className="home-page">
       <section className="hero-section">
         <div className="hero-copy">
-          <h1>Nine-volume series: a living manuscript body on coherence.</h1>
+          <h1>The Coherence Thesis</h1>
+          <p className="hero-deck">
+            Nine living manuscripts on coherence, trust, and the future
+            institutions required for a civilization worth inheriting.
+          </p>
           <div className="hero-actions">
-            <Link className="primary-link" href="/overview/">
+            <Link className="primary-link" href={catalog.volumes[0]!.href}>
+              <BookOpen aria-hidden="true" size={18} />
+              Begin Volume I
+            </Link>
+            <Link className="secondary-link" href="/overview/">
               <ListTree aria-hidden="true" size={18} />
               Read the overview
-            </Link>
-            <Link className="secondary-link" href="#manuscripts">
-              <BookOpen aria-hidden="true" size={18} />
-              Browse manuscripts
             </Link>
           </div>
         </div>
@@ -57,77 +36,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="stats-band" aria-label="Manuscript stats">
-        <div>
-          <strong>{catalog.stats.volumeCount}</strong>
-          <span>volumes</span>
-        </div>
-        <div>
-          <strong>{catalog.stats.partCount.toLocaleString()}</strong>
-          <span>parts</span>
-        </div>
-        <div>
-          <strong>{catalog.stats.sectionCount.toLocaleString()}</strong>
-          <span>sections</span>
-        </div>
-        <div>
-          <strong>{formatReadingDurationForWords(catalog.stats.wordCount)}</strong>
-          <span>full read</span>
-        </div>
-      </section>
-
-      <section
-        id="manuscripts"
-        className="manuscript-showcase"
-        aria-label="Published manuscripts"
-      >
-        {catalog.volumes.map((volume) => {
-          const tags = manuscriptTags[volume.volumeId] ?? [volume.planet];
-          const planetSymbol = planetSymbols[volume.planet] ?? "";
-
-          return (
-            <Link
-              key={volume.volumeId}
-              href={volume.href}
-              className={`manuscript-cover-card manuscript-cover-card-${volume.order}`}
-              aria-label={`Open ${volume.title}`}
-            >
-              <Image
-                src={volume.coverImage}
-                alt=""
-                width={512}
-                height={768}
-                priority={volume.order === 1}
-                sizes="(max-width: 720px) 92vw, (max-width: 1100px) 44vw, 31vw"
-              />
-              <span className="manuscript-card-panel" aria-hidden="true">
-                <span className="manuscript-card-kicker">
-                  Volume {volume.numberLabel}
-                </span>
-                {planetSymbol ? (
-                  <span
-                    className="manuscript-card-symbol"
-                    aria-label={volume.planet}
-                  >
-                    {planetSymbol}
-                  </span>
-                ) : null}
-                <strong>{volume.title}</strong>
-                <span className="manuscript-card-description">
-                  {volume.subtitle}
-                </span>
-                <span className="manuscript-card-tags">
-                  <span>{formatReadingDurationForWords(volume.wordCount)}</span>
-                  {tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </span>
-              </span>
-            </Link>
-          );
-        })}
-      </section>
-      <ManuscriptTileRevealIsland />
+      <ManuscriptCoverFlowIsland volumes={catalog.volumes} />
     </div>
   );
 }

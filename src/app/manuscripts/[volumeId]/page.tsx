@@ -48,57 +48,60 @@ export default async function VolumePage({
   if (!navigation) notFound();
 
   return (
-    <div className="page-frame">
-      <section
-        className="volume-hero volume-heading"
-        aria-labelledby="volume-title"
-      >
-        <Image
-          src={volume.coverImage}
-          alt={volume.coverAlt}
-          width={512}
-          height={768}
-          priority
-        />
-        <div className="volume-hero-copy">
-          <p className="eyebrow">Volume {volume.numberLabel}</p>
-          <h1 id="volume-title">{volume.title}</h1>
-          <p>{volume.subtitle}</p>
-          <div className="volume-meta-tags" aria-label="Volume details">
-            <span>{volume.planet}</span>
-            <span>{volume.parts.length.toLocaleString()} parts</span>
-            <span>{volume.sectionIds.length.toLocaleString()} sections</span>
-            <span>{formatReadingDurationForWords(volume.wordCount)}</span>
+    <div className="page-frame reader-layout">
+      <div className="reader-main">
+        <section
+          className="volume-hero volume-heading"
+          aria-labelledby="volume-title"
+        >
+          <Image
+            src={volume.coverImage}
+            alt={volume.coverAlt}
+            width={512}
+            height={768}
+            priority
+          />
+          <div className="volume-hero-copy">
+            <p className="eyebrow">Volume {volume.numberLabel}</p>
+            <h1 id="volume-title">{volume.title}</h1>
+            <p>{volume.subtitle}</p>
+            <div className="volume-meta-tags" aria-label="Volume details">
+              <span>{volume.planet}</span>
+              <span>{volume.parts.length.toLocaleString()} parts</span>
+              <span>{volume.sectionIds.length.toLocaleString()} sections</span>
+              <span>{formatReadingDurationForWords(volume.wordCount)}</span>
+            </div>
           </div>
-        </div>
-      </section>
-      <section className="part-list">
-        {volume.parts.map((part) => {
-          const partSections = sectionsForPart(volume.volumeId, part.partId).map(
-            toProgressSection,
-          );
+        </section>
+        <section className="part-list">
+          {volume.parts.map((part) => {
+            const partSections = sectionsForPart(
+              volume.volumeId,
+              part.partId,
+            ).map(toProgressSection);
 
-          return (
-            <Link key={part.partId} href={part.href} className="part-card">
-              <span className="card-kicker">
-                <BookOpen aria-hidden="true" size={21} />
-                Part {part.order || "0"}
-                <span className="content-status-row">
-                  <UpdatedMarkerIsland sections={partSections} />
-                  <ReadCheckmarkIsland sections={partSections} />
+            return (
+              <Link key={part.partId} href={part.href} className="part-card">
+                <span className="card-kicker">
+                  <BookOpen aria-hidden="true" size={21} />
+                  Part {part.order || "0"}
+                  <span className="content-status-row">
+                    <UpdatedMarkerIsland sections={partSections} />
+                    <ReadCheckmarkIsland sections={partSections} />
+                  </span>
                 </span>
-              </span>
-              <strong>{part.title}</strong>
-              <small>{formatReadingDurationForWords(part.wordCount)}</small>
-            </Link>
-          );
-        })}
-      </section>
-      <ManuscriptNavigation
-        previous={navigation.previous}
-        parent={navigation.parent}
-        next={navigation.next}
-      />
+                <strong>{part.title}</strong>
+                <small>{formatReadingDurationForWords(part.wordCount)}</small>
+              </Link>
+            );
+          })}
+        </section>
+        <ManuscriptNavigation
+          previous={navigation.previous}
+          parent={navigation.parent}
+          next={navigation.next}
+        />
+      </div>
     </div>
   );
 }

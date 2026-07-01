@@ -72,90 +72,111 @@ function PartPage({ match }: { match: PartRouteMatch }) {
   const navigation = partNavigation(volume.volumeId, part.partId);
   if (!navigation) notFound();
   const sections = sectionsForPart(volume.volumeId, part.partId);
-  const showSections = part.chapters.length === 1 && part.chapters[0]?.href === part.href;
+  const showSections =
+    part.chapters.length === 1 && part.chapters[0]?.href === part.href;
   const count = showSections ? sections.length : part.chapters.length;
   const label = showSections
     ? `section${count === 1 ? "" : "s"}`
     : `chapter${count === 1 ? "" : "s"}`;
 
   return (
-    <div className="page-frame">
-      <header className="page-heading">
-        <p className="eyebrow">Part {part.order || "0"}</p>
-        <h1>{part.title}</h1>
-        <p>
-          {formatReadingDurationForWords(part.wordCount)} across {count} {label}.
-        </p>
-      </header>
-      <section
-        className="chapter-list-section"
-        aria-labelledby="part-sections-heading"
-      >
-        <h2 id="part-sections-heading">Sections</h2>
-        <div className="chapter-list">
-          {showSections
-            ? sections.map((section) => (
-                <Link
-                  key={section.sectionId}
-                  href={section.href}
-                  className="chapter-card"
-                >
-                  <span className="card-kicker">
-                    {String(section.sectionOrder).padStart(2, "0")}
-                    <span className="content-status-row">
-                      <UpdatedMarkerIsland sections={[toProgressSection(section)]} />
-                      <ReadCheckmarkIsland sections={[toProgressSection(section)]} />
-                    </span>
-                  </span>
-                  <strong>{section.title}</strong>
-                  <small>{formatReadingDurationForWords(section.wordCount)}</small>
-                </Link>
-              ))
-            : part.chapters.map((chapter) => {
-                const chapterSections = sections.filter(
-                  (section) => section.chapterId === chapter.chapterId,
-                );
-                const onlySection = chapterSections[0];
-                const href =
-                  chapterSections.length === 1 && onlySection
-                    ? onlySection.href
-                    : chapter.href;
-                const progressSections = chapterSections.map(toProgressSection);
-
-                return (
+    <div className="page-frame reader-layout">
+      <article className="reader-main">
+        <header className="page-heading">
+          <p className="eyebrow">Part {part.order || "0"}</p>
+          <h1>{part.title}</h1>
+          <p>
+            {formatReadingDurationForWords(part.wordCount)} across {count}{" "}
+            {label}.
+          </p>
+        </header>
+        <section
+          className="chapter-list-section"
+          aria-labelledby="part-sections-heading"
+        >
+          <h2 id="part-sections-heading">Sections</h2>
+          <div className="chapter-list">
+            {showSections
+              ? sections.map((section) => (
                   <Link
-                    key={chapter.chapterId}
-                    href={href}
+                    key={section.sectionId}
+                    href={section.href}
                     className="chapter-card"
                   >
                     <span className="card-kicker">
-                      {String(chapter.order).padStart(2, "0")}
+                      {String(section.sectionOrder).padStart(2, "0")}
                       <span className="content-status-row">
-                        <UpdatedMarkerIsland sections={progressSections} />
-                        <ReadCheckmarkIsland sections={progressSections} />
+                        <UpdatedMarkerIsland
+                          sections={[toProgressSection(section)]}
+                        />
+                        <ReadCheckmarkIsland
+                          sections={[toProgressSection(section)]}
+                        />
                       </span>
                     </span>
-                    <strong>{chapter.title}</strong>
-                    <small>{formatReadingDurationForWords(chapter.wordCount)}</small>
+                    <strong>{section.title}</strong>
+                    <small>
+                      {formatReadingDurationForWords(section.wordCount)}
+                    </small>
                   </Link>
-                );
-              })}
-        </div>
-      </section>
-      <ManuscriptNavigation
-        previous={navigation.previous}
-        parent={navigation.parent}
-        next={navigation.next}
-      />
+                ))
+              : part.chapters.map((chapter) => {
+                  const chapterSections = sections.filter(
+                    (section) => section.chapterId === chapter.chapterId,
+                  );
+                  const onlySection = chapterSections[0];
+                  const href =
+                    chapterSections.length === 1 && onlySection
+                      ? onlySection.href
+                      : chapter.href;
+                  const progressSections =
+                    chapterSections.map(toProgressSection);
+
+                  return (
+                    <Link
+                      key={chapter.chapterId}
+                      href={href}
+                      className="chapter-card"
+                    >
+                      <span className="card-kicker">
+                        {String(chapter.order).padStart(2, "0")}
+                        <span className="content-status-row">
+                          <UpdatedMarkerIsland sections={progressSections} />
+                          <ReadCheckmarkIsland sections={progressSections} />
+                        </span>
+                      </span>
+                      <strong>{chapter.title}</strong>
+                      <small>
+                        {formatReadingDurationForWords(chapter.wordCount)}
+                      </small>
+                    </Link>
+                  );
+                })}
+          </div>
+        </section>
+        <ManuscriptNavigation
+          previous={navigation.previous}
+          parent={navigation.parent}
+          next={navigation.next}
+        />
+      </article>
     </div>
   );
 }
 
 function ChapterPage({ match }: { match: ChapterRouteMatch }) {
   const { volume, part, chapter } = match;
-  const navigation = chapterNavigation(volume.volumeId, part.partId, chapter.chapterId);
+  const navigation = chapterNavigation(
+    volume.volumeId,
+    part.partId,
+    chapter.chapterId,
+  );
   if (!navigation) notFound();
-  const sections = sectionsForChapter(volume.volumeId, part.partId, chapter.chapterId);
+  const sections = sectionsForChapter(
+    volume.volumeId,
+    part.partId,
+    chapter.chapterId,
+  );
   const onlySection = sections[0];
   if (sections.length === 1 && onlySection) {
     return (

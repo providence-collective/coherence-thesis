@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { OverviewMap } from "@/components/OverviewMap";
 import { catalog } from "@/lib/manuscript-data";
+import { formatReadingDurationForWords } from "@/lib/reading-time";
 
 export const metadata: Metadata = {
   title: "Overview",
@@ -10,13 +11,35 @@ export const metadata: Metadata = {
 
 export default function OverviewPage() {
   return (
-    <div className="page-frame">
-      <header className="page-heading">
-        <p className="eyebrow">Five minute map</p>
-        <h1>{catalog.overview.title}</h1>
-        <p>{catalog.overview.subtitle}</p>
-      </header>
-      <OverviewMap />
+    <div className="page-frame reader-layout">
+      <article className="reader-main">
+        <header className="page-heading">
+          <p className="eyebrow">Five minute map</p>
+          <h1>{catalog.overview.title}</h1>
+          <p>{catalog.overview.subtitle}</p>
+        </header>
+        <section className="stats-band" aria-label="Manuscript stats">
+          <div>
+            <strong>{catalog.stats.volumeCount.toLocaleString()}</strong>
+            <span>volumes</span>
+          </div>
+          <div>
+            <strong>{catalog.stats.partCount.toLocaleString()}</strong>
+            <span>parts</span>
+          </div>
+          <div>
+            <strong>{catalog.stats.sectionCount.toLocaleString()}</strong>
+            <span>sections</span>
+          </div>
+          <div>
+            <strong>
+              {formatReadingDurationForWords(catalog.stats.wordCount)}
+            </strong>
+            <span>full read</span>
+          </div>
+        </section>
+        <OverviewMap />
+      </article>
     </div>
   );
 }
