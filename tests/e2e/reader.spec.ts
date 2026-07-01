@@ -726,6 +726,9 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
       headerBrandDisplay: headerBrandStyle?.display ?? "",
       headerBrandLeft: headerBrand?.getBoundingClientRect().left ?? 0,
       headerBrandRight: headerBrand?.getBoundingClientRect().right ?? 0,
+      headerBrandWidth: headerBrand?.getBoundingClientRect().width ?? 0,
+      headerBrandTitleWidth:
+        headerBrandTitle?.getBoundingClientRect().width ?? 0,
       headerBrandPaddingLeft: headerBrandStyle?.paddingLeft ?? "",
       headerBrandTitleBorderColor:
         headerBrandTitleStyle?.borderBottomColor ?? "",
@@ -765,6 +768,14 @@ test("mobile toolbar and progress menu stay within the viewport", async ({
     expect(toolbarMetrics.headerBrandRight).toBeLessThanOrEqual(
       toolbarMetrics.searchLeft,
     );
+    expect(toolbarMetrics.headerBrandWidth).toBeLessThanOrEqual(
+      toolbarMetrics.headerBrandTitleWidth +
+        Number.parseFloat(toolbarMetrics.headerBrandPaddingLeft) +
+        2,
+    );
+    expect(
+      toolbarMetrics.searchLeft - toolbarMetrics.headerBrandRight,
+    ).toBeGreaterThan(8);
     expect(Number.parseFloat(toolbarMetrics.headerBrandPaddingLeft)).toBeGreaterThan(
       0,
     );
@@ -1965,6 +1976,45 @@ test("toolbar brand owns the active manuscript identity", async ({
       `Volume ${wieldingVolume.numberLabel} · ${wieldingVolume.title}`,
     );
     await expect(page.locator(".site-nav .mobile-home-link")).toHaveCount(0);
+    await brand.focus();
+    const mobileBrandTooltip = page.getByRole("tooltip");
+    await expect(mobileBrandTooltip).toBeVisible();
+    await page.waitForFunction(() => {
+      const tooltip = document.querySelector('[role="tooltip"]');
+      if (!tooltip) return false;
+      const arrowLeft = Number.parseFloat(
+        window
+          .getComputedStyle(tooltip)
+          .getPropertyValue("--clean-tooltip-arrow-left"),
+      );
+      return Number.isFinite(arrowLeft) && arrowLeft > 0;
+    });
+    const mobileBrandTooltipAlignment = await page.evaluate(() => {
+      const brandBox = document
+        .querySelector(".site-header > .brand-mark")
+        ?.getBoundingClientRect();
+      const tooltip = document.querySelector('[role="tooltip"]');
+      const tooltipBox = tooltip?.getBoundingClientRect();
+      const tooltipStyle = tooltip ? window.getComputedStyle(tooltip) : null;
+      const arrowLeft = Number.parseFloat(
+        tooltipStyle?.getPropertyValue("--clean-tooltip-arrow-left") ?? "0",
+      );
+
+      return {
+        brandCenter: brandBox ? brandBox.left + brandBox.width / 2 : 0,
+        brandWidth: brandBox?.width ?? 0,
+        tooltipArrowX: tooltipBox ? tooltipBox.left + arrowLeft : 0,
+      };
+    });
+    expect(mobileBrandTooltipAlignment.brandWidth).toBeLessThan(56);
+    expect(
+      Math.abs(
+        mobileBrandTooltipAlignment.tooltipArrowX -
+          mobileBrandTooltipAlignment.brandCenter,
+      ),
+    ).toBeLessThanOrEqual(2);
+    await brand.evaluate((element) => (element as HTMLElement).blur());
+    await expect(mobileBrandTooltip).toHaveCount(0);
 
     await page.setViewportSize({ width: 500, height: 760 });
     await expect(brand).toBeVisible();
@@ -2013,8 +2063,8 @@ test("toolbar brand owns the active manuscript identity", async ({
       titleTextWidth: titleText.getBoundingClientRect().width,
     };
   });
-  expect(overviewBrandTitleMetrics.titleWidth).toBeLessThan(
-    overviewBrandTitleMetrics.brandWidth - 24,
+  expect(overviewBrandTitleMetrics.titleWidth).toBeLessThanOrEqual(
+    overviewBrandTitleMetrics.brandWidth,
   );
   expect(
     Math.abs(

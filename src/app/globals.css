@@ -2899,11 +2899,12 @@ input {
   }
 
   .site-header > .brand-mark {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
+    width: fit-content;
     min-width: 0;
-    max-width: none;
+    max-width: max-content;
     padding: 0.2rem 0 0.2rem 0.4rem;
   }
 
@@ -3016,7 +3017,7 @@ input {
   }
 
   .site-nav {
-    flex: 0 0 auto;
+    flex: 1 1 auto;
     justify-content: flex-end;
     gap: 0.3rem;
     width: auto;
