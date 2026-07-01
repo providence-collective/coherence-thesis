@@ -5,6 +5,12 @@ import { readerProgressStorageKey } from "../../src/lib/reader-state";
 import { formatReadingDurationForWords } from "../../src/lib/reading-time";
 
 const firstSection = catalog.sections[0];
+const firstSectionVolume = catalog.volumes.find(
+  (volume) => volume.volumeId === firstSection.volumeId,
+)!;
+const firstSectionPdfFileName = "The Coherence Thesis - 01.001 - Orientation.pdf";
+const firstManuscriptPdfFileName =
+  "The Coherence Thesis - 01 - Humanity's Most Viable Future.pdf";
 const firstSectionVersionDate = new Intl.DateTimeFormat("en-US", {
   month: "long",
   day: "numeric",
@@ -121,6 +127,18 @@ function hexToRgb(hex: string): string {
   const blue = value & 255;
 
   return `rgb(${red}, ${green}, ${blue})`;
+}
+
+function pdfObjectCount(bytes: Buffer, pattern: RegExp): number {
+  return (bytes.toString("latin1").match(pattern) ?? []).length;
+}
+
+function pdfPageCount(bytes: Buffer): number {
+  return pdfObjectCount(bytes, /^\/Type \/Page$/gm);
+}
+
+function pdfImageCount(bytes: Buffer): number {
+  return pdfObjectCount(bytes, /^\/Subtype \/Image$/gm);
 }
 
 test("home page presents the overview and manuscript entry points", async ({
@@ -875,26 +893,42 @@ test("reader share menu exposes page sharing and PDF downloads", async ({ page }
     expect(shareBox.x + shareBox.width).toBeLessThanOrEqual(viewport.width + 1);
   }
 
-  const sectionPdfHref = `/downloads/sections/${firstSection.sectionId}.pdf`;
-  const manuscriptPdfHref = `/downloads/manuscripts/${firstSection.volumeId}.pdf`;
+  const sectionPdfHref = `/downloads/sections/${firstSectionPdfFileName}`;
+  const manuscriptPdfHref = `/downloads/manuscripts/${firstManuscriptPdfFileName}`;
   const sectionDownload = shareMenu.getByRole("link", {
     name: `Download this section as PDF: ${firstSection.title}`,
   });
   const manuscriptDownload = shareMenu.getByRole("link", {
-    name: `Download this manuscript as PDF: ${firstSection.volumeTitle}`,
+    name: `Download full manuscript as PDF: ${firstSection.volumeTitle}`,
   });
 
+  await expect(sectionDownload).toContainText("Download this section");
   await expect(sectionDownload).toHaveAttribute("href", sectionPdfHref);
-  await expect(sectionDownload).toHaveAttribute("download", "");
+  await expect(sectionDownload).toHaveAttribute("download", firstSectionPdfFileName);
+  await expect(manuscriptDownload).toContainText("Download full manuscript");
   await expect(manuscriptDownload).toHaveAttribute("href", manuscriptPdfHref);
-  await expect(manuscriptDownload).toHaveAttribute("download", "");
+  await expect(manuscriptDownload).toHaveAttribute(
+    "download",
+    firstManuscriptPdfFileName,
+  );
 
-  const sectionPdfResponse = await page.request.get(sectionPdfHref);
+  const sectionPdfResponse = await page.request.get(encodeURI(sectionPdfHref));
   expect(sectionPdfResponse.ok()).toBe(true);
   expect(sectionPdfResponse.headers()["content-type"]).toContain("application/pdf");
-  const manuscriptPdfResponse = await page.request.get(manuscriptPdfHref);
+  const sectionPdfBytes = await sectionPdfResponse.body();
+  expect(pdfPageCount(sectionPdfBytes)).toBeGreaterThanOrEqual(2);
+  expect(pdfPageCount(sectionPdfBytes)).toBeLessThanOrEqual(4);
+  expect(pdfImageCount(sectionPdfBytes)).toBeGreaterThanOrEqual(1);
+  expect(sectionPdfBytes.byteLength).toBeLessThan(450_000);
+  const manuscriptPdfResponse = await page.request.get(encodeURI(manuscriptPdfHref));
   expect(manuscriptPdfResponse.ok()).toBe(true);
   expect(manuscriptPdfResponse.headers()["content-type"]).toContain("application/pdf");
+  const manuscriptPdfBytes = await manuscriptPdfResponse.body();
+  const manuscriptPageCount = pdfPageCount(manuscriptPdfBytes);
+  expect(manuscriptPageCount).toBeGreaterThan(2);
+  expect(manuscriptPageCount).toBeLessThan(firstSectionVolume.sectionIds.length);
+  expect(pdfImageCount(manuscriptPdfBytes)).toBeGreaterThanOrEqual(1);
+  expect(manuscriptPdfBytes.byteLength).toBeLessThan(700_000);
 
   await shareMenu.getByRole("button", { name: "Share this page" }).click();
   await expect(shareMenu.getByRole("status")).toHaveText("Shared");
@@ -904,6 +938,98 @@ test("reader share menu exposes page sharing and PDF downloads", async ({ page }
   );
   expect(shareData?.title).toContain(firstSection.title);
   expect(shareData?.url).toContain(firstSection.href);
+});
+
+test("volume share menu only offers the full manuscript download", async ({
+  page,
+}) => {
+  await page.goto(firstSectionVolume.href);
+
+  const shareButton = page.getByRole("button", { name: "Share and downloads" });
+  await expect(shareButton).toBeVisible();
+  await shareButton.click();
+
+  const shareMenu = page.getByRole("region", { name: "Share and downloads" });
+  await expect(shareMenu).toBeVisible();
+  await expect(shareMenu.getByText("Download this section")).toHaveCount(0);
+
+  const manuscriptDownload = shareMenu.getByRole("link", {
+    name: `Download full manuscript as PDF: ${firstSectionVolume.title}`,
+  });
+  await expect(manuscriptDownload).toBeVisible();
+  await expect(manuscriptDownload).toContainText("Download full manuscript");
+  await expect(manuscriptDownload).toHaveAttribute(
+    "href",
+    `/downloads/manuscripts/${firstManuscriptPdfFileName}`,
+  );
+  await expect(manuscriptDownload).toHaveAttribute(
+    "download",
+    firstManuscriptPdfFileName,
+  );
+
+  const actionMetrics = await manuscriptDownload.evaluate((element) => {
+    const panel = element.closest(".reader-share")?.getBoundingClientRect();
+    const label = element.querySelector(".share-action-label");
+    const labelBox = label?.getBoundingClientRect();
+    const style = window.getComputedStyle(element);
+    return {
+      display: style.display,
+      labelWidth: labelBox?.width ?? 0,
+      panelLeft: panel?.left ?? 0,
+      panelRight: panel?.right ?? 0,
+      rowLeft: element.getBoundingClientRect().left,
+      rowRight: element.getBoundingClientRect().right,
+    };
+  });
+
+  expect(actionMetrics.display).toBe("grid");
+  expect(actionMetrics.labelWidth).toBeGreaterThan(120);
+  expect(actionMetrics.rowLeft).toBeGreaterThanOrEqual(actionMetrics.panelLeft);
+  expect(actionMetrics.rowRight).toBeLessThanOrEqual(
+    actionMetrics.panelRight + 1,
+  );
+});
+
+test("singleton section share menu offers both PDF downloads", async ({
+  page,
+}) => {
+  const singletonSectionHref = firstSection.href.replace(
+    `/${firstSection.sectionId}/`,
+    "/",
+  );
+  await page.goto(singletonSectionHref);
+
+  const shareButton = page.getByRole("button", { name: "Share and downloads" });
+  await expect(shareButton).toBeVisible();
+  await shareButton.click();
+
+  const shareMenu = page.getByRole("region", { name: "Share and downloads" });
+  await expect(shareMenu).toBeVisible();
+
+  const sectionDownload = shareMenu.getByRole("link", {
+    name: `Download this section as PDF: ${firstSection.title}`,
+  });
+  const manuscriptDownload = shareMenu.getByRole("link", {
+    name: `Download full manuscript as PDF: ${firstSectionVolume.title}`,
+  });
+
+  await expect(sectionDownload).toBeVisible();
+  await expect(sectionDownload).toContainText("Download this section");
+  await expect(sectionDownload).toHaveAttribute(
+    "href",
+    `/downloads/sections/${firstSectionPdfFileName}`,
+  );
+  await expect(manuscriptDownload).toBeVisible();
+  await expect(manuscriptDownload).toContainText("Download full manuscript");
+  await expect(manuscriptDownload).toHaveAttribute(
+    "href",
+    `/downloads/manuscripts/${firstManuscriptPdfFileName}`,
+  );
+  await expect(sectionDownload).toHaveAttribute("download", firstSectionPdfFileName);
+  await expect(manuscriptDownload).toHaveAttribute(
+    "download",
+    firstManuscriptPdfFileName,
+  );
 });
 
 test("reader settings update and persist local appearance preferences", async ({

@@ -21,6 +21,14 @@ function volumeIdFromPath(pathname: string): string | null {
   return match?.[1] ?? null;
 }
 
+function sectionMatchesPath(section: PdfDownloadSection, currentPath: string): boolean {
+  const sectionHref = normalizePath(section.href);
+  if (sectionHref === currentPath) return true;
+  if (!sectionHref.startsWith(currentPath)) return false;
+
+  return sectionHref.slice(currentPath.length) === `${section.sectionId}/`;
+}
+
 function statusLabel(status: ShareStatus): string | null {
   if (status === "copied") return "Link copied";
   if (status === "shared") return "Shared";
@@ -37,10 +45,7 @@ export function ToolbarShareIsland() {
 
   const currentSection = useMemo(() => {
     const currentPath = normalizePath(pathname);
-    return (
-      downloads?.sections.find((section) => normalizePath(section.href) === currentPath) ??
-      null
-    );
+    return downloads?.sections.find((section) => sectionMatchesPath(section, currentPath)) ?? null;
   }, [downloads, pathname]);
 
   const currentVolume = useMemo(() => {
@@ -142,40 +147,35 @@ export function ToolbarShareIsland() {
           <p className="eyebrow">Share</p>
           <button type="button" className="share-action" onClick={shareCurrentPage}>
             <Link aria-hidden="true" size={16} />
-            <span>Share this page</span>
+            <span className="share-action-label">Share this page</span>
           </button>
-          {sectionDownload ? (
+          {sectionDownload && (
             <a
               className="share-action"
               href={sectionDownload.pdfHref}
-              download
+              download={sectionDownload.fileName}
               aria-label={`Download this section as PDF: ${sectionDownload.title}`}
             >
               <FileText aria-hidden="true" size={16} />
-              <span>Download this section</span>
+              <span className="share-action-label">Download this section</span>
               <Download aria-hidden="true" size={15} />
             </a>
-          ) : (
-            <button type="button" className="share-action" disabled>
-              <FileText aria-hidden="true" size={16} />
-              <span>Download this section</span>
-            </button>
           )}
           {manuscriptDownload?.pdfHref ? (
             <a
               className="share-action"
               href={manuscriptDownload.pdfHref}
-              download
-              aria-label={`Download this manuscript as PDF: ${manuscriptDownload.title}`}
+              download={manuscriptDownload.fileName}
+              aria-label={`Download full manuscript as PDF: ${manuscriptDownload.title}`}
             >
               <BookOpen aria-hidden="true" size={16} />
-              <span>Download this manuscript</span>
+              <span className="share-action-label">Download full manuscript</span>
               <Download aria-hidden="true" size={15} />
             </a>
           ) : (
             <button type="button" className="share-action" disabled>
               <BookOpen aria-hidden="true" size={16} />
-              <span>Download this manuscript</span>
+              <span className="share-action-label">Download full manuscript</span>
             </button>
           )}
           {visibleStatus && (
