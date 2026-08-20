@@ -88,7 +88,7 @@ Exit condition: the limited guarantee survives a published stress test and an in
 - Form operating cooperatives where members actually produce food, housing services, care, technology, education, or land stewardship.
 - Pay wages where employment law requires them. Use patronage accounting only for genuine cooperative business under a preexisting obligation and qualified tax advice.
 - Keep one-member-one-vote or another expressly approved equal political rule separate from task delegation and stewardship qualifications.
-- Let COHERENCE inform voluntary development. Non-biometric attestations may inform bounded stewardship only when they are relevant, optional, contestable, and available through an equal non-biometric route. Never use biometric-derived personal records in stewardship eligibility or governance standing. Never let COHERENCE control wages, necessities, general membership, or vote weight.
+- Let COHERENCE inform voluntary development. Non-biometric attestations may inform bounded stewardship only when they are relevant, optional, contestable, and subject to due process, appeal, discrimination review, correction, and remedy. A person who declines an attestation must be able to establish the same role-relevant qualifications through other evidence on equal terms. Never use biometric-derived personal records in stewardship eligibility or governance standing. Never let COHERENCE control wages, necessities, general membership, or vote weight.
 
 Exit condition: operating revenue covers a defined share of the guarantee without restricted charitable subsidy, and worker, member, and beneficiary accounts reconcile.
 
@@ -118,7 +118,7 @@ Exit condition: multiple independent consociations can honor reciprocal obligati
 - Equal political voice means equal vote weight. Stewardship authority is delegated, bounded, reviewable, and removable.
 - Raw physiological data remains participant-held by default and is never sold or used for advertising.
 - A person may refuse biometrics without losing participation, provision, membership, or political voice.
-- Public-meeting sensing requires private, unanimous, meeting-specific consent. Refusal, absence of consent, late arrival without consent, or withdrawal keeps sensing off or stops it while the meeting continues without penalty.
+- Public-meeting sensing requires private, unanimous, meeting-specific consent from every person present for the sensed portion, including participants and observers. The process reveals only activation or nonactivation and never an individual's response or reason. If a response would be readily inferable, sensing does not activate. Refusal, absence of consent, late arrival without consent, or withdrawal keeps sensing off or stops it while the meeting continues without penalty.
 - Meeting output is ephemeral, aggregate, non-attributable, advisory, excluded from personal records, and unable to pause a meeting or decide an outcome automatically. Public attendance does not make physiological data public.
 - COHERENCE begins nontransferable and nonfinancial.
 - No charitable entity promises benefits outside its exempt purpose or valid charitable class.

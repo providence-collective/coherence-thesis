@@ -24,7 +24,7 @@ Proof required: Corpus-wide prohibition, non-biometric governance routes, and ve
 
 ### Option 2: Permit unanimous meeting sensing, never personal governance records
 
-Biometric-derived personal records never affect governance standing or stewardship. A public governance meeting may explore live sensing only when every affected participant privately and affirmatively consents for that specific meeting. Unanimity controls activation of sensing, not whether the meeting proceeds. Refusal, abstention, absence of consent, late arrival without consent, or withdrawal leaves sensing off or stops it while the meeting continues without penalty.
+Biometric-derived personal records never affect governance standing or stewardship. A public governance meeting may explore live sensing only when every person present for the sensed portion, including participants and observers, privately and affirmatively consents for that specific meeting. The consent process reveals only activation or nonactivation, never an individual's response or reason. If the group or circumstances make a response readily inferable, sensing does not activate. Unanimity controls activation of sensing, not whether the meeting proceeds. Refusal, abstention, absence of consent, late arrival without consent, or withdrawal leaves sensing off or stops it while the meeting continues without penalty.
 
 Output must be ephemeral, aggregate, non-attributable, advisory, and excluded from personal records. It cannot automatically pause a meeting or decide an outcome. Any participant may request a pause without biometric evidence. A public meeting does not make physiological data public.
 
@@ -32,9 +32,9 @@ This preserves a narrow research path while protecting equal standing and refusa
 
 Authority required: Author decision, followed by editorial review. The author selected this option on 2026-08-20 as the current provisional path.
 
-Dependencies: Affected-participant governance; accessible private consent; a fail-closed activation rule; local or ephemeral processing; aggregate and non-attributable output; withdrawal handling; privacy, accessibility, discrimination, security, and measurement review; and a human process for pause, appeal, complaint, remedy, and retirement.
+Dependencies: Affected-participant governance; accessible private consent; a fail-closed activation rule; a privacy threshold that prevents activation when a response is readily inferable; local or ephemeral processing; aggregate and non-attributable output; withdrawal handling; privacy, accessibility, discrimination, security, and measurement review; and a human process for pause, appeal, complaint, remedy, and retirement.
 
-Proof required: Tests that sensing cannot activate without unanimous current consent; a late arrival or withdrawal stops sensing; the meeting continues without sensing; no holdout is exposed; no output enters a participant record; no automated pause or decision exists; refusal changes no right, role, reputation, or eligibility; and participants can request a pause without a sensor.
+Proof required: Tests that sensing cannot activate without unanimous current consent; a late arrival or withdrawal stops sensing; the meeting continues without sensing; the system reveals no individual response or reason; sensing stays off when surrounding circumstances make a response readily inferable; no output enters a participant record; no automated pause or decision exists; refusal changes no right, role, reputation, or eligibility; and participants can request a pause without a sensor.
 
 ### Option 3: Permit consented personal biometric evidence in bounded stewardship
 
@@ -48,7 +48,7 @@ Proof required: Prospective evidence that the measure is valid for the exact ste
 
 ## Literature considered
 
-- Mayo, O., Lavidor, M., and Gordon, I. (2021), [Interpersonal autonomic nervous system synchrony and its association to relationship and performance](https://doi.org/10.1016/j.physbeh.2021.113391), systematic review and meta-analysis. The estimated association with relationship outcomes was small and marginal, while the performance association was small; both were heterogeneous and differed across autonomic branches.
+- Mayo, O., Lavidor, M., and Gordon, I. (2021), [Interpersonal autonomic nervous system synchrony and its association to relationship and performance](https://doi.org/10.1016/j.physbeh.2021.113391), systematic review and meta-analysis. The estimated association with relationship outcomes was small and marginal, while the performance association was small. Both were heterogeneous; relationship estimates differed across autonomic branches.
 - Danyluck, C., and Page-Gould, E. (2019), [Social and physiological context can affect the meaning of physiological synchrony](https://doi.org/10.1038/s41598-019-44667-5). In a study of 134 strangers interacting in pairs, context and underlying physiological reactivity affected what synchrony meant; synchrony alone was not enough to interpret affiliation.
 - Ohayon, S., and Gordon, I. (2025), [Multimodal interpersonal synchrony](https://doi.org/10.1016/j.bbr.2024.115369), systematic review and meta-analysis. Physiological and behavioral synchrony had a small association across 13 samples, and the limited neural and physiological literature produced inconsistent results.
 - Palumbo, R. V., et al. (2017), Interpersonal autonomic physiology: A systematic review of the literature. The review establishes physiological linkage as a field of study, not as a validated measure of wisdom or governance fitness.
