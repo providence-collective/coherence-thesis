@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-08-19",
+  "updated": "2026-08-20",
   "note": "Agent executable work. Distinct from editorial/evidence/debt, which holds authorial obligations requiring the author's judgment. Tier governs what may run unattended.",
   "tiers": {
     "green": "Mechanical and reversible. May run unattended.",
@@ -457,6 +457,15 @@
       "area": "canon",
       "blockedBy": [],
       "detail": "CTD-0015. The author approved a staged model on 2026-08-18: Providence begins by matching people through shared intentions, values, gifts, needs, and desired impact; the MVP studies whether consented physiological signals can offer useful participant-reviewed reflection; early records do not mint currency; and any portable attestation or exchange mechanism remains a later research, ethics, and anti-manipulation horizon. The focused Volume I candidate is approved for publication in PR 224. Volume III and corpus reconciliation remain active work under the same debt item."
+    },
+    {
+      "id": "T-050",
+      "title": "Resolve CTD-0006 on biometric records and governance standing",
+      "tier": "red",
+      "status": "in-progress",
+      "area": "canon",
+      "blockedBy": [],
+      "detail": "The author approved a provisional doctrine on 2026-08-20. Biometric-derived personal records never affect governance standing. Public-meeting sensing may be explored only with private, unanimous, meeting-specific consent and as ephemeral, aggregate, non-attributable, advisory process support. Any refusal or withdrawal keeps sensing off or stops it while the meeting continues without penalty. Corpus reconciliation, independent editorial review, exact-candidate preview approval, replacement audio, validation, and structured debt closure remain in progress."
     }
   ]
 }

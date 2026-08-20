@@ -20,7 +20,7 @@ Providence should not begin by asking one legal entity or one token to perform e
 2. A member-governed consociation defines participation, equal political voice, reciprocal obligations, incapacity protections, exit, and the limits of any member guarantee.
 3. One or more operating cooperatives employ people, produce goods and services, steward land, and account for patronage under the rules that apply to real economic activity.
 4. A participant-controlled data system holds reflections and physiological information under strict purpose limits, consent, minimization, access, deletion, security, and breach procedures.
-5. COHERENCE begins as a nontransferable developmental record. Whether biometric-derived evidence may inform any particular stewardship appointment remains an open author decision tracked in CTD-0006. COHERENCE does not begin as an investment, freely transferable token, fiat substitute, claim on pooled assets, or promise of appreciation.
+5. COHERENCE begins as a nontransferable developmental record. Biometric-derived personal records never inform stewardship appointments or governance standing. A public governance meeting may explore live sensing only under the provisional, unanimous, meeting-specific consent rule settled in CTD-0006. COHERENCE does not begin as an investment, freely transferable token, fiat substitute, claim on pooled assets, or promise of appreciation.
 
 This separation does not settle the final entity chart. It prevents charitable donations, member benefits, commercial labor, health data, political rights, and transferable value from being collapsed into one instrument before their obligations are understood.
 
@@ -88,7 +88,7 @@ Exit condition: the limited guarantee survives a published stress test and an in
 - Form operating cooperatives where members actually produce food, housing services, care, technology, education, or land stewardship.
 - Pay wages where employment law requires them. Use patronage accounting only for genuine cooperative business under a preexisting obligation and qualified tax advice.
 - Keep one-member-one-vote or another expressly approved equal political rule separate from task delegation and stewardship qualifications.
-- Let COHERENCE inform voluntary development. Do not use biometric-derived evidence in stewardship eligibility unless CTD-0006 is resolved with specific permitted decisions, non-biometric routes, due process, appeal, anti-discrimination controls, and measurement-error protections. Never let COHERENCE control wages, necessities, general membership, or vote weight.
+- Let COHERENCE inform voluntary development. Non-biometric attestations may inform bounded stewardship only when they are relevant, optional, contestable, and available through an equal non-biometric route. Never use biometric-derived personal records in stewardship eligibility or governance standing. Never let COHERENCE control wages, necessities, general membership, or vote weight.
 
 Exit condition: operating revenue covers a defined share of the guarantee without restricted charitable subsidy, and worker, member, and beneficiary accounts reconcile.
 
@@ -118,6 +118,8 @@ Exit condition: multiple independent consociations can honor reciprocal obligati
 - Equal political voice means equal vote weight. Stewardship authority is delegated, bounded, reviewable, and removable.
 - Raw physiological data remains participant-held by default and is never sold or used for advertising.
 - A person may refuse biometrics without losing participation, provision, membership, or political voice.
+- Public-meeting sensing requires private, unanimous, meeting-specific consent. Refusal, absence of consent, late arrival without consent, or withdrawal keeps sensing off or stops it while the meeting continues without penalty.
+- Meeting output is ephemeral, aggregate, non-attributable, advisory, excluded from personal records, and unable to pause a meeting or decide an outcome automatically. Public attendance does not make physiological data public.
 - COHERENCE begins nontransferable and nonfinancial.
 - No charitable entity promises benefits outside its exempt purpose or valid charitable class.
 - No commercial labor is disguised as volunteering, spiritual practice, or currency accumulation.
