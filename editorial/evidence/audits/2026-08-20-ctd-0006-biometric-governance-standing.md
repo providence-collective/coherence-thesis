@@ -59,6 +59,20 @@ The author selected Option 2 as the current path while the project continues to 
 
 The categorical rule is settled: biometric-derived personal records never affect governance standing or stewardship. The meeting experiment remains provisional and must stop if its safeguards cannot be proved.
 
+## Independent editorial review
+
+Fresh semantic, literary, and full slop reviews examined the exact manuscript source at commit `1ad14ae`. The first review cycle found four material problems: the draft presented a hoped-for live-feedback benefit as though research had demonstrated it; private unanimity did not protect a holdout whose response could be inferred; permitted non-biometric attestations lacked the complete procedural safeguards required by the ticket; and Volume IV's unchanged coda still implied that an instrument could identify the conditions of wisdom.
+
+The reconciled source now separates the hoped-for benefit from the observed associations, prevents sensing when a response is readily inferable, requires due process, appeal, anti-discrimination controls and review, correction, remedy, and equal alternative evidence for stewardship attestations, and refuses any claim that sensing can certify wisdom. The semantic, literary, and slop reviewers each passed exact commit `1ad14ae` with no remaining correction.
+
+## Validation state
+
+- `npm run editorial:validate` passed for all stable volume packages, voice cards, review batches, and evidence ledgers.
+- `npm run manuscripts:validate` passed for 535 manuscript files and 36 overview references after committed version provenance was regenerated.
+- `npm run repository:validate-links` passed for 249 tracked files and 166 local references.
+- The managed local preview returned 200 for the reader root, the administrative debt workbench, and the affected Volume III, IV, and IX routes. Exact-candidate author review remains required after the final evidence commit.
+- `npm run audio:verify-manuscript-publication -- --base origin/main` remains blocked, as required, on seven changed spoken sections. Matching immutable audio and timing sidecars must be published before merge or deployment.
+
 ## Related open obligations
 
 - CTD-0009 still requires a qualified scientific source audit of broader physiological and clinical claims. This decision record verifies only the literature used for the bounded synchrony tradeoff.
