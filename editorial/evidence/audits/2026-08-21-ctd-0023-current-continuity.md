@@ -1,14 +1,14 @@
 # CTD-0023 Current Continuity Verification
 
-Audit completed: 2026-08-20
+Audit completed: 2026-08-21
 
-Audited base revision: `f3aba50fe7711657b4e3f1cfa015f57ba990ace7`
+Audited base revision: `845a358b0e9659243781d60970895368da6ef770`
 
 Status: Current proof for closing CTD-0023 against the canonical route graph on refreshed `origin/main`. This audit does not restage or publish the unpublished 2026-07-09 editorial candidate.
 
 ## Authority and scope
 
-The author approved the current-state closure lane on 2026-08-20. Publishing continuity review owns the route and lineage proof. The audit covers the first-wave structural decisions in Volumes I, II, and III, their corpus continuity records, stored-progress identities, and historical fragment behavior. It changes no manuscript, voice card, volume identity, route destination, continuity registry, audio input, or publication checkpoint.
+The author approved the current-state closure lane and authorized the refreshed closure commit on 2026-08-21. Publishing continuity review owns the route and lineage proof. The audit covers the first-wave structural decisions in Volumes I, II, and III, their corpus continuity records, stored-progress identities, and historical fragment behavior. It changes no manuscript, voice card, volume identity, route destination, continuity registry, audio input, or publication checkpoint.
 
 The earlier counts in the wave-one review remain historical evidence. They describe an unpublished candidate and are not treated as targets for the current graph.
 
@@ -18,11 +18,13 @@ The canonical manuscript packages retain their stable editorial identities and h
 
 | Volume | Canonical source SHA-256 |
 | --- | --- |
-| I | `13617527804394e4549f570e68e965c99cec8d3e7cde08367682af9724e7ca66` |
+| I | `c549784300cf3c99b88402b90b8950bf32aaa127a75fdbff1db90c7aff99713e` |
 | II | `226a79331eac2eb3499f71e6425f1387c7987003dafb56a4828799da189eff5e` |
 | III | `de1d7ccf4113cac0c826d36c6db8eff36ea13d4fe597d5f2492de2dd109afc55` |
 
-`npm run manuscripts:prepare` imported nine canonical volumes into 535 source sections, compiled 525 public sections and 201,885 words, and wrote only ignored generated output. The import report named all nine canonical `editorial/sources/volumes/*/manuscript.md` paths. A subsequent import completed with the same 535-section result.
+`npm run manuscripts:prepare` imported nine canonical volumes into 535 source sections, compiled 525 public sections and 202,137 words, and wrote only ignored generated output. The import report named all nine canonical `editorial/sources/volumes/*/manuscript.md` paths, reported 37 Volume I sections, 83 Volume II sections, and 129 Volume III sections, and contained no warnings or errors. A subsequent import completed with the same 535-section result.
+
+Volume I changed on `main` after the earlier unmerged proof, but its public structural-line hash remained `bfafa56be4e5b7ce49214ab79c06a58b3bcc562ca193c5acf82908b429cf9540`. The refreshed proof therefore binds to the new source bytes without treating the unchanged route structure as sufficient by itself.
 
 ## Durable continuity state
 
@@ -59,12 +61,13 @@ This current result supersedes the old 4,621-link count as closure proof. The ol
 - `npm run manuscripts:validate`: passed; 535 manuscript files and 36 overview references validated.
 - `npm run manuscripts:import`: passed; nine volumes imported into 535 sections.
 - `npm run manuscripts:audit-history -- --summary`: passed; 4,387 historical hrefs and 451 fragments checked with zero broken destinations.
+- `npm run audio:verify-manuscript-publication -- --base origin/main`: passed; no spoken manuscript segments changed across zero changed volumes.
 - `npm run editorial:debt`: passed; 112 debt items validated after the structured resolution.
 - `npm run editorial:validate`: passed; nine stable volume packages, nine review batches, and 12,179 sentence and structure records validated.
-- `npm run repository:validate-admin-status`: passed; 49 tasks and 112 debt items checked.
+- `npm run repository:validate-admin-status`: passed; 50 tasks and 112 debt items checked.
 - `npm run repository:source-boundary`: passed; durable editorial and publishing records remained tracked and generated output remained untracked.
-- `npm run repository:validate-links`: passed; 248 tracked Markdown files and 166 local references checked.
-- `git diff --check`: passed before the closure mutation and is required again on the final candidate.
+- `npm run repository:validate-links`: passed; 250 tracked Markdown files and 166 local references checked.
+- `git diff --check`: passed on the refreshed tracked candidate diff.
 
 ## Conclusion
 

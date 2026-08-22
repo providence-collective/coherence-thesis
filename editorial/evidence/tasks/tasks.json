@@ -462,10 +462,10 @@
       "id": "T-050",
       "title": "Refresh and close CTD-0023 against current continuity state",
       "tier": "red",
-      "status": "in-progress",
+      "status": "done",
       "area": "publishing",
       "blockedBy": [],
-      "detail": "CTD-0023. The author approved current-state closure and commit authorization on 2026-08-21. Refresh the existing isolated closure candidate onto current origin/main, rerun import, continuity, stored-progress, historical-route, manuscript, and audio-diff proof, update the dated audit and structured resolution, validate the focused records, commit the exact candidate, and present its local admin preview before any push or pull request."
+      "detail": "Complete closure candidate for CTD-0023. The author approved current-state closure and commit authorization on 2026-08-21. Against origin/main at 845a358, preparation and import produced 535 source sections and 525 public sections, the planner recognized all 239 Volume I to III predecessors with zero unresolved mappings or destination changes, the historical audit checked 4,387 hrefs and 451 fragments with zero broken destinations, manuscript validation accepted 535 files and 36 overview references, and the audio publication comparison reported zero changed volumes. The dated audit, atomic criteria, structured resolution, debt index, and focused debt, editorial, admin-status, source-boundary, and link validators are current. No manuscript, audio, route destination, or publishing continuity registry changed."
     }
   ]
 }

@@ -122,7 +122,7 @@ Open: 61. Queries: 39. Deferred: 6. Resolved: 6.
 | ID | Title | Status | Kind | Severity | Scope | Updated |
 | --- | --- | --- | --- | --- | --- | --- |
 | [CTD-0005](items/ctd-0005-subsistence-conditionality-conflict.md) | Resolve whether subsistence is unconditional or tied to self-regulation | resolved | logical | critical | volume-1, volume-3, volume-9, corpus | 2026-08-18 |
-| [CTD-0023](items/ctd-0023-first-wave-link-continuity.md) | Complete first-wave import and historical link audit | resolved | link | critical | volume-1, volume-2, volume-3, corpus | 2026-08-20 |
+| [CTD-0023](items/ctd-0023-first-wave-link-continuity.md) | Complete first-wave import and historical link audit | resolved | link | critical | volume-1, volume-2, volume-3, corpus | 2026-08-21 |
 | [CTD-0030](items/ctd-0030-cardinal-scale-existence-claims.md) | Verify whether the first Cardinal Scale exists | resolved | factual | critical | volume-1, volume-3, volume-4, volume-5, volume-8, volume-9, corpus | 2026-08-22 |
 | [CTD-0032](items/ctd-0032-volume-one-ampersand-normalization.md) | Restore intentional and citation ampersands | resolved | literary | medium | volume-1, volume-3, corpus | 2026-07-14 |
 | [CTD-0102](items/ctd-0102-volume-six-outline-hierarchy.md) | Restore Volume VI's first authored part in the reader outline | resolved | structural | medium | volume-6, reader, corpus | 2026-08-01 |
