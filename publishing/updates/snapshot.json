@@ -2,8 +2,18 @@
   "schemaVersion": 3,
   "repository": "genii-foundation/coherence-thesis",
   "branch": "main",
-  "headSha": "c74fa0bb1707b1da79f81565619b1ff858a46198",
+  "headSha": "845a358b0e9659243781d60970895368da6ef770",
   "commits": [
+    {
+      "sha": "845a358b0e9659243781d60970895368da6ef770",
+      "committedAt": "2026-08-20T22:35:33.000Z",
+      "subject": "chore(publishing): publish CTD-0015 checkpoint (#226)",
+      "commitUrl": "https://github.com/genii-foundation/coherence-thesis/commit/845a358b0e9659243781d60970895368da6ef770",
+      "filesChanged": 2,
+      "additions": 24,
+      "deletions": 11,
+      "isLiterary": false
+    },
     {
       "sha": "c74fa0bb1707b1da79f81565619b1ff858a46198",
       "committedAt": "2026-08-20T22:13:29.000Z",
