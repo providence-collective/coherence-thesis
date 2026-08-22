@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-08-19",
+  "updated": "2026-08-21",
   "note": "Agent executable work. Distinct from editorial/evidence/debt, which holds authorial obligations requiring the author's judgment. Tier governs what may run unattended.",
   "tiers": {
     "green": "Mechanical and reversible. May run unattended.",
@@ -457,6 +457,15 @@
       "area": "canon",
       "blockedBy": [],
       "detail": "CTD-0015. The author approved a staged model on 2026-08-18: Providence begins by matching people through shared intentions, values, gifts, needs, and desired impact; the MVP studies whether consented physiological signals can offer useful participant-reviewed reflection; early records do not mint currency; and any portable attestation or exchange mechanism remains a later research, ethics, and anti-manipulation horizon. The focused Volume I candidate is approved for publication in PR 224. Volume III and corpus reconciliation remain active work under the same debt item."
+    },
+    {
+      "id": "T-050",
+      "title": "Build the CTD-0048 claim map before revising Volume VIII",
+      "tier": "red",
+      "status": "in-progress",
+      "area": "editorial",
+      "blockedBy": [],
+      "detail": "CTD-0048. The author approved a stable-manuscript and versioned-living-report direction on 2026-08-21 while preserving every existing Volume VIII heading, section identity, and route. Inventory and source every factual, quotation, medical, legal, historical, and volatile claim first. Obtain qualified specialist review before deciding which claims remain in the manuscript. No manuscript wording or debt status changes are authorized during this evidence phase."
     }
   ]
 }
