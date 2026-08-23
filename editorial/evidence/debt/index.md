@@ -4,7 +4,7 @@
 
 This index records known literary, philosophical, factual, continuity, publication, and technical obligations across The Coherence Thesis. A resolved item remains in the library as evidence of paydown.
 
-Open: 62. Queries: 39. Deferred: 6. Resolved: 5.
+Open: 63. Queries: 38. Deferred: 6. Resolved: 5.
 
 ## Active debt
 
@@ -116,7 +116,7 @@ Open: 62. Queries: 39. Deferred: 6. Resolved: 5.
 | [CTD-0058](items/ctd-0058-volume-one-reading-time-labels.md) | Make Volume I's reading-time labels reproducible | open | technical | low | volume-1 | 2026-07-09 |
 | [CTD-0059](items/ctd-0059-volume-one-house-cadence.md) | Review Volume I's residual triad and house-cadence density | query | literary | low | volume-1 | 2026-07-09 |
 | [CTD-0060](items/ctd-0060-volume-one-anatomical-scaling-image.md) | Approve or clarify Volume I's mixed anatomical scaling image | query | literary | low | volume-1, volume-3, volume-4, corpus | 2026-07-09 |
-| [CTD-0107](items/ctd-0107-currency-of-presence-semantic-link-retired.md) | Re-approve the Volume II cross-reference retired by the Currency of Presence re-render | query | literary | low | volume-1, volume-2, corpus | 2026-07-30 |
+| [CTD-0107](items/ctd-0107-currency-of-presence-semantic-link-retired.md) | Restore the Volume II cross-reference retired by Currency of Presence revisions | open | literary | low | volume-1, volume-2, corpus | 2026-08-22 |
 
 ## Resolved debt
 
