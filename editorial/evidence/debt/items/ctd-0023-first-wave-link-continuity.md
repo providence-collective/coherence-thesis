@@ -5,9 +5,9 @@ status: resolved
 kind: link
 severity: critical
 scopes: ["volume-1", "volume-2", "volume-3", "corpus"]
-sources: ["editorial/evidence/audits/2026-08-21-ctd-0023-current-continuity.md", "editorial/evidence/reviews/corpus/2026-07-09-wave-one/summary.md", "editorial/evidence/reviews/volumes/volume-01/2026-07-09-wave-one/review.md", "editorial/evidence/reviews/volumes/volume-02/2026-07-09-wave-one/review.md", "editorial/evidence/reviews/volumes/volume-03/2026-07-09-wave-one/review.md", "publishing/continuity/aliases.json", "publishing/continuity/historical-section-mappings.json", "publishing/continuity/route-aliases.json", "publishing/continuity/route-ledger.json", "publishing/continuity/section-ledger.json", "publishing/continuity/section-lineage.json", "editorial/method/plan.md"]
+sources: ["editorial/evidence/audits/2026-09-01-ctd-0023-current-continuity.md", "editorial/evidence/reviews/corpus/2026-07-09-wave-one/summary.md", "editorial/evidence/reviews/volumes/volume-01/2026-07-09-wave-one/review.md", "editorial/evidence/reviews/volumes/volume-02/2026-07-09-wave-one/review.md", "editorial/evidence/reviews/volumes/volume-03/2026-07-09-wave-one/review.md", "publishing/continuity/aliases.json", "publishing/continuity/historical-section-mappings.json", "publishing/continuity/route-aliases.json", "publishing/continuity/route-ledger.json", "publishing/continuity/section-ledger.json", "publishing/continuity/section-lineage.json", "editorial/method/plan.md"]
 discovered: 2026-07-09
-updated: 2026-08-21
+updated: 2026-09-01
 resolved: 2026-08-21
 discoveredIn: first-editorial-wave
 ---
@@ -40,6 +40,7 @@ The isolated reviews preserve the explicit heading and route decisions. The earl
 - 2026-08-20: The author approved closing against the current canonical route graph rather than reconstructing the unpublished July candidate.
 - 2026-08-20: Refreshed from `origin/main` at `f3aba50fe7711657b4e3f1cfa015f57ba990ace7`, reconciled the reviewed mappings with current lineage and aliases, and passed the current historical audit across 4,387 hrefs, including 451 fragments, with zero broken destinations.
 - 2026-08-21: After current `main` advanced through a Volume I prose publication, the author renewed approval for current-state closure and authorized a commit. Refreshed from `origin/main` at `845a358b0e9659243781d60970895368da6ef770`, confirmed that the Volume I structural hash remained stable, and repeated the complete proof with zero broken destinations or in-scope mapping changes.
+- 2026-09-01: The author explicitly requested the pull request and closure. Refreshed from `origin/main` at `20740657f5cc8fbec934c1df609d7e7e0d95fc32`, repeated source preparation, import, route planning, historical-link, manuscript, audio, debt, editorial, admin, source-boundary, link, and Updates checks, and found no in-scope destination change or broken route.
 
 ## Prior paydown
 
@@ -53,7 +54,7 @@ The reviewed first-wave structural destinations are present in the current canon
 
 ### Criterion results
 
-- C1: met. At `845a358b0e9659243781d60970895368da6ef770`, preparation imported nine canonical volumes into 535 source sections and compiled 525 public sections without an import failure. The import report contained no warnings or errors, and the current Volume I to III source hashes are recorded in the dated audit.
+- C1: met. At `20740657f5cc8fbec934c1df609d7e7e0d95fc32`, preparation imported nine canonical volumes into 535 source sections and compiled 525 public sections without an import failure. The import report contained no warnings or errors, and the current Volume I to III source hashes are recorded in the dated audit.
 - C2: met. The planner recognized 239 Volume I to III predecessor mappings through established lineage, reported zero in-scope unresolved mappings, and proposed no in-scope destination change.
 - C3: met. The durable state contains 82 reviewed structural route aliases for Volumes I to III, 695 section-route records, and 2,767 lineage-aware route records for those volumes. Current manuscript and historical-route validation accepts every destination.
 - C4: met. The 239 affected current lineage owners carry 241 progress-continuity groups, and manuscript validation accepted the lineage configuration and route ledger.
@@ -62,7 +63,7 @@ The reviewed first-wave structural destinations are present in the current canon
 
 ### Evidence
 
-The audited repository state is `845a358b0e9659243781d60970895368da6ef770`. Its closure proof is `editorial/evidence/audits/2026-08-21-ctd-0023-current-continuity.md`, introduced on the same closure candidate as this resolution. The three wave-one reviews remain the editorial mapping authority. The current `section-lineage.json`, `aliases.json`, `route-aliases.json`, `historical-section-mappings.json`, `section-ledger.json`, and `route-ledger.json` provide the durable runtime state.
+The audited repository state is `20740657f5cc8fbec934c1df609d7e7e0d95fc32`. Its closure proof is `editorial/evidence/audits/2026-09-01-ctd-0023-current-continuity.md`, introduced on the same closure candidate as this resolution. The three wave-one reviews remain the editorial mapping authority. The current `section-lineage.json`, `aliases.json`, `route-aliases.json`, `historical-section-mappings.json`, `section-ledger.json`, and `route-ledger.json` provide the durable runtime state.
 
 ### Validation
 
@@ -70,7 +71,7 @@ The audited repository state is `845a358b0e9659243781d60970895368da6ef770`. Its 
 
 ### Approval
 
-The author explicitly approved option 1, current-state closure, and authorized the refreshed closure commit on 2026-08-21. The closure changes no manuscript wording, canon, voice authority, route destination, public audio, or publication checkpoint.
+The author explicitly approved option 1, current-state closure, and authorized the closure commit on 2026-08-21. On 2026-09-01, the author explicitly requested the pull request and closure. The closure changes no manuscript wording, canon, voice authority, route destination, public audio, or publication checkpoint.
 
 ### Residual risk
 
