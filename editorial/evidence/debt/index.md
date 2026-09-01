@@ -4,7 +4,7 @@
 
 This index records known literary, philosophical, factual, continuity, publication, and technical obligations across The Coherence Thesis. A resolved item remains in the library as evidence of paydown.
 
-Open: 62. Queries: 39. Deferred: 6. Resolved: 5.
+Open: 61. Queries: 39. Deferred: 6. Resolved: 6.
 
 ## Active debt
 
@@ -13,7 +13,6 @@ Open: 62. Queries: 39. Deferred: 6. Resolved: 5.
 | [CTD-0006](items/ctd-0006-biometric-governance-standing.md) | Define whether biometric-derived records may affect governance standing | query | canon | critical | volume-3, volume-4, volume-9, corpus | 2026-07-09 |
 | [CTD-0015](items/ctd-0015-maren-minting-evidence.md) | Define what the Maren vignette says the currency records | query | canon | critical | volume-1, volume-3, corpus | 2026-08-20 |
 | [CTD-0019](items/ctd-0019-volume-two-empirical-sourcing.md) | Verify Volume II empirical and civilizational claims | open | citation | critical | volume-2, corpus | 2026-07-09 |
-| [CTD-0023](items/ctd-0023-first-wave-link-continuity.md) | Complete first-wave import and historical link audit | open | link | critical | volume-1, volume-2, volume-3, corpus | 2026-07-11 |
 | [CTD-0048](items/ctd-0048-volume-eight-fact-audit.md) | Refresh and verify Volume VIII's factual record | open | citation | critical | volume-8, corpus | 2026-07-09 |
 | [CTD-0055](items/ctd-0055-providence-protocol-ownership-promises.md) | Prove Providence's implementation and safeguard claims | open | technical | critical | volume-1, volume-2, volume-3, volume-4, site, corpus | 2026-07-09 |
 | [CTD-0088](items/ctd-0088-volume-seven-mentor-safeguarding.md) | Bound mentor authority and add safeguarding to Volume VII | open | canon | critical | volume-7, site, corpus | 2026-07-10 |
@@ -123,6 +122,7 @@ Open: 62. Queries: 39. Deferred: 6. Resolved: 5.
 | ID | Title | Status | Kind | Severity | Scope | Updated |
 | --- | --- | --- | --- | --- | --- | --- |
 | [CTD-0005](items/ctd-0005-subsistence-conditionality-conflict.md) | Resolve whether subsistence is unconditional or tied to self-regulation | resolved | logical | critical | volume-1, volume-3, volume-9, corpus | 2026-08-18 |
+| [CTD-0023](items/ctd-0023-first-wave-link-continuity.md) | Complete first-wave import and historical link audit | resolved | link | critical | volume-1, volume-2, volume-3, corpus | 2026-09-01 |
 | [CTD-0030](items/ctd-0030-cardinal-scale-existence-claims.md) | Verify whether the first Cardinal Scale exists | resolved | factual | critical | volume-1, volume-3, volume-4, volume-5, volume-8, volume-9, corpus | 2026-08-22 |
 | [CTD-0032](items/ctd-0032-volume-one-ampersand-normalization.md) | Restore intentional and citation ampersands | resolved | literary | medium | volume-1, volume-3, corpus | 2026-07-14 |
 | [CTD-0102](items/ctd-0102-volume-six-outline-hierarchy.md) | Restore Volume VI's first authored part in the reader outline | resolved | structural | medium | volume-6, reader, corpus | 2026-08-01 |
