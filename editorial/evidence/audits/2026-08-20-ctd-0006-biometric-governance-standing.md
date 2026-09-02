@@ -65,12 +65,15 @@ Neither permission turns a sensor into political authority. Equal membership, pr
 
 ## Independent editorial review
 
-The 2026-08-20 semantic, literary, and slop reviews examined an earlier categorical candidate. Their findings remain useful for the meeting safeguards, but their final pass does not approve the 2026-08-22 clarification. Fresh review of the reconciled candidate is required and will be recorded under `editorial/evidence/reviews/corpus/2026-09-01-ctd-0006-reconciliation/`.
+The 2026-08-20 semantic, literary, and slop reviews examined an earlier categorical candidate. Fresh semantic, literary, and complete slop review now passes at exact source commit `94e33ef8410197f77f2b08195cf0efd121348d0a`. The review records, including initial findings and corrections, are under `editorial/evidence/reviews/corpus/2026-09-01-ctd-0006-reconciliation/`.
 
 ## Validation state
 
 - The 2026-08-20 validation and preview results belong to the superseded categorical candidate and do not approve the clarified source.
-- Fresh editorial, manuscript, continuity, debt, audio, and exact-preview checks are required against the reconciled candidate on current `origin/main`.
+- On 2026-09-01, `npm run editorial:validate`, `npm run editorial:debt`, `npm run manuscripts:validate`, `npm run repository:source-boundary`, `npm run repository:validate-links`, and `npm run manuscripts:audit-history` passed. The history audit checked 4,387 historical URLs and found zero broken destinations.
+- `npm run editorial:lint:strict` completed its diagnostic corpus scan with 4,525 existing findings. Independent scoped review of every changed passage passed.
+- `npm run audio:verify-manuscript-publication -- --base origin/main` failed closed as required because eight spoken segments changed while the public audio manifest still points to older immutable versions. No audio was generated, uploaded, promoted, or published.
+- Exact local preview approval, replacement immutable audio, final publication validation, and structured ticket closure remain open.
 
 ## Related open obligations
 
