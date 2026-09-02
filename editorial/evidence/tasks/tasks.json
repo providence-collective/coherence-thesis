@@ -462,10 +462,10 @@
       "id": "T-050",
       "title": "Restore the Volume II semantic link from the Currency of Presence",
       "tier": "green",
-      "status": "in-progress",
+      "status": "done",
       "area": "editorial",
       "blockedBy": [],
-      "detail": "CTD-0107. The author decided on 2026-08-22 that the current Volume I phrase another kind of memory could become possible should link to Volume II's What Money Cannot See, and explicitly waived the local preview review gate on 2026-09-02. Add the reviewed occurrence, validate the rendered link, record structured debt resolution in the same branch, and open the focused pull request against main."
+      "detail": "Complete. For CTD-0107, the reviewed Volume I phrase another kind of memory could become possible now links to Volume II's What Money Cannot See. The author approved the link on 2026-08-22 and explicitly waived local preview review on 2026-09-02. The semantic audit finds one approved link and no unreviewed candidate, focused editorial and continuity checks pass, the compiled link targets the current route, and no manuscript or audio bytes changed. The ticket has structured resolution proof in the same pull request candidate."
     }
   ]
 }
