@@ -93,6 +93,11 @@
           "text": "What Money Cannot See",
           "caseSensitive": false,
           "wholeWord": true
+        },
+        {
+          "text": "another kind of memory could become possible",
+          "caseSensitive": false,
+          "wholeWord": true
         }
       ],
       "sourceEditorialIds": [
@@ -109,8 +114,8 @@
       "targetContinuityId": "v02-what-money-cannot-carry",
       "approval": {
         "state": "approved",
-        "date": "2026-07-14",
-        "rationale": "This exact unique section title maps to its reviewed continuity identity for candidate evaluation."
+        "date": "2026-09-02",
+        "rationale": "What Money Cannot See maps to its reviewed Volume II continuity identity. Under CTD-0107, the author approved the current Volume I phrase another kind of memory could become possible as a cross-reference label for this concept."
       }
     },
     {
@@ -796,6 +801,23 @@
         "state": "approved",
         "date": "2026-07-14",
         "rationale": "The sentence gives the Cardinal Scale its proper name and points to its later treatment."
+      }
+    },
+    {
+      "occurrenceId": "semantic-link-7040019eba45df93",
+      "conceptId": "section-title-v02-what-money-cannot-carry",
+      "source": {
+        "editorialId": "volume-01",
+        "sectionContinuityId": "v01-the-currency-of-presence",
+        "paragraphAnchor": "p-ha0c719792dc12462",
+        "matchText": "another kind of memory could become possible",
+        "matchOrdinal": 1
+      },
+      "decision": "link",
+      "approval": {
+        "state": "approved",
+        "date": "2026-09-02",
+        "rationale": "CTD-0107: The author approved this Volume I phrase as a direct conceptual reference to Volume II's What Money Cannot See."
       }
     }
   ]
