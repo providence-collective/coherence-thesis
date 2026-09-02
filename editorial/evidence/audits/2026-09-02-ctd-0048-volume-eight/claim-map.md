@@ -1,12 +1,12 @@
 # CTD-0048 claim map
 
-Map version: 2026-09-02 research candidate
+Map version: 2026-09-02 pre-repair record
 
-Exact manuscript hash: `60a9339de6656c68129449af471e06230b5ae7ad599001c7126c97152d79c0c7`
+Pre-repair manuscript hash: `60a9339de6656c68129449af471e06230b5ae7ad599001c7126c97152d79c0c7`
 
-This map is read with `research-report.md`. Each `R` reference supplies the full primary or authoritative source, page or table location, date, geography, population, denominator, method, uncertainty, and contested status. Repeated claims are mapped at every current occurrence but share the same evidence card. The exact-hash sentence ledger is the complete 855-sentence census. Sentences omitted below were reviewed as autobiography, fiction or composite explicitly labeled as such, authorial doctrine, interpretation, analogy, rhetoric, instruction, or project design rather than externally verifiable factual, empirical, medical, legal, historical, or quotation claims.
+This map preserves every factual, empirical, medical, legal, historical, and quotation claim identified in the pre-repair manuscript. It is read with `research-report.md` and `claim-status-register.md`. Each `R` reference supplies the primary or authoritative source, location, date, geography, population, denominator, method, uncertainty, and contested status. The status register records whether each earlier claim became verified, provisional, literary, composite, or withdrawn in the candidate. The final review ledger binds the retained candidate wording to its exact committed hash.
 
-Reviewer notation:
+Research notation:
 
 - `Research`: evidence pass completed 2026-09-02. This is source review, not qualified professional sign-off.
 - `Medical`: qualified clinical, public-health, nutrition, toxicology, or epidemiology reviewer pending.
@@ -14,7 +14,7 @@ Reviewer notation:
 - `History`: qualified historian or philologist pending.
 - `Quotation`: primary-text or complete-transcript verification pending where stated.
 
-No disposition below is approval to edit the manuscript.
+The author approved the open-review disposition model and the candidate changes on 2026-09-02. Earlier recommendations remain here as historical reasoning, not as the standing of the candidate.
 
 ## Title, history, and cosmology
 
@@ -1027,4 +1027,4 @@ No disposition below is approval to edit the manuscript.
 
 The exact-hash ledger contains 855 current sentence records across 31 section identities. This map records every sentence or sentence group in the current manuscript that the evidence pass identified as factual, empirical, medical, legal, historical, or quotation-bearing, including every numerical claim in the Accounting, Present Tense, intimacy section, and Roots, plus repeated factual claims elsewhere.
 
-Before C1 can be certified, the qualified reviewers must perform an independent omission pass against all 855 ledger records. A reviewer must add any missed claim rather than assuming omission means non-factual. Before C8 can be certified, this map and the sentence ledger must be regenerated against the exact final manuscript hash and every revised sentence must point to a surviving source card.
+The open-review candidate does not claim independent professional endorsement. Before C1 and C8 can be certified, the exact candidate sentence ledger must reconstruct the full manuscript, connect every retained factual sentence to its surviving source cards, and pass an omission check. Later attributed reviews may add missed claims or alter a status only through a new versioned edition.

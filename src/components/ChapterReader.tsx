@@ -8,6 +8,7 @@ import { ReaderBookmarkHighlightIsland } from "@/components/ReaderBookmarkHighli
 import { ReaderAudioWordInteractionIsland } from "@/components/ReaderAudioWordInteractionIsland";
 import { ReaderSelectionBookmarkIsland } from "@/components/ReaderSelectionBookmarkIsland";
 import { SectionRevisionNotice } from "@/components/SectionRevisionNotice";
+import { VolumeEvidenceLink } from "@/components/VolumeEvidenceLink";
 import {
   toProgressSection,
   type Chapter,
@@ -61,6 +62,7 @@ export function ChapterReader({
           title={chapter.title}
         />
         <p>{formatReadingDurationForWords(chapter.wordCount)} read.</p>
+        {firstSection && <VolumeEvidenceLink volumeId={firstSection.volumeId} />}
       </header>
       {sections.map((section, index) => (
         <section

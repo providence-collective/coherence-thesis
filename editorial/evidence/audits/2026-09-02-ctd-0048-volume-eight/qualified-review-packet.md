@@ -1,19 +1,20 @@
 # CTD-0048 qualified review packet
 
-This packet requests independent review of the claim map and proposed dispositions for Volume VIII. It is not a request for a general endorsement of the manuscript.
+This packet supports the public open-review process for Volume VIII. It invites attributable review within a reader's field and is not a request for general endorsement of the manuscript.
 
 ## Record under review
 
 - Manuscript: `editorial/sources/volumes/volume-08/manuscript.md`
-- Exact source hash: `60a9339de6656c68129449af471e06230b5ae7ad599001c7126c97152d79c0c7`
-- Claim map: `claim-map.md`
+- Candidate source hash: `bd64a5ec4ffbfb749b6c539c0649587eab6e437c79fbe7891a14e1c68a9b97a2`
+- Pre-repair claim map: `claim-map.md`
+- Candidate status register: `claim-status-register.md`
 - Source report: `research-report.md`
 - Historical production review preserved at: `editorial/evidence/reviews/volumes/volume-08/2026-07-09-production-pass/review.md`
 - Boundary: no heading, section identity, or route may change.
 
 Reviewers should not treat the July review as a fact check. It says fact checking was not performed and that the candidate was not publication approved.
 
-## Required reviewer record
+## Attributed reviewer record
 
 Each reviewer must provide:
 
@@ -29,7 +30,7 @@ Each reviewer must provide:
 - Whether any retained statement could reasonably be read as medical or legal advice.
 - Signed conclusion and remaining limitations.
 
-No anonymous, simulated, or editorial-only review satisfies C6 or C7.
+Anonymous comments may identify a useful lead, but a conclusion enters the versioned review record only when its author, scope, basis, and conflicts are attributable. The standing edition remains openly provisional in the relevant field unless and until a later edition incorporates that review.
 
 ## Medical and public-health review
 
@@ -126,6 +127,6 @@ Publication conclusion for accepted scope:
 Signature or attributable written confirmation:
 ```
 
-## Completion rule
+## Versioning rule
 
-Qualified review is complete only when every medical and legal claim has an in-scope conclusion and every historical claim has the C7 language, region, period, and descent-versus-analogy decision. An editor can coordinate and record those reviews but cannot substitute for them.
+Publication of this open-review edition does not assert that every field has supplied an independent professional conclusion. The current edition is complete when its retained claims are sourced and honestly classified, unsupported claims are withdrawn, and this review process is working and public. An accepted attributable review is preserved with its scope and limitations, then incorporated through a later versioned edition rather than used to rewrite the standing of this one retroactively.

@@ -1,16 +1,16 @@
 # Volume VIII living evidence report
 
-Version: 2026-09-02 research candidate
+Version: 2026-09-02 open-review candidate
 
-Source hash: `60a9339de6656c68129449af471e06230b5ae7ad599001c7126c97152d79c0c7`
+Candidate source hash: `bd64a5ec4ffbfb749b6c539c0649587eab6e437c79fbe7891a14e1c68a9b97a2`
 
-This is a versioned evidence report, not publication approval. `Primary` means the underlying study, statute, court filing, agency dataset, or direct statement. `Authoritative` means the strongest responsible institutional synthesis available when a primary dataset is not practical for the claim.
+This is the versioned evidence report for the proposed Volume VIII open-review edition. It records the evidence available for the candidate above; it does not claim medical, legal, or historical endorsement. `Primary` means the underlying study, statute, court filing, agency dataset, or direct statement. `Authoritative` means the strongest responsible institutional synthesis available when a primary dataset is not practical for the claim. `Verified` means a source supports the bounded candidate wording. `Provisional` means evidence exists but interpretation, method, or professional judgment remains open. `Withdrawn` means the earlier wording was unsupported, contradicted, untraceable, or retired.
 
 ## Executive finding
 
-The core ecological and demographic direction is supportable. The current manuscript nevertheless contains several figures that are wrong, stale, underspecified, or stronger than their sources. The safest candidate is a narrow factual repair inside the current headings and routes, not a structural rewrite.
+The core ecological and demographic direction is supportable. The candidate corrects, narrows, or withdraws the figures and quotations that failed the source check while preserving every existing heading, section identity, and route. The detailed claim-status register records the result for all 111 entries in the pre-repair map.
 
-### Claims that fail as written
+### Earlier claims corrected or withdrawn
 
 - The bee survey did not establish 1.6 million colonies lost. It represented 1.835 million colonies and reported average commercial loss of about 62 percent, implying more than 1.1 million colonies among respondents.
 - The pollination sentence combines different denominators. About 87.5 percent of wild flowering plant species depend at least partly on animal pollination, more than three quarters of leading food-crop types benefit, and about 35 percent of crop-production volume comes from crops that depend at least partly on animal pollination.
@@ -22,7 +22,7 @@ The core ecological and demographic direction is supportable. The current manusc
 - The Fuller wording cannot yet be traced to a primary Fuller text. The popular two-sentence form should not be presented as an authenticated Fuller quotation.
 - The Krishnamurti Foundation cannot authenticate the popular line used as the title's point of departure. It identifies the wording as a later paraphrase of a theme Krishnamurti did express.
 
-### Claims that require narrowing or a named denominator
+### Candidate claims retained with boundaries
 
 - Conflict counts depend on a definition and tracker. The CFR Global Conflict Tracker is not a world census. It covers conflicts of concern to the United States.
 - Sudan's 150,000 deaths is a high outside estimate, not an official counted total. UNHCR's displacement total also changes by snapshot and by whether refugees, returnees, and internally displaced people are combined.
@@ -530,9 +530,106 @@ The core ecological and demographic direction is supportable. The current manusc
 - Limits: interpretive summaries require page citations; the sentence calling the wording Fuller's "most enduring instruction" is evaluative.
 - Disposition: retain only as page-cited paraphrase unless a primary quotation source is established.
 
-## Preliminary disposition summary
+### R46 COP30 adopted package and presidency roadmaps
 
-- Keep with attached citation: North American birds; Krefeld regional result; rejection of a global sixty-harvest countdown; water access and agricultural-withdrawal data; glyphosate's split hazard and risk record; WMO and Copernicus temperature records; CDC overdose decline; fertility level; sperm meta-regression with limits; Surgeon General loneliness comparison; Thiel quotation.
-- Narrow or correct: bee losses; pollination denominators; farmer-suicide period and categories; nutrition consensus; microplastic tissue claims; inflation comparison; bankruptcies; buyer age; AI cuts and early-career employment; EU and United States AI law; Sudan; 23andMe; social credit; infertility; sexual-frequency estimates; planetary-week and festival history; Krishnamurti adaptation.
-- Remove unless a primary source is produced: forty-percent water gap; 700 million water-displacement projection; lowest-ever sentiment; widest-ever wage gap; three-quarters of homes unaffordable; twelve million households behind; 700 billion dollars in AI infrastructure; one-sixth of United States jobs gone in five years as attributed to BCG; 150,000 Sudan deaths as an authoritative count; Epstein vanished-file, search-log, and fabricated-image details; authenticated Fuller quotation.
-- Hold for direct verification: Palantir's separate "more lethal" wording, Capra pages, exact NCRB cumulative farmer-suicide total, exact 23andMe customer count, weighted GSS calculations, and the historical festival pages.
+- Sources: UNFCCC, `Belem Political Package`; UNFCCC, `COP30 Presidency Roadmaps`; COP30 Presidency Executive Report.
+- Location: the political package's complete list of adopted decision texts; the Presidency Roadmaps page's opening description; Executive Report section on Presidency roadmaps.
+- Date and geography: COP30 in Belem, Brazil, November 2025; roadmap work documented through 2026; parties to the UN climate process.
+- Population and denominator: 56 consensus decisions in the Presidency's executive account; no human population denominator.
+- Method: comparison of the adopted decision inventory with the separately announced presidency work programme.
+- Finding: the formal package adopted decisions by consensus. At the conference's close, the president separately announced an intention to develop transition-away and forest roadmaps, and later presidency materials describe that continuing work.
+- Limits: the conclusion that the adopted package did not itself contain the transition-away roadmap is an inference from the complete adopted-text inventory and the UNFCCC's separate treatment of the presidency roadmap.
+- Sources: https://unfccc.int/cop30/belem-political-package and https://unfccc.int/cop30/cop30-presidency-roadmaps
+
+### R47 Ellsberg, Manning, Snowden, and Assange documentary records
+
+- Sources: National Archives, `Pentagon Papers`; Department of Justice Office of the Pardon Attorney commutation record for Chelsea Manning; Department of Justice statement on Edward Snowden's criminal complaint; United States v. Julian Assange plea agreement and Justice Department disposition notice.
+- Location: National Archives overview and linked 1973 Ellsberg interview; Manning entry in the 2009 to 2017 commutations table; Snowden statement listing the June 2013 complaint statutes; Assange plea agreement pages 1 to 2 and June 25, 2024 disposition notice.
+- Date and geography: United States records from 1971 through 2024.
+- Population and denominator: four individually named cases; no aggregate denominator.
+- Method: separate archival and court-record verification for each person.
+- Finding: Ellsberg disclosed the Pentagon Papers; Manning disclosed military and diplomatic records and was convicted at court-martial; Snowden disclosed classified surveillance information and was charged under United States law; Assange published source-supplied material and pleaded guilty to conspiracy to obtain and disclose classified national-defense information.
+- Limits: the cases involve different conduct, procedural histories, legal theories, judgments, and consequences. Their collective moral meaning is interpretation.
+- Sources: https://www.archives.gov/research/pentagon-papers, https://www.justice.gov/pardon/commutations-granted-president-barack-h-obama-2009-2017, https://www.justice.gov/archives/opa/pr/justice-department-statement-request-hong-kong-edward-snowden-s-provisional-arrest, and https://www.justice.gov/opa/media/1358636/dl?inline=
+
+### R48 Title etymologies and the birds-and-bees phrase
+
+- Source: Merriam-Webster.com Dictionary entries for `misanthrope`, `artifice`, and `the birds and the bees`.
+- Location: each entry's definition and Word History or Etymology section.
+- Date and geography: current English dictionary entries accessed for the 2026 edition; Greek, Anglo-French, Middle French, and Latin word histories where specified.
+- Population and denominator: not applicable.
+- Method: historical lexicography.
+- Finding: Greek *misanthrōpos* means hating humankind and derives from *misein* and *anthrōpos*; English *artifice* came through French from Latin *artificium*, with senses including craft, contrivance, and trick; `the birds and the bees` is an informal phrase for facts about sex told to children.
+- Limits: dictionary derivation does not establish the manuscript's moral interpretation. The phrase's full twentieth-century cultural history would require a corpus study.
+- Sources: https://www.merriam-webster.com/dictionary/misanthrope, https://www.merriam-webster.com/dictionary/artifice, and https://www.merriam-webster.com/dictionary/the%20birds%20and%20the%20bees
+
+### R49 Saturn and melancholy
+
+- Source: Raymond Klibansky, Erwin Panofsky, and Fritz Saxl, *Saturn and Melancholy: Studies in the History of Natural Philosophy, Religion, and Art*.
+- Location: `Saturn in the Literary Tradition`, pages 127 to 195, especially the opening account of the medieval and Renaissance association; `Saturn in the Pictorial Tradition`, pages 196 to 214.
+- Date and geography: ancient, medieval, and Renaissance sources, with the English scholarly edition first published in 1964.
+- Population and denominator: not applicable.
+- Method: history of texts, natural philosophy, religion, and art.
+- Finding: later medieval and Renaissance literary traditions connected Saturn with melancholy, and related pictorial traditions connected the planet with time and other layered attributes.
+- Limits: these associations changed across periods and media. They do not constitute one universal or timeless astrological doctrine.
+- Source: https://www.jstor.org/stable/j.ctvscxt1r
+
+### R50 Mid-2026 conflicts and drone warfare
+
+- Sources: UNHCR Ukraine emergency and 2026 operational records; United Nations OCHA occupied Palestinian territory situation reports; UNHCR Sudan Situation Appeal 2026 and June 2026 dashboard; NATO records on first-person-view drones and battlefield adaptation.
+- Location: each emergency page's dated situation overview; OCHA's June 26, 2026 report overview and Gaza section; UNHCR Sudan appeal opening situation analysis; NATO Allied Command Transformation's June 24, 2025 challenge record and February 2026 Ukraine battlefield lessons.
+- Date and geography: Ukraine, the occupied Palestinian territory, and Sudan through mid-2026; battlefield-technology evidence centered on Ukraine.
+- Population and denominator: separately reported conflict-affected and displaced populations; no combined global count is used in the manuscript.
+- Method: dated humanitarian administrative reporting and institutional military lessons.
+- Finding: the named wars continued to kill, injure, and displace people on a vast scale; inexpensive commercial and first-person-view drones expanded reconnaissance and strike reach in Ukraine.
+- Limits: humanitarian estimates change by date, reporting authority, and population definition. Battlefield observations do not establish one universal effect on deterrence.
+- Sources: https://www.unhcr.org/emergencies/ukraine-emergency, https://www.ochaopt.org/content/humanitarian-situation-report-26-june-2026, https://www.unhcr.org/sites/default/files/2026-02/UNHCR%20Sudan%20Situation%20Appeal%202026.pdf, and https://www.act.nato.int/article/innovation-challenge-fibre-optic-drones/
+
+### R51 Rachel Carson's silent spring image
+
+- Source: Rachel Carson, *Silent Spring* (Houghton Mifflin, 1962).
+- Location: chapter 1, `A Fable for Tomorrow`, pages 1 to 3 in the first edition, followed by chapter 2's explanation that the imagined town's separate disasters each had real counterparts.
+- Date and geography: published 1962; composite United States setting.
+- Population and denominator: not applicable.
+- Method: literary fable grounded in documented pesticide harms, not a population forecast.
+- Finding: Carson used the imagined disappearance of bird voices in spring as a warning about indiscriminate pesticide use.
+- Limits: the passage is an image and composite warning. It is not a measured projection that birdsong will become rare everywhere.
+
+### R52 Honey-bee stressor interactions and Colony Collapse Disorder
+
+- Sources: Al Naggar and Paxton, `Synergistic and Antagonistic Interactions Between Varroa destructor Mites and Neonicotinoid Insecticides in Male Apis mellifera Honey Bees`, *Frontiers in Ecology and Evolution* 9 (2021), article 756027; United States EPA pollinator-risk history and USDA Colony Collapse Disorder materials.
+- Location: Frontiers Methods, Results, and Discussion; agency chronology for the winter 2006 to 2007 reports.
+- Date and geography: controlled colony-level experiment published 2021; United States reporting history beginning in winter 2006 to 2007.
+- Population and denominator: male honey bees exposed at the tested colony and dose conditions; reported United States commercial colonies for the chronology.
+- Method: controlled factorial exposure experiment, plus agency reporting history.
+- Finding: tested *Varroa* and neonicotinoid combinations can interact under specified conditions; United States agencies date the prominent Colony Collapse Disorder reports to winter 2006 to 2007.
+- Limits: laboratory or colony conditions do not establish one national cause of the 2024 to 2025 commercial losses. Interactions vary by compound, dose, bee stage, and parasite burden.
+- Source: https://www.frontiersin.org/journals/ecology-and-evolution/articles/10.3389/fevo.2021.756027/full
+
+### R53 Dark-triad construct
+
+- Source: Delroy L. Paulhus and Kevin M. Williams, `The Dark Triad of Personality: Narcissism, Machiavellianism, and Psychopathy`, *Journal of Research in Personality* 36 (2002), pages 556 to 563.
+- Location: abstract, construct definitions, measures, and intercorrelation results.
+- Date and geography: published 2002; two Canadian undergraduate samples.
+- Population and denominator: 245 and 215 students in the reported studies.
+- Method: self-report personality scales, cognitive measures, and correlational analysis.
+- Finding: the paper proposed the related but distinct personality constructs now called the dark triad.
+- Limits: the construct and measures do not permit remote diagnosis of named public figures. Later literature debates measurement, overlap, and generalizability.
+- Source: https://doi.org/10.1016/S0092-6566(02)00505-6
+
+### R54 Technofeudalism and surveillance capitalism terminology
+
+- Sources: Yanis Varoufakis, *Technofeudalism: What Killed Capitalism* (2023); Shoshana Zuboff, *The Age of Surveillance Capitalism* (2019).
+- Location: each book's definition and opening argument; the manuscript uses the terms as attributed frameworks rather than settled historical periodization.
+- Date and geography: published 2023 and 2019; contemporary political-economic analysis centered on digital platforms.
+- Population and denominator: not applicable.
+- Method: attributed theoretical interpretation.
+- Finding: Varoufakis uses `technofeudalism` for his account of platform power, and Zuboff uses `surveillance capitalism` for the extraction and prediction of behavior from data.
+- Limits: both are contested analytic frameworks. The manuscript's manor, cage, and deposit images are its own analogies, not empirical findings of those books.
+
+## Open-review disposition summary
+
+- **Verified:** North American bird loss; the bounded commercial-beekeeper survey; separate pollination denominators; the Krefeld regional result; rejection of a global sixty-harvest countdown; United Nations water measures; IARC and regulatory glyphosate classifications stated as different questions; named economic series; WMO and Copernicus temperature records; CDC overdose counts; United Nations fertility level; the WHO infertility estimate; the Thiel quotation; and the verified portion of the Palantir recording.
+- **Provisional:** plural causes of agricultural suicide; project-specific land and water control; microplastic tissue detection without a clinical-effect claim; employer-attributed AI cuts; early-career employment analysis; legal interpretations of the EU AI Act, Executive Order 14365, 23andMe, and Chinese social-credit systems; sperm-count meta-regression; the loneliness comparison; weighted sexual-frequency findings; and bounded historical and intellectual interpretations.
+- **Withdrawn:** the unsupported water, housing, wage-gap, sentiment, farmer-suicide, AI-investment, and conflict totals; causal apportionment of the overdose decline; the universal citizen-score account; the one-in-three-bites slogan; unsupported tissue-harm claims; vanished-file and fabricated-image allegations; unverified applause and lethality wording; and popular quotations without a primary lineage.
+- **Open review:** qualified readers may challenge any status using the public submission form. Accepted attributable conclusions and corrections create a later versioned edition. They do not retroactively confer professional endorsement on this candidate.

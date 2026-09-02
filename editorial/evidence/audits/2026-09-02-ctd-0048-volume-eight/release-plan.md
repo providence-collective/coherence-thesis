@@ -2,34 +2,34 @@
 
 This plan separates preparation from approval. Commands run in `/Users/robertryan/Documents/GitHub/coherence-thesis-worktrees/ctd-0048-fact-map` on `edit/ctd-0048-fact-map`.
 
-## Phase 1: evidence candidate
+## Phase 1: evidence and author decision
 
-Current status: in progress.
+Current status: complete for the open-review candidate.
 
 - Consolidate the T-050 and quick-triage commits on the task branch rebased to `origin/main` at `2074065`. Complete.
 - Run `npm run editorial:debt:queue -- --id CTD-0048`. Complete.
-- Freeze the current source into exact-hash sentence and structure ledgers. Complete for hash `60a9339d...`; working review batch remains uncommitted until final.
-- Build source cards, claim map, reviewer packet, and author decision sheet. Prepared as research candidates.
-- Obtain qualified medical, legal, and historical review. Outstanding external gate.
-- Record named reviewers, qualifications, scope, conclusions, and omissions against the exact hash. Outstanding.
+- Freeze the pre-repair source into exact-hash sentence and structure ledgers. Complete for hash `60a9339d...`.
+- Build source cards, claim map, reviewer packet, and author decision sheet. Complete.
+- Record the author's 2026-09-02 approval of the open-review placements, status model, revised C1 to C8 criteria, and factual-repair direction. Complete.
+- Establish a public route and attributable submission form for later qualified review. Complete in the candidate.
 
-Stop condition: do not edit the manuscript until all required reviewer conclusions exist and the author approves exact decisions and wording.
+Boundary: this edition may not be described as medically, legally, or historically endorsed. Later attributable reviews create new versioned editions.
 
 ## Phase 2: approved factual repair
 
-After author approval:
+Author approval was given on 2026-09-02. The candidate now:
 
 1. Edit only `editorial/sources/volumes/volume-08/manuscript.md` and the evidence records authorized by the decisions.
 2. Preserve all headings, standalone bold structural lines, section identities, ordering, and routes.
 3. Update the Roots entries from the surviving claim map. Do not hand-edit generated reader output.
 4. Run `npm run manuscripts:prepare`.
 5. Recreate the exact candidate ledgers if the source hash changed.
-6. Complete independent semantic, literary, and slop reviews required by the editorial-review protocol, recording them in the final review batch.
-7. Refresh every volatile source as of the final candidate date.
-8. Re-run the omission review over all final sentence records.
-9. Preserve the source and evidence in a checkpoint commit before preview handoff.
+6. Records semantic, literary, and mechanical review evidence without presenting editorial review as professional endorsement.
+7. Refreshes every volatile source as of the final candidate date.
+8. Re-runs the omission review over all final sentence records.
+9. Preserves the source and evidence in a checkpoint commit before preview handoff.
 
-Stop condition: do not resolve the ticket or mark T-050 done while any claim, reviewer conclusion, citation attachment, or required revision is incomplete.
+Stop condition: do not resolve the ticket or mark T-050 done while any final claim attachment, required revision, validation, audio, or preview proof is incomplete.
 
 ## Phase 3: focused validation
 
@@ -38,15 +38,22 @@ Run shared-output commands sequentially.
 ```bash
 npm run editorial:validate
 npm run editorial:lint:strict
-npm run editorial:ledgers:validate
+npm run editorial:ledgers:validate -- \
+  editorial/evidence/reviews/volumes/volume-08/2026-09-02-open-review-fact-audit/sentence-ledger.jsonl
+npm run editorial:structure-ledger -- \
+  --base 20740657f5cc8fbec934c1df609d7e7e0d95fc32 \
+  --current WORKTREE \
+  --source editorial/sources/volumes/volume-08/manuscript.md \
+  editorial/evidence/reviews/volumes/volume-08/2026-09-02-open-review-fact-audit/structure-ledger.jsonl
 npm run manuscripts:prepare
 npm run manuscripts:validate
-npm run manuscripts:preserve-links
+npm run manuscripts:preserve-links -- \
+  --base 20740657f5cc8fbec934c1df609d7e7e0d95fc32
 npm run manuscripts:audit-history
 npm run repository:source-boundary
 ```
 
-Citation verification is partly structural and partly human. The final sentence ledger must contain direct citation attachments for every retained factual, empirical, medical, legal, historical, and quotation claim. The living report must show source location, method, population, geography, date, denominator, uncertainty, reviewer, and conclusion for each.
+Citation verification is partly structural and partly editorial. The final sentence ledger must contain direct citation attachments for every retained factual, empirical, medical, legal, historical, and quotation claim. The living report must show source location, method, population, geography, date, denominator, uncertainty, reviewer, and conclusion for each. Provisional status must remain visible where professional judgment or a reproducible method is still open.
 
 Confirm structure separately by diffing headings and generated section identities against the approved baseline. Any heading, standalone bold line, part introduction, route, or identity change fails the approved boundary and requires a separate continuity decision.
 
@@ -73,7 +80,7 @@ Stop condition: no ready pull request and no merge while the audio verifier repo
 
 ## Phase 5: exact-worktree preview and author approval
 
-After the final candidate commit and audio parity:
+After the final candidate commit:
 
 1. Select an unused port.
 2. Start the managed preview in this exact worktree.
@@ -94,15 +101,15 @@ Review at minimum:
 - Architects quotations.
 - Roots source register.
 - Representative prior public routes and the Volume VIII table of contents.
-- Audio playback and timing for every changed section.
+- The audio-parity plan and every changed section identified by the verifier. Playback review follows publication of the matching immutable files.
 
 Give the author the direct local URL. Wait for explicit approval of that exact commit and digest. A changed candidate invalidates the approval.
 
 Stop condition: do not push or open the pull request before exact-preview approval or an explicit waiver.
 
-## Phase 6: closure candidate
+## Phase 6: audio parity and closure candidate
 
-After specialist, author wording, exact-preview, and audio approvals:
+After author wording, exact-preview, and audio approvals:
 
 1. Fill structured CTD-0048 proof for C1 through C8 with links to the final claim map, source cards, reviewer records, final source hash, citation attachments, continuity proof, and validation results.
 2. Set CTD-0048 to `resolved` on the same repair branch.
@@ -131,16 +138,15 @@ Pull-request body candidate:
 ## Summary
 
 - attaches a claim-level evidence map to every retained factual, empirical, medical, legal, historical, and quotation claim in Volume VIII
-- corrects or removes claims that did not survive primary-source and qualified review while preserving every heading, section identity, and route
+- corrects or removes claims that did not survive primary-source review while preserving every heading, section identity, and route
 - publishes matching immutable audio and timing for every changed spoken section
 - records fresh exact-hash review evidence and resolves CTD-0048 with proof for C1 through C8
 
 ## Review evidence
 
 - final manuscript hash: <hash>
-- qualified medical review: <record>
-- qualified legal review: <record>
-- qualified historical and quotation review: <record>
+- open-review process: <public route and submission record>
+- professional endorsement: not claimed
 - exact local preview: <url, commit, digest, approval>
 
 ## Validation
@@ -158,7 +164,7 @@ Pull-request body candidate:
 
 ## Remaining gate
 
-<none for a ready pull request, or name the one concrete specialist, preview, audio, or publication gate keeping the pull request in draft>
+<none for a ready pull request, or name the one concrete preview, audio, or publication gate keeping the pull request in draft>
 ```
 
 The pull request must target `main`. It may be draft only while a named gate remains incomplete. Before merge run:
@@ -182,10 +188,9 @@ After squash merge:
 
 ## Approval ledger
 
-- Qualified medical review: pending.
-- Qualified legal review: pending.
-- Qualified historical and quotation review: pending.
-- Author claim-retention and exact wording approval: pending.
+- Open-review process: implemented in the candidate; public route validation pending.
+- Qualified medical, legal, and historical endorsement: not claimed and not a closure prerequisite for this edition.
+- Author claim-retention and exact wording approval: approved 2026-09-02 for the open-review candidate direction.
 - Author exact-preview approval: pending.
 - Author audio publication and playback approval: pending.
 - Push approval implicit only after the exact-preview gate is satisfied under the requested workflow.

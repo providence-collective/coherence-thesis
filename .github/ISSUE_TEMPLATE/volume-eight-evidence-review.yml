@@ -1,0 +1,64 @@
+name: Volume VIII evidence review
+description: Submit an attributed correction or qualified review of the Volume VIII factual record.
+title: "Volume VIII evidence review: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping test the living factual record. Review only the claims within your knowledge and identify the exact claim IDs you considered.
+  - type: input
+    id: name
+    attributes:
+      label: Reviewer name
+      description: The name that may be attributed in the versioned review record.
+    validations:
+      required: true
+  - type: textarea
+    id: qualifications
+    attributes:
+      label: Relevant qualifications and scope
+      description: State the field, training, practice, research, archival experience, or other basis for this review.
+    validations:
+      required: true
+  - type: input
+    id: claims
+    attributes:
+      label: Claim IDs reviewed
+      description: List the exact IDs from the public claim map, such as E31, P33, or H08.
+    validations:
+      required: true
+  - type: textarea
+    id: conclusion
+    attributes:
+      label: Review conclusion
+      description: For each claim, state verified, revise, withdraw, or outside scope, and explain why.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources and locations
+      description: Provide primary or authoritative sources with page, table, dataset, docket, statute, or transcript locations.
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations, uncertainty, and contested status
+      description: Identify material disagreement, uncertainty, population limits, or methods that should remain visible.
+    validations:
+      required: true
+  - type: textarea
+    id: conflicts
+    attributes:
+      label: Conflicts or relevant relationships
+      description: Disclose any relationship that could reasonably affect the review, or write none.
+    validations:
+      required: true
+  - type: checkboxes
+    id: attribution
+    attributes:
+      label: Attribution
+      options:
+        - label: I consent to attribution of this submission in a later versioned evidence record.
+          required: true

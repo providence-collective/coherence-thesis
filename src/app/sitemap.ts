@@ -22,6 +22,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.95,
     },
+    {
+      url: `${siteUrl}/evidence/volume-08/`,
+      changeFrequency: "monthly",
+      priority: 0.55,
+    },
     ...updateModes.flatMap((mode) => [
       {
         url: `${siteUrl}${getUpdatesPageHref(1, mode)}`,

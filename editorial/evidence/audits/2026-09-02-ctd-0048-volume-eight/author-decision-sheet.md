@@ -1,8 +1,8 @@
 # CTD-0048 author decision sheet
 
-Status: research candidate, not yet ready for author decision
+Status: approved open-review decision material
 
-The exact language below shows the likely minimum factual repair. It is review material only. Qualified reviewers may require different wording, and no text will be copied into the manuscript before their conclusions and the author's explicit approval.
+The author approved the open-review placements, status model, closure standard, and factual-repair direction on 2026-09-02. The candidate manuscript applies that direction, but its exact wording and hash remain subject to preview approval. Later attributable reviews may require a new versioned edition after an approved candidate is published.
 
 Every option preserves existing headings, section identities, and routes.
 

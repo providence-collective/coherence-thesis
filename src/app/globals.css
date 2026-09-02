@@ -3009,6 +3009,41 @@ a.bookmark-quote:focus-visible {
   text-underline-offset: 0.18em;
 }
 
+.volume-evidence-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  margin-top: 0.85rem;
+  padding: 0.34rem 0.62rem;
+  border: 1px solid rgba(96, 121, 109, 0.38);
+  border-radius: 999px;
+  color: var(--sage);
+  background: rgba(96, 121, 109, 0.07);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.volume-evidence-link:hover,
+.volume-evidence-link:focus-visible {
+  border-color: var(--sage);
+  background: rgba(96, 121, 109, 0.13);
+}
+
+.volume-evidence-dot {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 999px;
+  background: var(--sage);
+}
+
+.volume-evidence-state {
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
 .section-version-meta a:where(:visited) {
   color: var(--bronze-deep);
 }
