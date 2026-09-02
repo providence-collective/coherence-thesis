@@ -68,7 +68,16 @@
           "publishedAt": null
         }
       ],
-      "approvedCandidate": null
+      "approvedCandidate": {
+        "checkpointId": "volume-03/published-2026-09-02-ctd-0006",
+        "parentCheckpointId": "volume-03/original",
+        "commit": "113cfbbab7c6a80592f808a0a1fffb5eac26794a",
+        "sourcePath": "editorial/sources/volumes/volume-03/manuscript.md",
+        "snapshotPath": "editorial/evidence/checkpoints/volume-03/published-2026-09-02-ctd-0006/manuscript.md",
+        "sha256": "3beb8c2276f7a369b54d0e41e3d421c8f497a0215775b3ffeda2d51ab73846da",
+        "approvalRecordPath": "editorial/evidence/publication-approvals/volume-03/published-2026-09-02-ctd-0006.json",
+        "approvedAt": "2026-09-02"
+      }
     },
     {
       "editorialId": "volume-04",
@@ -87,7 +96,16 @@
           "publishedAt": null
         }
       ],
-      "approvedCandidate": null
+      "approvedCandidate": {
+        "checkpointId": "volume-04/published-2026-09-02-ctd-0006",
+        "parentCheckpointId": "volume-04/original",
+        "commit": "113cfbbab7c6a80592f808a0a1fffb5eac26794a",
+        "sourcePath": "editorial/sources/volumes/volume-04/manuscript.md",
+        "snapshotPath": "editorial/evidence/checkpoints/volume-04/published-2026-09-02-ctd-0006/manuscript.md",
+        "sha256": "a3ef03f0d955768be26a987c012e498d53766dc267ccfebe1e26cec7d0595ba2",
+        "approvalRecordPath": "editorial/evidence/publication-approvals/volume-04/published-2026-09-02-ctd-0006.json",
+        "approvedAt": "2026-09-02"
+      }
     },
     {
       "editorialId": "volume-05",
@@ -182,7 +200,16 @@
           "publishedAt": null
         }
       ],
-      "approvedCandidate": null
+      "approvedCandidate": {
+        "checkpointId": "volume-09/published-2026-09-02-ctd-0006",
+        "parentCheckpointId": "volume-09/original",
+        "commit": "113cfbbab7c6a80592f808a0a1fffb5eac26794a",
+        "sourcePath": "editorial/sources/volumes/volume-09/manuscript.md",
+        "snapshotPath": "editorial/evidence/checkpoints/volume-09/published-2026-09-02-ctd-0006/manuscript.md",
+        "sha256": "22981f93f8a953e42919fb8062bdd3db730102e4255cecd538c136990f1b55f3",
+        "approvalRecordPath": "editorial/evidence/publication-approvals/volume-09/published-2026-09-02-ctd-0006.json",
+        "approvedAt": "2026-09-02"
+      }
     }
   ]
 }

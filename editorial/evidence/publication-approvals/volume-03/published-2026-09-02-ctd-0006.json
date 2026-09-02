@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "approvalId": "volume-03/published-2026-09-02-ctd-0006",
+  "editorialId": "volume-03",
+  "checkpointId": "volume-03/published-2026-09-02-ctd-0006",
+  "parentCheckpointId": "volume-03/original",
+  "sourcePath": "editorial/sources/volumes/volume-03/manuscript.md",
+  "sha256": "3beb8c2276f7a369b54d0e41e3d421c8f497a0215775b3ffeda2d51ab73846da",
+  "approvedBy": "author",
+  "approvedAt": "2026-09-02",
+  "evidencePaths": [
+    "editorial/evidence/debt/items/ctd-0006-biometric-governance-standing.md",
+    "editorial/evidence/reviews/corpus/2026-09-01-ctd-0006-reconciliation/summary.md"
+  ]
+}
