@@ -2,6 +2,8 @@
 
 Date: 2026-08-20
 
+Clarified: 2026-08-22
+
 Authority: Author decision
 
 Scope: Volume III, Volume IV, Volume IX, and corpus canon
@@ -30,21 +32,23 @@ Output must be ephemeral, aggregate, non-attributable, advisory, and excluded fr
 
 This preserves a narrow research path while protecting equal standing and refusal. Its detriments are operational complexity, the possibility of subtle consent pressure, accessibility and missing-data problems, measurement error, and the risk that an advisory display acquires unwarranted authority.
 
-Authority required: Author decision, followed by editorial review. The author selected this option on 2026-08-20 as the current provisional path.
+Authority required: Author decision, followed by editorial review. The author selected the meeting-sensing portion of this option on 2026-08-20. The categorical exclusion of personal records was superseded by the 2026-08-22 clarification recorded under Option 3.
 
 Dependencies: Affected-participant governance; accessible private consent; a fail-closed activation rule; a privacy threshold that prevents activation when a response is readily inferable; local or ephemeral processing; aggregate and non-attributable output; withdrawal handling; privacy, accessibility, discrimination, security, and measurement review; and a human process for pause, appeal, complaint, remedy, and retirement.
 
 Proof required: Tests that sensing cannot activate without unanimous current consent; a late arrival or withdrawal stops sensing; the meeting continues without sensing; the system reveals no individual response or reason; sensing stays off when surrounding circumstances make a response readily inferable; no output enters a participant record; no automated pause or decision exists; refusal changes no right, role, reputation, or eligibility; and participants can request a pause without a sensor.
 
-### Option 3: Permit consented personal biometric evidence in bounded stewardship
+### Option 3: Permit voluntary personal evidence as one input to bounded stewardship
 
-This would preserve the broadest version of the earlier Providence proposal by allowing a participant to offer biometric-derived history when seeking a role. It might surface a dimension of development that non-biometric testimony misses. It also creates the highest risk of proxy discrimination, coerced disclosure, gaming, measurement error, status hierarchy, and gradual conversion of optional evidence into a practical requirement. The current literature does not establish that physiological synchrony identifies wisdom, trustworthiness, moral worth, or fitness to govern.
+This preserves a bounded version of the earlier Providence proposal. Human decision-makers may consider demonstrated relational coherence when choosing leaders or stewards. A participant may voluntarily offer a private longitudinal record containing limited biometrics and consented reflections from others as evidence that their presence has repeatedly helped people around them become more regulated and well. The record may inform a decision but cannot decide it, become its sole basis, or establish a preferred physiological ideal. Refusal creates no adverse inference, and accessible non-biometric evidence must carry equal standing.
 
-Authority required: A new author ruling that reverses the present doctrine, plus qualified scientific, legal, privacy, accessibility, democratic-governance, and affected-community review.
+The option retains serious risks: proxy discrimination, coerced disclosure, gaming, measurement error, status hierarchy, and gradual conversion of optional evidence into a practical requirement. The current literature does not establish that physiological synchrony identifies wisdom, trustworthiness, moral worth, or fitness to govern. The permission is therefore normative and procedural, not an empirical claim that the record proves the role-relevant capacity.
 
-Dependencies: Validated constructs and instruments; cross-population performance; purpose limitation; data control; non-biometric parity; due process; appeal; anti-discrimination controls; remedies; and a demonstrated need that less intrusive evidence cannot meet.
+Authority required: The author approved this constrained option on 2026-08-22. Any real implementation still requires qualified scientific, legal, privacy, accessibility, democratic-governance, and affected-community review.
 
-Proof required: Prospective evidence that the measure is valid for the exact stewardship decision, improves decisions beyond non-biometric alternatives, does not create disparate exclusion, remains genuinely optional, survives adversarial testing, and can be contested and withdrawn without penalty.
+Dependencies: Role relevance; purpose limitation; participant and contributor data control; accessible non-biometric parity; no adverse inference; due process; appeal; correction; revocation; expiry; anti-discrimination controls; remedies; and proof that incentives do not become indirect coercion or biometric gatekeeping.
+
+Proof required: The source must keep the decision human, the evidence optional and never sufficient by itself, the relevant claim relational rather than a physiological ideal, refusal consequence-free, non-biometric alternatives genuinely equal, and every contributor's consent and evidence control intact. A real implementation would also need prospective evidence, disparity review, adversarial testing, and affected-participant oversight.
 
 ## Literature considered
 
@@ -55,23 +59,18 @@ Proof required: Prospective evidence that the measure is valid for the exact ste
 
 ## Decision
 
-The author selected Option 2 as the current path while the project continues to examine the benefits and detriments in the literature and in affected-participant review. Here, a more coherent way means an ethical and institutional design that protects dignity, equal standing, refusal, privacy, accessibility, and human judgment. It does not mean a sensor has measured coherence as a political fact.
+The author selected Option 2 on 2026-08-20, then clarified the personal-record question on 2026-08-22. The meeting rule from Option 2 remains in force. For bounded leadership or stewardship selection, Option 3 now controls in its constrained form: human judgment may consider demonstrated relational coherence, and a participant may voluntarily disclose a private longitudinal record containing limited biometrics and consented reflections from others as one input. The record cannot decide the result, become its sole basis, establish a physiological ideal, or create an adverse inference when withheld. Accessible non-biometric evidence must carry equal standing, and every contributor retains consent and evidence control.
 
-The categorical rule is settled: biometric-derived personal records never affect governance standing or stewardship. The meeting experiment remains provisional and must stop if its safeguards cannot be proved.
+Neither permission turns a sensor into political authority. Equal membership, provision, voice, vote weight, human worth, and standing remain independent of disclosure. Incentives for sustained presence and care may not become indirect coercion or biometric gatekeeping. The meeting experiment remains provisional and must stop if its safeguards cannot be proved.
 
 ## Independent editorial review
 
-Fresh semantic, literary, and full slop reviews examined the exact manuscript source at commit `1ad14ae`. The first review cycle found four material problems: the draft presented a hoped-for live-feedback benefit as though research had demonstrated it; private unanimity did not protect a holdout whose response could be inferred; permitted non-biometric attestations lacked the complete procedural safeguards required by the ticket; and Volume IV's unchanged coda still implied that an instrument could identify the conditions of wisdom.
-
-The reconciled source now separates the hoped-for benefit from the observed associations, prevents sensing when a response is readily inferable, requires due process, appeal, anti-discrimination controls and review, correction, remedy, and equal alternative evidence for stewardship attestations, and refuses any claim that sensing can certify wisdom. The semantic, literary, and slop reviewers each passed exact commit `1ad14ae` with no remaining correction.
+The 2026-08-20 semantic, literary, and slop reviews examined an earlier categorical candidate. Their findings remain useful for the meeting safeguards, but their final pass does not approve the 2026-08-22 clarification. Fresh review of the reconciled candidate is required and will be recorded under `editorial/evidence/reviews/corpus/2026-09-01-ctd-0006-reconciliation/`.
 
 ## Validation state
 
-- `npm run editorial:validate` passed for all stable volume packages, voice cards, review batches, and evidence ledgers.
-- `npm run manuscripts:validate` passed for 535 manuscript files and 36 overview references after committed version provenance was regenerated.
-- `npm run repository:validate-links` passed for 249 tracked files and 166 local references.
-- The managed local preview returned 200 for the reader root, the administrative debt workbench, and the affected Volume III, IV, and IX routes. Exact-candidate author review remains required after the final evidence commit.
-- `npm run audio:verify-manuscript-publication -- --base origin/main` remains blocked, as required, on seven changed spoken sections. Matching immutable audio and timing sidecars must be published before merge or deployment.
+- The 2026-08-20 validation and preview results belong to the superseded categorical candidate and do not approve the clarified source.
+- Fresh editorial, manuscript, continuity, debt, audio, and exact-preview checks are required against the reconciled candidate on current `origin/main`.
 
 ## Related open obligations
 

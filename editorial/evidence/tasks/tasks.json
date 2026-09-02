@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-08-20",
+  "updated": "2026-09-01",
   "note": "Agent executable work. Distinct from editorial/evidence/debt, which holds authorial obligations requiring the author's judgment. Tier governs what may run unattended.",
   "tiers": {
     "green": "Mechanical and reversible. May run unattended.",
@@ -465,7 +465,7 @@
       "status": "in-progress",
       "area": "canon",
       "blockedBy": [],
-      "detail": "The author approved a provisional doctrine on 2026-08-20. Biometric-derived personal records never affect governance standing. Public-meeting sensing may be explored only with private, unanimous, meeting-specific consent from everyone present, with no activation when a response is readily inferable, and as ephemeral, aggregate, non-attributable, advisory process support. Fresh semantic, literary, and slop reviews pass the exact manuscript source. Editorial, manuscript, and link validation pass. Exact-candidate preview approval, immutable replacement audio for seven changed spoken sections, final publication validation, and structured debt closure remain in progress."
+      "detail": "CTD-0006. The 2026-08-22 author clarification controls: human selectors may consider a participant's voluntarily disclosed, role-relevant record of limited biometrics and consented reflections as one input, never as the decision-maker or sole basis, never as a physiological ideal, and never with an adverse inference for refusal. Accessible non-biometric evidence must carry equal standing. The separate 2026-08-20 meeting rule remains private, unanimous, meeting-specific, ephemeral, aggregate, non-attributable, advisory, and fail-closed when a response is inferable. The branch is being reconciled onto current main. Fresh review, validation, exact-candidate preview approval, immutable replacement audio, and structured debt closure remain in progress."
     }
   ]
 }
