@@ -357,14 +357,14 @@ The core ecological and demographic direction is supportable. The current manusc
 
 ### R30 23andMe bankruptcy privacy record
 
-- Sources: *In re 23andMe Holding Co.*, Case No. 25-40976; FTC chairman's March 31, 2025 letter; state objections and sale orders.
-- Location: petition and asset schedules; FTC letter pages 1 to 4; exact bidding and sale orders to be listed after legal review.
-- Date and geography: bankruptcy filed March 23, 2025; United States Bankruptcy Court for the Eastern District of Missouri.
-- Population and denominator: customers whose genetic, profile, and related data were held by the debtors; the current fifteen-million count is not yet attached to a controlling filing.
-- Method: legal and corporate records.
-- Finding: the FTC treated the data as sensitive, immutable personal information potentially transferred in bankruptcy and insisted that consumer promises continue to bind a buyer.
-- Limits: the legal path, buyer sequence, final order, nonprofit structure, covered data classes, and HIPAA boundary require counsel review. The current paragraph is directionally plausible but not yet legally publishable.
-- Source: https://www.ftc.gov/system/files/ftc_gov/pdf/23andme-letter-ferguson.pdf
+- Sources: *In re 23andMe Holding Co.*, Case No. 25-40976; FTC chairman's March 31, 2025 letter; the debtor's July 14, 2025 Form 8-K; the TTAM asset-purchase agreement and privacy term sheet; state litigation over the proposed Regeneron sale.
+- Location: Form 8-K, Items 1.01, 1.03, and 2.01; asset-purchase agreement, privacy term sheet sections 1 to 8; FTC letter pages 1 to 4; state complaint and sale docket for legal review.
+- Date and geography: Chapter 11 filed March 23, 2025; court approval of the TTAM transaction June 27; closing July 14; United States Bankruptcy Court for the Eastern District of Missouri.
+- Population and denominator: customers whose genetic, profile, survey, phenotype, linked-health, and biological-sample data were held by the debtors; the current fifteen-million count is not yet attached to a controlling filing.
+- Method: legal, securities, and corporate-record review.
+- Finding: the debtor reported that TTAM Research Institute, an affiliate of founder Anne Wojcicki, acquired substantially all assets for $305 million after the earlier Regeneron transaction was contested. The TTAM privacy terms apply specified state privacy rules, preserve deletion and research opt-out mechanisms, require notice, and restrict later transfers. The FTC separately said consumer privacy promises continued to bind any buyer.
+- Limits: counsel must verify the exact bidder chronology, the legal effect of the state action and sale order, the nonprofit description, the transferred data classes, and the interaction among HIPAA, the FTC Act, state genetic-privacy law, and bankruptcy law. The exact customer count remains unverified from the controlling record.
+- Sources: https://www.ftc.gov/system/files/ftc_gov/pdf/23andme-letter-ferguson.pdf ; https://www.sec.gov/Archives/edgar/data/1804591/000119312525158551/d11473d8k.htm ; https://www.sec.gov/Archives/edgar/data/1804591/000162828025037443/exhibit22assetpurchaseag.htm
 
 ### R31 China's social-credit system
 
@@ -509,14 +509,15 @@ The core ecological and demographic direction is supportable. The current manusc
 
 ### R44 Palantir quotation
 
-- Source required: Palantir fourth-quarter 2024 earnings call or official recording, February 2025.
-- Location required: exact timestamp or transcript page for "scare enemies" and "on occasion kill them," plus the separate "lethal" wording.
+- Source: Palantir fourth-quarter 2024 earnings webcast, issuer-hosted official video, February 3, 2025.
+- Location: 47:23 for "scare enemies" and "on occasion kill them." A separate primary location is still required for the manuscript's "more lethal" wording.
 - Date and geography: February 2025 investor communication; United States issuer.
 - Population and denominator: not applicable.
 - Method: direct quotation verification.
-- Finding: secondary transcripts appear consistent, but this audit has not yet attached an issuer-hosted recording or SEC-filed transcript.
-- Limits: no publication-ready quotation until the complete primary recording or transcript is archived and context checked.
-- Disposition: hold for direct-source verification; paraphrase or remove if primary recording cannot be attached.
+- Finding: the official webcast verifies the chief executive's statement that Palantir is intended to improve partner institutions and, when necessary, "scare enemies" and "on occasion kill them." The manuscript's separate "more lethal" statement is not yet linked to a primary source.
+- Limits: retain only the verified words with speaker, investor-call context, and date. Do not imply applause without evidence from the recording. Hold or remove the separate "more lethal" sentence unless its primary source is attached.
+- Disposition: keep the verified quotation with precise context; hold or remove the unverified second statement.
+- Source: https://www.youtube.com/watch?v=MW0zvoEMdRA
 
 ### R45 Fuller and Capra
 
@@ -534,4 +535,4 @@ The core ecological and demographic direction is supportable. The current manusc
 - Keep with attached citation: North American birds; Krefeld regional result; rejection of a global sixty-harvest countdown; water access and agricultural-withdrawal data; glyphosate's split hazard and risk record; WMO and Copernicus temperature records; CDC overdose decline; fertility level; sperm meta-regression with limits; Surgeon General loneliness comparison; Thiel quotation.
 - Narrow or correct: bee losses; pollination denominators; farmer-suicide period and categories; nutrition consensus; microplastic tissue claims; inflation comparison; bankruptcies; buyer age; AI cuts and early-career employment; EU and United States AI law; Sudan; 23andMe; social credit; infertility; sexual-frequency estimates; planetary-week and festival history; Krishnamurti adaptation.
 - Remove unless a primary source is produced: forty-percent water gap; 700 million water-displacement projection; lowest-ever sentiment; widest-ever wage gap; three-quarters of homes unaffordable; twelve million households behind; 700 billion dollars in AI infrastructure; one-sixth of United States jobs gone in five years as attributed to BCG; 150,000 Sudan deaths as an authoritative count; Epstein vanished-file, search-log, and fabricated-image details; authenticated Fuller quotation.
-- Hold for direct verification: Palantir quotations, Capra pages, exact NCRB cumulative farmer-suicide total, exact 23andMe customer count and sale orders, weighted GSS calculations, and the historical festival pages.
+- Hold for direct verification: Palantir's separate "more lethal" wording, Capra pages, exact NCRB cumulative farmer-suicide total, exact 23andMe customer count, weighted GSS calculations, and the historical festival pages.

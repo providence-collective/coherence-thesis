@@ -156,7 +156,7 @@ Recommended disposition: legal hold.
 
 Proposed factual frame for counsel to complete:
 
-> 23andMe filed for Chapter 11 protection on March 23, 2025. The FTC warned the bankruptcy trustee that the company held sensitive, immutable data about millions of consumers and that any transfer remained subject to the company's privacy promises. The exact customer count, buyer chronology, transferred asset classes, final privacy obligations, and interaction among HIPAA, the FTC Act, state genetic-privacy law, and bankruptcy law must be stated from the controlling filings.
+> 23andMe filed for Chapter 11 protection on March 23, 2025. A court approved the sale of substantially all its assets to TTAM Research Institute, an affiliate of founder Anne Wojcicki, on June 27, and the $305 million transaction closed on July 14. The purchase agreement included privacy terms governing deletion, research choices, notice, and later transfers. The exact customer count, legal effect of the earlier Regeneron result and state litigation, transferred data classes, nonprofit description, and interaction among HIPAA, the FTC Act, state genetic-privacy law, and bankruptcy law still require counsel's wording.
 
 Decision after legal review: approve completed language / remove paragraph
 
@@ -215,7 +215,7 @@ Decision after historical review: approve / revise / remove
 Recommended disposition: quotation hold.
 
 - Krishnamurti: label the epigraph as an adaptation of a recurring theme because the foundation cannot authenticate the popular exact wording.
-- Palantir: retain only after an issuer-hosted recording or complete primary transcript supplies timestamps and context.
+- Palantir: the issuer-hosted February 3, 2025 webcast verifies "scare enemies" and "on occasion kill them" at 47:23. Retain that statement only with its investor-call context. Hold or remove the separate "more lethal" wording unless its own primary source is attached.
 - Thiel: the sentence about freedom and democracy is exact. Remove or label the manuscript's interpretive claims that it organized a movement or sought unaccountable builders.
 - Fuller: paraphrase page-cited primary works or remove the popular "existing reality/new model" wording unless a primary source is found.
 - Capra: retain only with edition and page for the stated interpretation.

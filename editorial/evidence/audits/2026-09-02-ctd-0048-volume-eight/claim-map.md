@@ -737,8 +737,8 @@ No disposition below is approval to edit the manuscript.
 
 - Exact manuscript sentence and location: `v08-the-present-tense-a-reckoning-of-the-year-2026:60`: "In 2025 the genetic-testing company 23andMe collapsed into bankruptcy, and the genetic data of some fifteen million people, the most private text a human being possesses, and one that implicates relatives who never consented to anything, became entangled in a bankruptcy sale."
 - Type: legal; factual; medical privacy.
-- Evidence: R30; bankruptcy Case No. 25-40976, FTC letter, debtor schedules, and sale record; filed March 23, 2025; United States; customers and data classes as denominator; legal-record method.
-- Uncertainty and contested status: bankruptcy fact survives; fifteen-million count and exact data classes need a controlling filing; relatives' implications are real but scope varies by test and kinship inference.
+- Evidence: R30; bankruptcy Case No. 25-40976, FTC letter, debtor's July 14 Form 8-K, and TTAM asset-purchase agreement; filed March 23, 2025; United States; customers and data classes as denominator; legal-record method.
+- Uncertainty and contested status: bankruptcy fact survives; the controlling agreement identifies genetic, profile, survey, phenotype, linked-health, and biological-sample data, but the fifteen-million count still needs a controlling source; relatives' implications vary by test and kinship inference.
 - Review: Research concludes retain bankruptcy with exact filing and count only after counsel verifies the record. Legal and genetic-privacy review pending.
 - Proposed disposition: revise.
 
@@ -746,9 +746,9 @@ No disposition below is approval to edit the manuscript.
 
 - Exact manuscript sentence and location: `v08-the-present-tense-a-reckoning-of-the-year-2026:61`: "A drugmaker won the first bid, more than two dozen states sued, and the database ultimately passed to a nonprofit run by the company's own founder with privacy pledges attached."
 - Type: legal; factual; volatile.
-- Evidence: R30; bidding orders, state complaint or objection, final sale order, and nonprofit corporate record required; 2025; Eastern District of Missouri bankruptcy; bidders, state parties, transferred assets; legal-record method.
-- Uncertainty and contested status: the initial Regeneron bid, TTAM backup bid, state litigation, and final transaction need an exact docket chronology. "Database" may underdescribe or overdescribe transferred assets.
-- Review: Research concludes no publication-ready sentence until counsel completes the docket map. Legal review pending.
+- Evidence: R30; debtor's July 14 Form 8-K, TTAM asset-purchase agreement and privacy term sheet, state complaint over the Regeneron transaction, and final sale docket; 2025; Eastern District of Missouri bankruptcy; bidders, state parties, transferred assets; legal-record method.
+- Uncertainty and contested status: the debtor reports court approval on June 27 and closing on July 14 of TTAM's $305 million acquisition of substantially all assets. Counsel still needs to certify how the earlier Regeneron result, state litigation, nonprofit status, and final order should be characterized. "Database" may underdescribe or overdescribe transferred assets.
+- Review: Research concludes the chronology is substantially sourced but not publication-ready until counsel completes the docket map. Legal review pending.
 - Proposed disposition: revise.
 
 ### P33 Consumer genetic data and HIPAA
@@ -946,10 +946,10 @@ No disposition below is approval to edit the manuscript.
 
 - Exact manuscript sentences and location: `v08-let-the-architects-speak:3-4`: "In February 2025, on an investor call, the chief executive of Palantir described what his company is for: to make its partners formidable and, when necessary, to scare enemies and on occasion kill them. In the same season he welcomed the era's disruption and boasted that the work makes a nation more lethal."
 - Type: quotation; factual.
-- Evidence: R44; complete issuer-hosted earnings call or SEC-filed transcript required; February 2025; exact timestamp or page; direct-transcript method.
-- Uncertainty and contested status: secondary transcripts appear consistent, but exact wording, speaker, context, and audience response are not attached.
-- Review: Research concludes not publication-ready. Quotation verification pending.
-- Proposed disposition: hold, then keep accurately or remove.
+- Evidence: R44; Palantir's issuer-hosted fourth-quarter 2024 earnings webcast at 47:23; February 3, 2025; United States issuer; direct-recording method.
+- Uncertainty and contested status: the official recording verifies the speaker, investor context, and "scare enemies" and "on occasion kill them" wording. It does not by itself verify the separate "more lethal" sentence or an audience response.
+- Review: Research concludes the first quotation is source-ready with precise attribution. The second statement remains unverified. Quotation review pending.
+- Proposed disposition: keep the verified quotation with context; hold or remove the unverified second statement.
 
 ### Q05 Shareholders applauded
 
