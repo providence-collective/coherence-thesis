@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-08-19",
+  "updated": "2026-09-02",
   "note": "Agent executable work. Distinct from editorial/evidence/debt, which holds authorial obligations requiring the author's judgment. Tier governs what may run unattended.",
   "tiers": {
     "green": "Mechanical and reversible. May run unattended.",
@@ -457,6 +457,15 @@
       "area": "canon",
       "blockedBy": [],
       "detail": "CTD-0015. The author approved a staged model on 2026-08-18: Providence begins by matching people through shared intentions, values, gifts, needs, and desired impact; the MVP studies whether consented physiological signals can offer useful participant-reviewed reflection; early records do not mint currency; and any portable attestation or exchange mechanism remains a later research, ethics, and anti-manipulation horizon. The focused Volume I candidate is approved for publication in PR 224. Volume III and corpus reconciliation remain active work under the same debt item."
+    },
+    {
+      "id": "T-050",
+      "title": "Restore the Volume II semantic link from the Currency of Presence",
+      "tier": "green",
+      "status": "done",
+      "area": "editorial",
+      "blockedBy": [],
+      "detail": "Complete. For CTD-0107, the reviewed Volume I phrase another kind of memory could become possible now links to Volume II's What Money Cannot See. The author approved the link on 2026-08-22 and explicitly waived local preview review on 2026-09-02. The semantic audit finds one approved link and no unreviewed candidate, focused editorial and continuity checks pass, the compiled link targets the current route, and no manuscript or audio bytes changed. The ticket has structured resolution proof in the same pull request candidate."
     }
   ]
 }
