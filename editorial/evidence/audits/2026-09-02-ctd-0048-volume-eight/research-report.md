@@ -18,7 +18,7 @@ The core ecological and demographic direction is supportable. The candidate corr
 - The median first-time home buyer was 40 in the 2025 NAR survey, not 35.
 - Fertility was below 2.1 births per woman in 55 percent of countries and areas, representing more than two thirds of the global population. It was not below replacement in two thirds of countries.
 - WHO's one-in-six estimate applies to the adult population experiencing infertility in their lifetime, not to one in six couples.
-- WMO's consolidated 2023 to 2025 temperature average was 1.48 C above 1850 to 1900, with uncertainty of plus or minus 0.13 C. Copernicus ERA5, a specific dataset, placed the three-year mean above 1.5 C. The manuscript currently presents the dataset-specific result as universal.
+- WMO's consolidated 2023 to 2025 temperature average was 1.48 C above 1850 to 1900, with uncertainty of plus or minus 0.13 C. Copernicus ERA5, a specific dataset, placed the three-year mean above 1.5 C. The candidate now keeps those records separate and does not present a three-year mean as the Paris Agreement's long-term threshold.
 - The Fuller wording cannot yet be traced to a primary Fuller text. The popular two-sentence form should not be presented as an authenticated Fuller quotation.
 - The Krishnamurti Foundation cannot authenticate the popular line used as the title's point of departure. It identifies the wording as a later paraphrase of a theme Krishnamurti did express.
 
@@ -31,7 +31,7 @@ The core ecological and demographic direction is supportable. The candidate corr
 - Stanford's August 2026 working paper finds a 19 percent employment shortfall for ages 22 to 25 in highly AI-exposed occupations relative to less-exposed peers. It does not report that all software developers under 26 fell by one fifth, and it expressly says the pattern is descriptive rather than causal.
 - The EU AI Act prohibits specified social-scoring and biometric practices, subject to statutory definitions and exceptions. United States Executive Order 14365 directs challenges, grant conditions, a federal proceeding, and a legislative proposal. It does not itself preempt every state AI law.
 - The microplastics studies establish detection in sampled tissues. They do not establish clinical harm, a representative population trend, or a causal health outcome.
-- The social-credit record supports a fragmented legal, regulatory, credit-information, and court-enforcement system, not a single universal citizen score. Exact consequences and current legal remedies require specialist review.
+- The social-credit record supports a fragmented legal, regulatory, credit-information, and court-enforcement system, not a single universal citizen score. Exact consequences and current legal remedies remain provisional and open to attributable specialist challenge.
 - The Epstein transparency law, deadline, DOJ releases, and statutory exceptions are verifiable. The current claims about vanished files, congressional search logging, and fabricated images need direct documentary support or removal.
 
 ## Source cards
@@ -99,14 +99,14 @@ The core ecological and demographic direction is supportable. The candidate corr
 - Population and denominator: soil resources by region and threat type.
 - Method: expert synthesis of soil-condition indicators and regional evidence.
 - Finding: major soil threats are real and uneven across regions.
-- Limits: the report does not support a single global countdown of sixty harvests; the current sentence's five-orders-of-magnitude claim still needs its own primary source.
+- Limits: the report does not support a single global countdown of sixty harvests. The earlier five-orders-of-magnitude comparison had no direct primary source and was withdrawn.
 - Source: https://www.fao.org/fileadmin/user_upload/newsroom/docs/FAO-world_soils-report-COMPLETE.pdf
 
 ### R07 Farmer suicide in India
 
 - Source: National Crime Records Bureau annual *Accidental Deaths and Suicides in India* tables, read with methodological scholarship on occupational classification.
 - Location: annual tables for self-employed persons in farming or agriculture and agricultural laborers; exact years must be enumerated in the final citation.
-- Date and geography: India; the current manuscript says about two decades but does not identify start and end years.
+- Date and geography: India; the source series is annual. The candidate does not publish a cumulative interval or total.
 - Population and denominator: recorded suicide deaths in changing occupational categories; no farmer population rate denominator is supplied.
 - Method: police-record administrative statistics aggregated by NCRB.
 - Finding: cumulative deaths are large, but totals depend on category definitions and years selected.
@@ -165,7 +165,7 @@ The core ecological and demographic direction is supportable. The candidate corr
 - Population and denominator: modeled exposure groups and authorized uses.
 - Method: exposure-specific risk assessment and regulatory hazard classification, with evidence rules different from IARC's monograph process.
 - Finding: these bodies have not adopted IARC's cancer-hazard classification for authorized exposure conditions.
-- Limits: the bodies do not all answer the same question or use the same evidence set. A medical and toxicology reviewer must approve any summary.
+- Limits: the bodies do not all answer the same question or use the same evidence set. Any broader medical or toxicological conclusion remains provisional and is invited for attributable expert challenge.
 - Sources: https://www.epa.gov/ingredients-used-pesticide-products/glyphosate and https://www.efsa.europa.eu/en/news/glyphosate-no-critical-areas-concern-data-gaps-identified
 
 ### R13 Microplastics in placenta
@@ -308,7 +308,7 @@ The core ecological and demographic direction is supportable. The candidate corr
 - Population and denominator: federal agencies, state AI laws, grants, reporting rules, and a proposed federal framework.
 - Method: executive directive, bounded by existing legal authority.
 - Finding: directs a litigation task force, evaluation of state laws, possible grant conditions, an FCC proceeding, an FTC policy statement, and a legislative recommendation to preempt conflicting state laws.
-- Limits: does not itself invalidate all state AI regulation; excludes several subject areas from the requested legislative proposal; legal effect requires qualified review.
+- Limits: does not itself invalidate all state AI regulation; excludes several subject areas from the requested legislative proposal; legal effect remains provisional and open to attributable legal challenge.
 - Source: https://www.whitehouse.gov/wp-content/uploads/2025/12/eo-14365.pdf
 
 ### R26 Global temperature in 2025
