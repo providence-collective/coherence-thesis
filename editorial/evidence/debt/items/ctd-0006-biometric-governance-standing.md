@@ -1,24 +1,24 @@
 ---
 id: CTD-0006
 title: Define whether biometric-derived records may affect governance standing
-status: query
+status: deferred
 kind: canon
 severity: critical
 scopes: ["volume-3", "volume-4", "volume-9", "corpus"]
 sources: ["editorial/sources/volumes/volume-03/manuscript.md", "editorial/sources/volumes/volume-04/manuscript.md", "editorial/sources/volumes/volume-09/manuscript.md", "editorial/sources/corpus/master-ledger.md", "editorial/evidence/audits/2026-08-20-ctd-0006-biometric-governance-standing.md"]
 discovered: 2026-07-09
-updated: 2026-09-01
+updated: 2026-09-02
 resolved:
 discoveredIn: volume-3/wave-one
 ---
 
 ## Debt
 
-The author has ruled that human judgment may consider demonstrated relational coherence when choosing leaders or stewards. A participant may voluntarily share private longitudinal biometric and relational evidence that their presence has repeatedly supported greater regulation and wellness in people around them. The evidence may inform a decision but cannot decide it alone. Refusing to share it cannot reduce membership, provision, political voice, vote weight, human worth, or human standing. The reconciled candidate implements that authority through scoped, role-relevant, privacy-preserving evidence derived from a participant-held record, equal non-biometric routes, contributor control, contestability, and safeguards against indirect coercion or biometric gatekeeping. Exact author approval, replacement audio, publication validation, and structured closure remain open.
+The author has ruled that human judgment may consider demonstrated relational coherence when choosing leaders or stewards. A participant may voluntarily share private longitudinal biometric and relational evidence that their presence has repeatedly supported greater regulation and wellness in people around them. The evidence may inform a decision but cannot decide it alone. Refusing to share it cannot reduce membership, provision, political voice, vote weight, human worth, or human standing. The approved candidate implements that authority through scoped, role-relevant, privacy-preserving evidence derived from a participant-held record, equal non-biometric routes, contributor control, contestability, and safeguards against indirect coercion or biometric gatekeeping. Replacement immutable audio, final publication validation, and structured closure remain open.
 
 ## Evidence
 
-CTD-0005 and the current corpus already prohibit biometric evidence from determining provision, membership, equal vote weight, human worth, or superior political standing. Volume III gives every participant equal governance standing and vote weight. Volume IV says no sensor or score decides who may speak, vote, or lead. Volume IX preserves bounded stewardship above provision. The 2026-08-22 author clarification resolves the high-level canon question by keeping selection human while permitting private biometric and relational evidence as one voluntary input. The current candidate reconciles that clarification across the cited sources and preserves the separate 2026-08-20 live-meeting rule. Fresh semantic, literary, and complete slop review pass at source commit `94e33ef8410197f77f2b08195cf0efd121348d0a`.
+CTD-0005 and the current corpus already prohibit biometric evidence from determining provision, membership, equal vote weight, human worth, or superior political standing. Volume III gives every participant equal governance standing and vote weight. Volume IV says no sensor or score decides who may speak, vote, or lead. Volume IX preserves bounded stewardship above provision. The 2026-08-22 author clarification resolves the high-level canon question by keeping selection human while permitting private biometric and relational evidence as one voluntary input. The current candidate reconciles that clarification across the cited sources and preserves the separate 2026-08-20 live-meeting rule. Fresh semantic, literary, and complete slop review pass at source commit `94e33ef8410197f77f2b08195cf0efd121348d0a`. The author approved exact preview candidate `113cfbbab7c6a80592f808a0a1fffb5eac26794a` for publication on 2026-09-02, and the Volume III, IV, and IX manuscript candidates are staged against that exact source commit.
 
 ## Paydown criteria
 
@@ -42,6 +42,7 @@ CTD-0005 and the current corpus already prohibit biometric evidence from determi
 - Author decision, 2026-08-20: a public governance meeting may explore live physiological sensing only when every person present for the sensed portion, including participants and observers, privately and affirmatively consents for that specific meeting. The process reveals only activation or nonactivation and never an individual's response or reason. If a response would be readily inferable, sensing does not activate. Unanimity controls activation of sensing, not whether the meeting proceeds. Refusal, abstention, missing consent, late arrival without consent, or withdrawal leaves sensing off or stops it while the meeting continues without penalty.
 - Author decision, 2026-08-20: output must be ephemeral, aggregate, non-attributable, advisory, and excluded from personal records. It cannot automatically pause a meeting or decide an outcome. Any person may request a pause without biometric evidence. Public deliberation does not make physiological data public.
 - Reconciliation candidate, 2026-09-01: the dedicated manuscript branch now implements the 2026-08-22 clarification through participant-held records and scoped, role-relevant, privacy-preserving evidence. Fresh semantic, literary, and complete slop review pass at source commit `94e33ef8410197f77f2b08195cf0efd121348d0a`. Editorial, debt, manuscript, source-boundary, Markdown-link, and historical-link validation pass. The history audit found zero broken destinations across 4,387 historical URLs. The audio publication check correctly blocks eight changed spoken segments. Exact-candidate preview approval, matching immutable audio, final publication validation, and structured closure remain open.
+- Publication approval, 2026-09-02: the author approved exact preview candidate `113cfbbab7c6a80592f808a0a1fffb5eac26794a` and authorized publication. Byte-exact Volume III, IV, and IX manuscript candidates are staged with author approval records. The eight-section audio delta dry run validates one pinned production narrator, 32,657 input bytes, and an estimated paid generation cost of $0.49. Generation and immutable publication cannot begin until `FISH_AUDIO_API_KEY`, the Supabase S3 publication credentials, `ffmpeg`, `ffprobe`, and `mlx-whisper` are available on the publication host.
 
 ## History
 
@@ -52,3 +53,4 @@ CTD-0005 and the current corpus already prohibit biometric evidence from determi
 - 2026-08-22: The author clarified that voluntarily disclosed biometric and relational evidence may inform, but never decide or solely determine, bounded human leadership or stewardship selection. The categorical personal-record prohibition was superseded; the meeting safeguards remain in force. The ticket stayed a query pending specialist reconciliation and exact source-language approval.
 - 2026-09-01: Full-resolution work resumed on current `origin/main` under the 2026-08-22 clarification. The ticket remains a query until the author approves the exact reconciled source; audio and publication gates remain mandatory afterward.
 - 2026-09-01: Reconciled source commit `94e33ef8410197f77f2b08195cf0efd121348d0a` passed fresh semantic, literary, and complete slop review. Focused editorial, debt, manuscript, source-boundary, Markdown-link, and historical-link validation passed. The required audio check identified eight stale spoken segments, so publication and ticket resolution remain blocked pending exact-preview approval and replacement immutable audio.
+- 2026-09-02: The author approved exact preview candidate `113cfbbab7c6a80592f808a0a1fffb5eac26794a` and authorized publication. The ticket moved from `query` to `deferred` because the author decision is complete but the required audio generation and publication credentials and local audio tools are unavailable. Recheck this condition when the primary checkout has `.env.audio.local` with the Fish and Supabase S3 credentials and the publication host has `ffmpeg`, `ffprobe`, and `mlx-whisper`.

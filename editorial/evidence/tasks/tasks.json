@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-01",
+  "updated": "2026-09-02",
   "note": "Agent executable work. Distinct from editorial/evidence/debt, which holds authorial obligations requiring the author's judgment. Tier governs what may run unattended.",
   "tiers": {
     "green": "Mechanical and reversible. May run unattended.",
@@ -462,10 +462,10 @@
       "id": "T-050",
       "title": "Resolve CTD-0006 on biometric records and governance standing",
       "tier": "red",
-      "status": "in-progress",
+      "status": "blocked",
       "area": "canon",
       "blockedBy": [],
-      "detail": "CTD-0006. The 2026-08-22 author clarification controls: people choosing stewards may consider a participant's voluntarily disclosed, scoped, role-relevant, privacy-preserving evidence derived from a participant-held record of limited biometrics and consented reflections as one input, never as the decision-maker or sole basis, never as a physiological ideal, and never with an adverse inference for refusal. Accessible non-biometric evidence must carry equal standing. The separate 2026-08-20 meeting rule remains private, unanimous, meeting-specific, ephemeral, aggregate, non-attributable, advisory, and fail-closed when a response is inferable. Fresh semantic, literary, complete slop, editorial, debt, manuscript, source-boundary, Markdown-link, and historical-link checks pass on the reconciled branch. Eight changed spoken segments correctly block audio publication. Exact-candidate preview approval, immutable replacement audio, final publication validation, and structured debt closure remain in progress."
+      "detail": "CTD-0006. The author approved exact preview candidate 113cfbb on 2026-09-02 and authorized publication. Volume III, IV, and IX byte-exact manuscript candidates are staged. Fresh semantic, literary, complete slop, editorial, debt, manuscript, source-boundary, Markdown-link, and historical-link checks pass. The required eight-section audio delta cannot be generated or published because the publication host lacks the Fish and Supabase S3 credentials, ffmpeg, ffprobe, and mlx-whisper. Once those prerequisites are available, generate and publish the immutable delta, promote the sections, rerun the publication gate, record structured debt closure, and complete final validation."
     }
   ]
 }
