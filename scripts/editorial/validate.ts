@@ -31,7 +31,7 @@ import {
 } from "../repository/paths";
 
 export const expectedVolumePackageCount = 9;
-export const expectedEditorialLedgerRecordCount = 12_179;
+export const expectedEditorialLedgerRecordCount = 13_074;
 
 export const requiredVoiceCardSections = [
   "Identity",

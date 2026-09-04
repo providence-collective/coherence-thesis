@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "batchId": "2026-09-02-open-review-fact-audit",
+  "editorialId": "volume-08",
+  "approvalState": "pending",
+  "standing": "current",
+  "scope": {
+    "coverage": "complete-volume",
+    "sentenceRecords": 855,
+    "structureRecords": 40
+  },
+  "validationState": "validated",
+  "openQueryCount": 324,
+  "residualRisk": "high",
+  "publicationState": "unpublished",
+  "baseline": {
+    "commit": "20740657f5cc8fbec934c1df609d7e7e0d95fc32",
+    "path": "editorial/sources/volumes/volume-08/manuscript.md",
+    "sha256": "60a9339de6656c68129449af471e06230b5ae7ad599001c7126c97152d79c0c7"
+  },
+  "reviewed": {
+    "commit": "d1a0331d0fb52281ab53773e357cd73c1c6288a7",
+    "path": "editorial/sources/volumes/volume-08/manuscript.md",
+    "sha256": "bd64a5ec4ffbfb749b6c539c0649587eab6e437c79fbe7891a14e1c68a9b97a2"
+  },
+  "canonicalSourcePath": "editorial/sources/volumes/volume-08/manuscript.md",
+  "evidence": [
+    {
+      "path": "review.md"
+    },
+    {
+      "path": "semantic-review.md"
+    },
+    {
+      "path": "literary-review.md"
+    },
+    {
+      "path": "slop-review.md"
+    },
+    {
+      "path": "sentence-ledger.jsonl"
+    },
+    {
+      "path": "structure-ledger.jsonl"
+    }
+  ]
+}
