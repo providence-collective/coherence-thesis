@@ -381,7 +381,7 @@ Lay one stone. That is the whole method, and it is enough to begin.
 
 ## The Roots of This Volume
 
-*This volume is a living factual record. Its [public evidence report and claim map](/evidence/volume-08/) record sources, methods, dates, populations, denominators, uncertainties, claim status, and unresolved questions for inspection. Clinicians, public-health researchers, lawyers, historians, statisticians, and other qualified readers are invited to challenge the evidence within their fields. Attributed reviews and corrections will be incorporated into later versioned editions. Material identified as provisional should not be read as medical or legal advice or as professional endorsement.*
+*This volume is a living factual record. Its [public evidence report and claim map](https://github.com/genii-foundation/coherence-thesis/tree/main/editorial/evidence/audits/2026-09-02-ctd-0048-volume-eight) record sources, methods, dates, populations, denominators, uncertainties, claim status, and unresolved questions for inspection. Clinicians, public-health researchers, lawyers, historians, statisticians, and other qualified readers are invited to challenge the evidence within their fields. Attributed reviews and corrections will be incorporated into later versioned editions. Material identified as provisional should not be read as medical or legal advice or as professional endorsement.*
 
 **The living world.**
 - **Birds.** Rosenberg et al., "Decline of the North American avifauna," *Science* (2019): about 2.9 billion fewer breeding birds, or 29 percent, since 1970. Rachel Carson, *Silent Spring* (1962).

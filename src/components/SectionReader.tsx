@@ -12,7 +12,6 @@ import { ReaderBookmarkHighlightIsland } from "@/components/ReaderBookmarkHighli
 import { ReaderSelectionBookmarkIsland } from "@/components/ReaderSelectionBookmarkIsland";
 import { SectionRevisionNotice } from "@/components/SectionRevisionNotice";
 import { SectionAliasRedirectIsland } from "@/components/SectionAliasRedirectIsland";
-import { VolumeEvidenceLink } from "@/components/VolumeEvidenceLink";
 import {
   sectionNavigation,
   toProgressSection,
@@ -91,7 +90,6 @@ export function SectionReader({
             <span>{formatVersionDate(section.versionDate)}</span>
           )}
         </p>
-        <VolumeEvidenceLink volumeId={section.volumeId} />
       </header>
       {alias && (
         <aside className="revision-notice" aria-label="Section alias notice">
