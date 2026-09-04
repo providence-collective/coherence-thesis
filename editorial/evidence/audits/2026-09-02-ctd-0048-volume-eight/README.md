@@ -8,13 +8,13 @@ Task: `T-050`
 
 Current source: `editorial/sources/volumes/volume-08/manuscript.md`
 
-Candidate source hash: `bd64a5ec4ffbfb749b6c539c0649587eab6e437c79fbe7891a14e1c68a9b97a2`
+Candidate source hash: `f0f10f0cc7e355d181ecd5949f4efbfbc1edc1af7c8aa03e55ecfeac50c59752`
 
 Base commit: `20740657f5cc8fbec934c1df609d7e7e0d95fc32`
 
 ## Authority and limits
 
-The author approved the sourced open-review model, the verified, provisional, and withdrawn status boundary, the reader-facing placements, and the factual-repair direction. The exact candidate wording and hash remain subject to preview approval. This record does not claim medical, legal, or historical endorsement. It does not authorize publication, audio promotion, a push, or a pull request before exact-preview approval and the remaining gates.
+The author approved the sourced open-review model, the verified, provisional, and withdrawn status boundary, and the factual-repair direction. On 2026-09-03 the author restricted this work to editorial material and directed removal of the dedicated reader route and submission-interface work. The Roots source link now points directly to the public editorial evidence directory. The revised candidate remains subject to approval. This record does not claim medical, legal, or historical endorsement.
 
 Every existing Volume VIII heading, section identity, and route is protected. Any later wording proposal must fit inside that structure.
 
@@ -37,4 +37,4 @@ The pre-repair sentence and structure ledgers remain historical inventory. The f
 
 ## Current conclusion
 
-The prose did not need a broad stylistic rewrite. The candidate corrects or withdraws unsupported numerical and quotation claims, narrows the rest to their dataset, population, geography, date, and legal scope, and moves the full apparatus one click away from the reading surface. It remains a candidate until exact-hash review evidence, validation, audio parity, and author preview approval are recorded.
+The prose did not need a broad stylistic rewrite. The candidate corrects or withdraws unsupported numerical and quotation claims, narrows the rest to their dataset, population, geography, date, and legal scope, and keeps the full apparatus outside the reading flow. It remains a candidate until exact-hash review evidence, focused validation, audio parity, and renewed author approval are recorded.

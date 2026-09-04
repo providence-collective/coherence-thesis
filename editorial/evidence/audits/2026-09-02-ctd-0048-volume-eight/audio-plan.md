@@ -16,7 +16,7 @@ The open-review candidate changes spoken Volume VIII wording. Existing audio can
 
 ## Current status
 
-The verifier was run against the candidate source bytes fixed at commit `d1a0331d0fb52281ab53773e357cd73c1c6288a7`. It reports 14 changed spoken segments:
+The verifier was run against the candidate spoken wording fixed at commit `d1a0331d0fb52281ab53773e357cd73c1c6288a7`. It reports 14 changed spoken segments. Commit `dedd1fc6258064584ee5f3404dacadb297488f13` changes only the evidence-link destination and removes reader-system work; it does not change spoken wording.
 
 - `v08-saturns-day-cosmological-opening-and-register`
 - `v08-the-accounting`

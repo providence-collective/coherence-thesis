@@ -11,7 +11,7 @@ Current status: complete for the open-review candidate.
 - Freeze the pre-repair source into exact-hash sentence and structure ledgers. Complete for hash `60a9339d...`.
 - Build source cards, claim map, reviewer packet, and author decision sheet. Complete.
 - Record the author's 2026-09-02 approval of the open-review placements, status model, revised C1 to C8 criteria, and factual-repair direction. Complete.
-- Establish a public route and attributable submission form for later qualified review. Complete in the candidate.
+- Prepare a public editorial evidence directory and attributable conclusion form for later qualified review. Complete in the candidate. The dedicated reader route and submission interface were removed at the author's direction.
 
 Boundary: this edition may not be described as medically, legally, or historically endorsed. Later attributable reviews create new versioned editions.
 
@@ -145,7 +145,7 @@ Pull-request body candidate:
 ## Review evidence
 
 - final manuscript hash: <hash>
-- open-review process: <public route and submission record>
+- open-review process: <public editorial evidence directory and attributable review record>
 - professional endorsement: not claimed
 - exact local preview: <url, commit, digest, approval>
 
@@ -178,17 +178,17 @@ npm run repository:validate-pr-topology -- --pr <number>
 After squash merge:
 
 1. Deploy the merged `main` commit.
-2. Verify the live Volume VIII manuscript and source report.
+2. Verify the live Volume VIII manuscript and the linked public editorial evidence directory.
 3. Verify audio and timing for representative changed sections.
 4. Verify the public Updates entry contains the merged pull request or commit.
-5. Verify sitemap entries and representative current and historical reader routes.
+5. Verify representative current and historical reader routes.
 6. Run the production verification commands required by the publishing guide.
 7. Only after live bytes and audio match the merged source, promote the verified Volume VIII manuscript checkpoint using the production commit.
 8. Confirm CTD-0048 and T-050 are resolved and done on canonical `main`.
 
 ## Approval ledger
 
-- Open-review process: implemented in the candidate; public route validation pending.
+- Open-review materials: prepared in the public editorial evidence directory; no dedicated reader route or submission interface is part of this branch.
 - Qualified medical, legal, and historical endorsement: not claimed and not a closure prerequisite for this edition.
 - Author claim-retention and exact wording approval: approved 2026-09-02 for the open-review candidate direction.
 - Author exact-preview approval: pending.

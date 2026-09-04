@@ -5,7 +5,7 @@ This packet supports the public open-review process for Volume VIII. It invites 
 ## Record under review
 
 - Manuscript: `editorial/sources/volumes/volume-08/manuscript.md`
-- Candidate source hash: `bd64a5ec4ffbfb749b6c539c0649587eab6e437c79fbe7891a14e1c68a9b97a2`
+- Candidate source hash: `f0f10f0cc7e355d181ecd5949f4efbfbc1edc1af7c8aa03e55ecfeac50c59752`
 - Pre-repair claim map: `claim-map.md`
 - Candidate status register: `claim-status-register.md`
 - Source report: `research-report.md`

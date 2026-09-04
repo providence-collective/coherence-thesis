@@ -2,7 +2,7 @@
 
 Version: 2026-09-02 open-review candidate
 
-Candidate manuscript hash: `bd64a5ec4ffbfb749b6c539c0649587eab6e437c79fbe7891a14e1c68a9b97a2`
+Candidate manuscript hash: `f0f10f0cc7e355d181ecd5949f4efbfbc1edc1af7c8aa03e55ecfeac50c59752`
 
 This register records the candidate outcome of every claim ID in the complete pre-repair map. `Verified` means the cited evidence supports the bounded candidate wording. `Provisional` means evidence exists but an interpretation, method, or professional judgment remains open. `Withdrawn` means the earlier wording was unsupported, contradicted, untraceable, or retired. A provisional label never rescues a contradicted claim.
 
